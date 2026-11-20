@@ -1,5 +1,9 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Tahoe Lift Status</title>
-<meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&display=swap">
 <style>
 /* Layout: slim header, then one column per resort (weather strip over map); stacks on narrow screens.
@@ -22,7 +26,8 @@
   --easy:#3fbf73; --inter:#4a97f0; --adv:#f1f4f7; --lift:#ef5a70;
   --closed:#3a4550; --closed-text:#6f7d8a; --connector:#2c3640; --halo:#161e26;
   --cold:#3987e5; --warm:#e66767; --snow:#5598e7; --past:#1b242d; color-scheme:dark}
-body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:14px;line-height:1.4}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--body);font-size:14px;line-height:1.4}
 .page{padding-block:14px 20px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:14px}
 header{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 16px}
 h1{font-family:var(--display);font-weight:700;font-size:1.9rem;line-height:1;margin:0;letter-spacing:.01em}
@@ -51,7 +56,8 @@ h1{font-family:var(--display);font-weight:700;font-size:1.9rem;line-height:1;mar
 .tip{position:absolute;pointer-events:none;background:var(--panel);color:var(--fg);border:1px solid var(--line);border-radius:6px;padding:5px 8px;font-size:.78rem;box-shadow:0 4px 14px rgba(0,0,0,.15);white-space:nowrap;font-variant-numeric:tabular-nums;z-index:2}
 .tip b{display:block;font-weight:600}
 .nowx{color:var(--muted);font-size:.8rem;padding:6px 0}
-.mapwrap{position:relative;height:440px;background:var(--bg)}
+.mapwrap{position:relative;height:520px;background:var(--bg)}
+@media (max-width:700px){.mapwrap{height:min(76vh,620px)}}
 .single .mapwrap{height:max(420px,calc(100vh - 290px))}
 .seg{display:inline-flex;background:var(--grid);padding:2px;border-radius:6px;gap:2px}
 .seg button{font:600 .78rem var(--body);border:0;background:transparent;color:var(--muted);padding:3px 10px;border-radius:4px;cursor:pointer}
@@ -67,7 +73,10 @@ h1{font-family:var(--display);font-weight:700;font-size:1.9rem;line-height:1;mar
 .sat .map .closed{stroke:#ffffff;opacity:.5}
 .sat .labels text[data-closed]{fill:#4a5561}
 .mapwrap svg{position:absolute;inset:0;width:100%;height:100%;display:block}
-.map{touch-action:none;cursor:grab}
+.map{touch-action:pan-y;cursor:grab}
+.single .map{touch-action:none}
+.hint{display:none;position:absolute;left:8px;top:8px;font-size:.7rem;color:var(--muted);background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:2px 6px;pointer-events:none}
+@media (pointer:coarse){.hint{display:block}.single .hint{display:none}}
 .map.drag{cursor:grabbing}
 .labels{pointer-events:none}
 .labels text{font-family:var(--body);font-weight:600;font-size:10.5px;paint-order:stroke;stroke:var(--halo);stroke-width:3px;stroke-linejoin:round}
@@ -79,6 +88,8 @@ h1{font-family:var(--display);font-weight:700;font-size:1.9rem;line-height:1;mar
 .foot{color:var(--muted);font-size:.75rem;margin:0}
 .foot a{color:inherit}
 </style>
+</head>
+<body>
 <div class="page">
   <header>
     <h1>Tahoe Lift Status</h1>
@@ -124,6 +135,8 @@ class MapView {
     this.tileRoot = el('g', { transform: `rotate(${R.rotate || 0})` }, this.svg);  // unrotated coords, rotated like the runs
     this.layers = new Map();
     this.world = el('g', {}, this.svg);
+    if (!single && R.reporting) { const h = document.createElement('div'); h.className = 'hint'; h.textContent = 'Two fingers to move or zoom'; wrap.appendChild(h); }
+    this.single = single;
     this.credit = document.createElement('div'); this.credit.className = 'credit'; this.credit.textContent = 'Imagery © Esri, Maxar, Earthstar Geographics'; this.credit.hidden = true;
     wrap.appendChild(this.credit);
     this.lsvg = el('svg', { class: 'labels', 'aria-hidden': 'true' }, wrap);
@@ -264,14 +277,33 @@ class MapView {
     const svg = this.svg;
     const toWorld = (ex, ey) => { const r = this.rect(); return [this.vb[0] + (ex - r.left) / r.width * this.vb[2], this.vb[1] + (ey - r.top) / r.height * this.vb[3]]; };
     svg.addEventListener('wheel', e => { e.preventDefault(); const [x, y] = toWorld(e.clientX, e.clientY); this.zoom(Math.exp(e.deltaY * 0.0015), x, y); }, { passive: false });
-    const ptrs = new Map(); let last = null, pinch = null;
-    svg.addEventListener('pointerdown', e => { svg.setPointerCapture(e.pointerId); ptrs.set(e.pointerId, [e.clientX, e.clientY]); svg.classList.add('drag'); last = [e.clientX, e.clientY]; if (ptrs.size === 2) { const [a, b] = [...ptrs.values()]; pinch = Math.hypot(a[0] - b[0], a[1] - b[1]); } });
-    svg.addEventListener('pointermove', e => {
-      if (!ptrs.has(e.pointerId)) return; ptrs.set(e.pointerId, [e.clientX, e.clientY]);
-      if (ptrs.size === 2 && pinch) { const [a, b] = [...ptrs.values()], d = Math.hypot(a[0] - b[0], a[1] - b[1]); const [x, y] = toWorld((a[0] + b[0]) / 2, (a[1] + b[1]) / 2); this.zoom(pinch / d, x, y); pinch = d; return; }
-      this.cx -= (e.clientX - last[0]) * this.scale; this.cy -= (e.clientY - last[1]) * this.scale; last = [e.clientX, e.clientY]; this.touched = true; this.apply();
+    // Mouse: drag pans. Touch: in the all-resorts view one finger scrolls the page
+    // and two fingers pan/zoom the map; in the single-resort view one finger pans.
+    const ptrs = new Map(); let prev = null;
+    const state = () => {
+      const v = [...ptrs.values()];
+      if (v.length >= 2) return { x: (v[0][0] + v[1][0]) / 2, y: (v[0][1] + v[1][1]) / 2, d: Math.hypot(v[0][0] - v[1][0], v[0][1] - v[1][1]) };
+      return v.length ? { x: v[0][0], y: v[0][1], d: 0 } : null;
+    };
+    const oneFingerPans = e => e.pointerType !== 'touch' || this.single;
+    svg.addEventListener('pointerdown', e => {
+      ptrs.set(e.pointerId, [e.clientX, e.clientY]);
+      if (ptrs.size >= 2 || oneFingerPans(e)) { svg.setPointerCapture(e.pointerId); svg.classList.add('drag'); }
+      prev = state();
     });
-    const up = e => { ptrs.delete(e.pointerId); if (ptrs.size < 2) pinch = null; if (!ptrs.size) svg.classList.remove('drag'); const v = [...ptrs.values()][0]; if (v) last = v; };
+    svg.addEventListener('pointermove', e => {
+      if (!ptrs.has(e.pointerId)) return;
+      ptrs.set(e.pointerId, [e.clientX, e.clientY]);
+      const cur = state();
+      if (ptrs.size === 1 && !oneFingerPans(e)) { prev = cur; return; }
+      if (prev && cur) {
+        this.cx -= (cur.x - prev.x) * this.scale; this.cy -= (cur.y - prev.y) * this.scale; this.touched = true;
+        if (ptrs.size >= 2 && prev.d && cur.d) { this.apply(); const [wx, wy] = toWorld(cur.x, cur.y); this.zoom(prev.d / cur.d, wx, wy); }
+        else this.apply();
+      }
+      prev = cur;
+    });
+    const up = e => { ptrs.delete(e.pointerId); if (!ptrs.size) svg.classList.remove('drag'); prev = state(); };
     svg.addEventListener('pointerup', up); svg.addEventListener('pointercancel', up);
   }
 }
@@ -466,3 +498,5 @@ function route() {
 window.addEventListener('hashchange', route);
 route();
 </script>
+</body>
+</html>

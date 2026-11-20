@@ -4,6 +4,12 @@
 
 Run and lift maps for Northstar, Heavenly and Kirkwood, side by side. Open terrain is colored by difficulty and closed terrain is gray.
 
+Maps can be zoomed, panned and rotated:
+
+- **Computer:** the ↺/↻ buttons, or Shift + drag.
+- **Phone:** a two-finger twist.
+- **Compass button:** returns the map to its default orientation.
+
 A **Map / Satellite** switch in the header puts satellite imagery under every map. The imagery is Esri World Imagery, loaded in the viewer's browser. The page remembers the choice.
 
 Below each map is a small weather chart:
@@ -56,7 +62,7 @@ n.
 
 | File | What it is |
 | --- | --- |
-| `resorts.json` | Each resort's status page URL, OpenSkiMap ski-area IDs, map rotation, and name aliases |
+| `resorts.json` | Each resort's status page URL, OnTheSnow link, OpenSkiMap ski-area IDs, default map rotation, and name aliases. `rotate` is in degrees clockwise. To match an OpenSkiMap view, use minus its bearing: a link ending `/150.6/0` means `"rotate": -150.6`. |
 | `data/shapes/<resort>.json` | Run and lift lines from OpenSkiMap. Changes rarely. |
 | `data/status/<resort>.json` | Open/closed status from the resort site. Rewritten by `npm run update`. |
 | `fetch_status.js` | Downloads the status. Each site embeds a `TerrainStatusFeed` JSON blob in its page. |

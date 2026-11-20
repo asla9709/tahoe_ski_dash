@@ -71,7 +71,8 @@ h1{font-family:var(--display);font-weight:700;font-size:1.9rem;line-height:1;mar
 .sat .map .casing{display:inline}
 .sat .map .closed{stroke:#ffffff;opacity:.5}
 .sat .labels text[data-closed]{fill:#4a5561}
-.mapwrap svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.mapwrap > svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.ctrl svg{display:block;pointer-events:none}
 .map{touch-action:pan-y;cursor:grab}
 .single .map{touch-action:none}
 .hint{display:none;position:absolute;left:8px;top:8px;font-size:.7rem;color:var(--muted);background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:2px 6px;pointer-events:none}
@@ -82,7 +83,8 @@ h1{font-family:var(--display);font-weight:700;font-size:1.9rem;line-height:1;mar
 .single .labels text{font-size:11.5px}
 .labels text.lift{font-style:italic}
 .ctrl{position:absolute;right:10px;bottom:10px;display:flex;flex-direction:column;gap:5px}
-.ctrl button{width:32px;height:32px;border-radius:6px;border:1px solid var(--line);background:var(--panel);color:var(--fg);font-size:17px;cursor:pointer}
+.ctrl button{width:32px;height:32px;border-radius:6px;border:1px solid var(--line);background:var(--panel);color:var(--fg);font-size:17px;cursor:pointer;display:grid;place-items:center;padding:0}
+.ctrl .rotb{font-size:16px}
 .notice{position:absolute;left:10px;top:10px;right:56px;max-width:380px;background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:6px 10px;font-size:.8rem}
 .foot{color:var(--muted);font-size:.75rem;margin:0}
 .foot a{color:inherit}
@@ -128,22 +130,33 @@ function stroke(f) {
 const rank = f => ({ open: 3, partial: 2, closed: 1 }[f.status] || 0) + (f.t === 'lift' ? 0.5 : 0);
 
 class MapView {
+  // Coordinates: run/lift lines are projected once into a flat local frame
+  // (meters, north up). The view rotates that frame by `theta` degrees inside an
+  // SVG group, then a viewBox (center + scale, in the rotated frame) pans/zooms it.
   constructor(wrap, R, single) {
-    this.wrap = wrap; this.R = R; this.fs = single ? 11.5 : 10.5;
+    this.wrap = wrap; this.R = R; this.fs = single ? 11.5 : 10.5; this.single = single;
+    this.theta0 = R.rotate || 0; this.theta = this.theta0;
     this.svg = el('svg', { class: 'map', role: 'img', 'aria-label': `${R.name} runs and lifts. Open runs are colored by difficulty; closed runs and lifts are gray.` }, wrap);
-    this.tileRoot = el('g', { transform: `rotate(${R.rotate || 0})` }, this.svg);  // unrotated coords, rotated like the runs
+    this.rot = el('g', {}, this.svg);
+    this.tileRoot = el('g', {}, this.rot);
     this.layers = new Map();
-    this.world = el('g', {}, this.svg);
-    if (!single && R.reporting) { const h = document.createElement('div'); h.className = 'hint'; h.textContent = 'Two fingers to move or zoom'; wrap.appendChild(h); }
-    this.single = single;
+    this.world = el('g', {}, this.rot);
+    if (!single && R.reporting) { const h = document.createElement('div'); h.className = 'hint'; h.textContent = 'Two fingers to move, zoom or rotate'; wrap.appendChild(h); }
     this.credit = document.createElement('div'); this.credit.className = 'credit'; this.credit.textContent = 'Imagery © Esri, Maxar, Earthstar Geographics'; this.credit.hidden = true;
     wrap.appendChild(this.credit);
     this.lsvg = el('svg', { class: 'labels', 'aria-hidden': 'true' }, wrap);
     const ctrl = document.createElement('div'); ctrl.className = 'ctrl';
-    ctrl.innerHTML = `<button aria-label="Zoom in">+</button><button aria-label="Zoom out">−</button><button aria-label="Reset view" style="font-size:13px">⟲</button>`;
+    ctrl.innerHTML = `<button aria-label="Zoom in">+</button><button aria-label="Zoom out">−</button>`
+      + `<button aria-label="Rotate left" class="rotb">↺</button><button aria-label="Rotate right" class="rotb">↻</button>`
+      + `<button aria-label="Face default direction" title="Reset rotation" class="compass"><svg viewBox="-10 -10 20 20" width="20" height="20"><g><path d="M0,-8 L3.6,0 L-3.6,0Z" fill="var(--warm)"/><path d="M0,8 L3.6,0 L-3.6,0Z" fill="var(--muted)"/></g></svg></button>`
+      + `<button aria-label="Reset view" style="font-size:13px">⟲</button>`;
     wrap.appendChild(ctrl);
-    const [bi, bo, br] = ctrl.children;
-    bi.onclick = () => this.zoom(1 / 1.5); bo.onclick = () => this.zoom(1.5); br.onclick = () => this.fit();
+    const [bi, bo, rl, rr, bc, br] = ctrl.children;
+    this.needle = bc.querySelector('g');
+    bi.onclick = () => this.zoom(1 / 1.5); bo.onclick = () => this.zoom(1.5);
+    rl.onclick = () => this.rotate(-15); rr.onclick = () => this.rotate(15);
+    bc.onclick = () => this.rotate(this.theta0 - this.theta);
+    br.onclick = () => { this.theta = this.theta0; this.fit(); };
     if (!R.reporting) {
       const n = document.createElement('div'); n.className = 'notice';
       n.textContent = `${R.name} isn't reporting individual runs or lifts right now, which usually means it's closed for the season or not open yet. Everything is shown as closed.`;
@@ -157,13 +170,13 @@ class MapView {
     const R = this.R;
     const all = R.feats.flatMap(f => f.p.flat());
     const lat0 = all.reduce((s, c) => s + c[1], 0) / all.length, lon0 = all.reduce((s, c) => s + c[0], 0) / all.length;
-    const k = Math.cos(lat0 * Math.PI / 180), a = R.rotate * Math.PI / 180, ca = Math.cos(a), sa = Math.sin(a);
-    Object.assign(this, { lat0, lon0, k, ca, sa });
-    const proj = c => { const x = (c[0] - lon0) * k * 111320, y = -(c[1] - lat0) * 111320; return [x * ca - y * sa, x * sa + y * ca]; };
-    let x0 = 1e9, x1 = -1e9, y0 = 1e9, y1 = -1e9;
-    R.feats.forEach(f => { f.pp = f.p.map(p => p.map(proj)); f.pp.flat().forEach(([x, y]) => { x0 = Math.min(x0, x); x1 = Math.max(x1, x); y0 = Math.min(y0, y); y1 = Math.max(y1, y); }); });
-    const pad = Math.max(x1 - x0, y1 - y0) * 0.04;
-    this.VB0 = [x0 - pad, y0 - pad, x1 - x0 + 2 * pad, y1 - y0 + 2 * pad];
+    const k = Math.cos(lat0 * Math.PI / 180);
+    Object.assign(this, { lat0, lon0, k });
+    const proj = c => [(c[0] - lon0) * k * 111320, -(c[1] - lat0) * 111320];
+    R.feats.forEach(f => { f.pp = f.p.map(p => p.map(proj)); });
+    this.pts = R.feats.flatMap(f => f.pp.flat());
+    const xs = this.pts.map(p => p[0]), ys = this.pts.map(p => p[1]);
+    this.extent = Math.max(Math.max(...xs) - Math.min(...xs), Math.max(...ys) - Math.min(...ys));
     this.labels = [];
     R.feats.slice().sort((a, b) => rank(a) - rank(b)).forEach(f => {
       const open = isOpen(f);
@@ -183,28 +196,46 @@ class MapView {
       if (!best || best.L === 0) return;
       let acc = 0, i = 0; while (i < best.seg.length - 1 && acc + best.seg[i] < best.L / 2) { acc += best.seg[i]; i++; }
       const A = best.pts[i], B = best.pts[i + 1], t = (best.L / 2 - acc) / best.seg[i];
-      let ang = Math.atan2(B[1] - A[1], B[0] - A[0]) * 180 / Math.PI; if (ang > 90) ang -= 180; if (ang < -90) ang += 180;
+      const ang = Math.atan2(B[1] - A[1], B[0] - A[0]) * 180 / Math.PI;
       this.labels.push({ f, x: A[0] + (B[0] - A[0]) * t, y: A[1] + (B[1] - A[1]) * t, ang, len: best.L, pri: rank(f) * 1e6 + best.L });
     });
     this.labels.sort((a, b) => b.pri - a.pri);
   }
+  // local -> rotated view frame
+  toView(x, y) { return [x * this.ca - y * this.sa, x * this.sa + y * this.ca]; }
+  setTrig() { const a = this.theta * Math.PI / 180; this.ca = Math.cos(a); this.sa = Math.sin(a); }
   rect() { return this.svg.getBoundingClientRect(); }
-  // View = a center point plus a scale (world units per screen pixel), so resizing
-  // the box never drifts the view. Until the user pans or zooms, resizing re-fits.
   fit() {
     const r = this.rect(); this.touched = false;
     if (!r.width || !r.height) return;
-    this.scale = Math.max(this.VB0[2] / r.width, this.VB0[3] / r.height);
-    this.cx = this.VB0[0] + this.VB0[2] / 2; this.cy = this.VB0[1] + this.VB0[3] / 2;
+    this.setTrig();
+    let x0 = 1e9, x1 = -1e9, y0 = 1e9, y1 = -1e9;
+    for (const p of this.pts) { const [x, y] = this.toView(p[0], p[1]); if (x < x0) x0 = x; if (x > x1) x1 = x; if (y < y0) y0 = y; if (y > y1) y1 = y; }
+    const pad = Math.max(x1 - x0, y1 - y0) * 0.04;
+    this.scale = Math.max((x1 - x0 + 2 * pad) / r.width, (y1 - y0 + 2 * pad) / r.height);
+    this.cx = (x0 + x1) / 2; this.cy = (y0 + y1) / 2;
     this.apply();
   }
   resized() { if (!this.touched || !this.scale) this.fit(); else this.apply(); }
   apply() {
     const r = this.rect(); if (!r.width || !r.height || !this.scale) return;
+    this.setTrig();
     const w = r.width * this.scale, h = r.height * this.scale;
     this.vb = [this.cx - w / 2, this.cy - h / 2, w, h];
     this.svg.setAttribute('viewBox', this.vb.join(' '));
+    this.rot.setAttribute('transform', `rotate(${this.theta})`);
+    this.needle.setAttribute('transform', `rotate(${this.theta})`);
     if (!this.pending) { this.pending = true; requestAnimationFrame(() => { this.pending = false; this.drawLabels(); this.updateTiles(); }); }
+  }
+  // rotate by d degrees around a point given in view coordinates (default: center)
+  rotate(d, px, py) {
+    if (!this.scale || !d) return;
+    px = px ?? this.cx; py = py ?? this.cy;
+    const a = d * Math.PI / 180, c = Math.cos(a), s = Math.sin(a);
+    const qx = px * c - py * s, qy = px * s + py * c;     // pivot's new position
+    this.cx += qx - px; this.cy += qy - py;
+    this.theta = ((this.theta + d) % 360 + 540) % 360 - 180;
+    this.touched = true; this.apply();
   }
   setSat(on) {
     this.sat = on; this.wrap.classList.toggle('sat', on); this.credit.hidden = !on;
@@ -215,7 +246,7 @@ class MapView {
   updateTiles() {
     if (!this.sat || !this.vb) return;
     const { lat0, lon0, k, ca, sa } = this, M = 111320, vb = this.vb;
-    // visible area in unrotated local coordinates
+    // visible area back in unrotated local coordinates
     const corners = [[vb[0], vb[1]], [vb[0] + vb[2], vb[1]], [vb[0], vb[1] + vb[3]], [vb[0] + vb[2], vb[1] + vb[3]]]
       .map(([x, y]) => [x * ca + y * sa, -x * sa + y * ca]);
     const xs = corners.map(c => c[0]), ys = corners.map(c => c[1]);
@@ -249,16 +280,19 @@ class MapView {
     this.lsvg.replaceChildren();
     const placed = [];
     for (const L of this.labels) {
-      const sx = (L.x - vb[0]) * s, sy = (L.y - vb[1]) * s;
+      const [vx, vy] = this.toView(L.x, L.y);
+      const sx = (vx - vb[0]) * s, sy = (vy - vb[1]) * s;
       if (sx < 0 || sy < 0 || sx > r.width || sy > r.height) continue;
       const w = L.f.name.length * fs * 0.55 + 6, h = fs + 3;
       if (L.len * s < w * 0.6 && L.f.t !== 'lift') continue; // run too short on screen for its name
-      const rad = L.ang * Math.PI / 180, c = Math.abs(Math.cos(rad)), sn = Math.abs(Math.sin(rad));
+      let ang = ((L.ang + this.theta) % 360 + 540) % 360 - 180;  // keep text upright
+      if (ang > 90) ang -= 180; if (ang < -90) ang += 180;
+      const rad = ang * Math.PI / 180, c = Math.abs(Math.cos(rad)), sn = Math.abs(Math.sin(rad));
       const bw = (w * c + h * sn) * 0.4, bh = (w * sn + h * c) * 0.4;
       const core = [sx - bw, sy - bh, sx + bw, sy + bh];
       if (placed.some(b => core[0] < b[2] && core[2] > b[0] && core[1] < b[3] && core[3] > b[1])) continue;
       placed.push(core);
-      const t = el('text', { transform: `translate(${sx.toFixed(1)},${sy.toFixed(1)}) rotate(${L.ang.toFixed(1)})`, 'text-anchor': 'middle', dy: '-4',
+      const t = el('text', { transform: `translate(${sx.toFixed(1)},${sy.toFixed(1)}) rotate(${ang.toFixed(1)})`, 'text-anchor': 'middle', dy: '-4',
         fill: isOpen(L.f) ? (L.f.t === 'lift' ? 'var(--lift)' : 'var(--fg)') : 'var(--closed-text)', ...(isOpen(L.f) ? {} : { 'data-closed': '' }) }, this.lsvg);
       if (L.f.t === 'lift') t.setAttribute('class', 'lift');
       t.textContent = L.f.name;
@@ -266,7 +300,7 @@ class MapView {
   }
   zoom(f, px, py) {
     if (!this.scale) return;
-    const fitScale = Math.max(this.VB0[2], this.VB0[3]) / Math.max(1, Math.min(this.rect().width, this.rect().height));
+    const r = this.rect(), fitScale = this.extent / Math.max(1, Math.min(r.width, r.height));
     const ns = Math.min(fitScale * 2, Math.max(fitScale / 20, this.scale * f)), q = ns / this.scale;
     px = px ?? this.cx; py = py ?? this.cy;
     this.cx = px - (px - this.cx) * q; this.cy = py - (py - this.cy) * q; this.scale = ns;
@@ -274,20 +308,22 @@ class MapView {
   }
   bind() {
     const svg = this.svg;
-    const toWorld = (ex, ey) => { const r = this.rect(); return [this.vb[0] + (ex - r.left) / r.width * this.vb[2], this.vb[1] + (ey - r.top) / r.height * this.vb[3]]; };
-    svg.addEventListener('wheel', e => { e.preventDefault(); const [x, y] = toWorld(e.clientX, e.clientY); this.zoom(Math.exp(e.deltaY * 0.0015), x, y); }, { passive: false });
-    // Mouse: drag pans. Touch: in the all-resorts view one finger scrolls the page
-    // and two fingers pan/zoom the map; in the single-resort view one finger pans.
-    const ptrs = new Map(); let prev = null;
+    const toViewPt = (ex, ey) => { const r = this.rect(); return [this.vb[0] + (ex - r.left) / r.width * this.vb[2], this.vb[1] + (ey - r.top) / r.height * this.vb[3]]; };
+    svg.addEventListener('wheel', e => { e.preventDefault(); const [x, y] = toViewPt(e.clientX, e.clientY); this.zoom(Math.exp(e.deltaY * 0.0015), x, y); }, { passive: false });
+    // Mouse: drag pans, Shift+drag rotates. Touch: in the all-resorts view one finger
+    // scrolls the page and two fingers pan/zoom/rotate; in the single-resort view one
+    // finger pans. A twist only starts rotating once it passes 12°, so pinches stay level.
+    const ptrs = new Map(); let prev = null, twist = 0, rotating = false;
     const state = () => {
       const v = [...ptrs.values()];
-      if (v.length >= 2) return { x: (v[0][0] + v[1][0]) / 2, y: (v[0][1] + v[1][1]) / 2, d: Math.hypot(v[0][0] - v[1][0], v[0][1] - v[1][1]) };
+      if (v.length >= 2) return { x: (v[0][0] + v[1][0]) / 2, y: (v[0][1] + v[1][1]) / 2, d: Math.hypot(v[0][0] - v[1][0], v[0][1] - v[1][1]), a: Math.atan2(v[1][1] - v[0][1], v[1][0] - v[0][0]) * 180 / Math.PI };
       return v.length ? { x: v[0][0], y: v[0][1], d: 0 } : null;
     };
     const oneFingerPans = e => e.pointerType !== 'touch' || this.single;
     svg.addEventListener('pointerdown', e => {
       ptrs.set(e.pointerId, [e.clientX, e.clientY]);
       if (ptrs.size >= 2 || oneFingerPans(e)) { svg.setPointerCapture(e.pointerId); svg.classList.add('drag'); }
+      if (ptrs.size === 2) { twist = 0; rotating = false; }
       prev = state();
     });
     svg.addEventListener('pointermove', e => {
@@ -296,9 +332,19 @@ class MapView {
       const cur = state();
       if (ptrs.size === 1 && !oneFingerPans(e)) { prev = cur; return; }
       if (prev && cur) {
-        this.cx -= (cur.x - prev.x) * this.scale; this.cy -= (cur.y - prev.y) * this.scale; this.touched = true;
-        if (ptrs.size >= 2 && prev.d && cur.d) { this.apply(); const [wx, wy] = toWorld(cur.x, cur.y); this.zoom(prev.d / cur.d, wx, wy); }
-        else this.apply();
+        if (ptrs.size === 1 && e.shiftKey) {                    // Shift+drag rotates
+          this.rotate((cur.x - prev.x) * 0.4);
+        } else {
+          this.cx -= (cur.x - prev.x) * this.scale; this.cy -= (cur.y - prev.y) * this.scale; this.touched = true;
+          this.apply();
+          if (ptrs.size >= 2 && prev.d && cur.d) {
+            const [wx, wy] = toViewPt(cur.x, cur.y);
+            this.zoom(prev.d / cur.d, wx, wy);
+            let da = cur.a - prev.a; if (da > 180) da -= 360; if (da < -180) da += 360;
+            if (!rotating) { twist += da; if (Math.abs(twist) > 12) { rotating = true; da = twist; } else da = 0; }
+            if (da) { const [px, py] = toViewPt(cur.x, cur.y); this.rotate(da, px, py); }
+          }
+        }
       }
       prev = cur;
     });

@@ -25,7 +25,7 @@ To run it on a schedule, use cron (or Task Scheduler on Windows), for example ev
 ```cron
 */30 7-16 * * ## Automatic updates with GitHub Actions
 
-`.github/workflows/update.yml` runs twice a day, at 7:05am and 1:05pm Pacific (an hour earlier in summer). It also runs when you click **Run workflow** on the Actions tab.
+`.github/workflows/update.yml` runs three times a day, at 4am, 8am and 11pm Pacific (an hour later during daylight time), until **February 20, 2027**. On the first scheduled run after that date, the workflow turns itself off. You can also start it anytime with **Run workflow** on the Actions tab while it's enabled.
 
 Each run does three things:
 
@@ -36,9 +36,11 @@ Each run does three things:
 - If the site doesn't appear, open Settings > Pages and set Source to "Deploy from a branch", with branch `gh-pages` and folder `/ (root)`.
 - A run fails if no resort could be fetched, which would most likely mean the resort sites are blocking GitHub's servers.
 - To change the schedule, edit the `cron` line. It's in UTC.
+- To run it longer, change `ACTIVE_UNTIL` near the top of the workflow. If the end date already passed and the workflow turned itself off, re-enable it on the Actions tab.
 
 n.
 - To change the schedule, edit the `cron` line. It's in UTC.
+- To run it longer, change `ACTIVE_UNTIL` near the top of the workflow. If the end date already passed and the workflow turned itself off, re-enable it on the Actions tab.
 
 ## How it works
 

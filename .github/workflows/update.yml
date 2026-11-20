@@ -1,14 +1,21 @@
 name: Update ski maps
 
-# Refreshes open/closed status twice a day, commits the updated status files and
+# Refreshes open/closed status three times a day until ACTIVE_UNTIL, commits the updated status files and
 # dist/ski-maps.html to main, and publishes the page to the gh-pages branch,
 # which GitHub Pages serves at https://asla9709.github.io/tahoe_ski_dash/.
 
 on:
   schedule:
-    # 7:05am and 1:05pm Pacific Standard Time (6:05am / 12:05pm in summer)
-    - cron: "5 15,21 * * *"
+    # 4am, 8am and 11pm Pacific Standard Time (12:00, 16:00 and 07:00 UTC).
+    # Cron is in UTC, so during daylight time these run an hour later in Pacific time.
+    - cron: "0 7,12,16 * * *"
   workflow_dispatch:
+
+env:
+  # Scheduled runs stop after this date (Pacific). The first scheduled run after it
+  # disables this workflow. To extend: change the date, then re-enable the workflow
+  # on the Actions tab if it was already disabled.
+  ACTIVE_UNTIL: "2027-02-20"
 
 permissions:
   contents: write
@@ -18,7 +25,29 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  gate:
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+    outputs:
+      active: ${{ steps.check.outputs.active }}
+    steps:
+      - id: check
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          today=$(TZ=America/Los_Angeles date +%F)
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] || [[ ! "$today" > "$ACTIVE_UNTIL" ]]; then
+            echo "active=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "active=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::Past ACTIVE_UNTIL ($ACTIVE_UNTIL); disabling this workflow."
+            gh workflow disable "${{ github.workflow }}" --repo "${{ github.repository }}"
+          fi
+
   update:
+    needs: gate
+    if: needs.gate.outputs.active == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:

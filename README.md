@@ -4,7 +4,9 @@
 
 Run and lift maps for Northstar, Heavenly and Kirkwood, side by side. Open terrain is colored by difficulty and closed terrain is gray.
 
-Above each map is a small weather chart:
+A **Map / Satellite** switch in the header puts satellite imagery under every map. The imagery is Esri World Imagery, loaded in the viewer's browser. The page remembers the choice.
+
+Below each map is a small weather chart:
 
 - hourly temperature at the resort's summit and base elevations, 4 days back and 4 days ahead
 - the 32°F line, with the temperature line drawn blue below freezing and red above
@@ -90,4 +92,4 @@ Any Vail Resorts mountain should work.
 2. Add an entry to `resorts.json`.
 3. Run `npm run shapes`, then `npm run update`.
 
-Data: runs and lifts © OpenStreetMap contributors via OpenSkiMap; status from each resort's website.
+Data: runs and lifts © OpenStreetMap contributors via OpenSkiMap; status from each resort's website; weather from Open-Meteo; satellite imagery © Esri, Maxar, Earthstar Geographics.

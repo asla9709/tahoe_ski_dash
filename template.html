@@ -39,20 +39,33 @@ h1{font-family:var(--display);font-weight:700;font-size:1.9rem;line-height:1;mar
 .links a{color:var(--inter);text-decoration:none;font-weight:600;white-space:nowrap}
 .links a:hover{text-decoration:underline}
 .links a:focus-visible,.ctrl button:focus-visible{outline:2px solid var(--inter);outline-offset:2px}
-.wx{padding:2px 14px 10px;border-bottom:1px solid var(--line);position:relative}
-.verdict{font-size:.86rem;margin:0 0 6px;color:var(--fg)}
+.wx{padding:8px 14px 10px;border-top:1px solid var(--line);position:relative}
+.verdict{font-size:.78rem;margin:0 0 4px;color:var(--muted)}
 .verdict .w{color:var(--warm);font-weight:600}
 .verdict .c{color:var(--cold);font-weight:600}
-.wxkey{display:flex;flex-wrap:wrap;gap:2px 12px;font-size:.72rem;color:var(--muted);margin-top:2px}
+.wxkey{display:flex;flex-wrap:wrap;gap:2px 10px;font-size:.68rem;color:var(--muted);margin-top:2px}
 .wxkey svg{vertical-align:middle;margin-right:4px}
 .chart{display:block;width:100%;touch-action:pan-y}
-.chart text{font-family:var(--body);font-size:10px;fill:var(--muted);font-variant-numeric:tabular-nums}
-.chart text.strong{fill:var(--fg);font-weight:600}
+.chart text{font-family:var(--body);font-size:9px;fill:var(--muted);font-variant-numeric:tabular-nums}
+.chart text.strong{fill:var(--muted);font-weight:600}
 .tip{position:absolute;pointer-events:none;background:var(--panel);color:var(--fg);border:1px solid var(--line);border-radius:6px;padding:5px 8px;font-size:.78rem;box-shadow:0 4px 14px rgba(0,0,0,.15);white-space:nowrap;font-variant-numeric:tabular-nums;z-index:2}
 .tip b{display:block;font-weight:600}
 .nowx{color:var(--muted);font-size:.8rem;padding:6px 0}
 .mapwrap{position:relative;height:440px;background:var(--bg)}
-.single .mapwrap{height:max(420px,calc(100vh - 330px))}
+.single .mapwrap{height:max(420px,calc(100vh - 290px))}
+.seg{display:inline-flex;background:var(--grid);padding:2px;border-radius:6px;gap:2px}
+.seg button{font:600 .78rem var(--body);border:0;background:transparent;color:var(--muted);padding:3px 10px;border-radius:4px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--panel);color:var(--fg);box-shadow:0 1px 2px rgba(0,0,0,.12)}
+.seg button:focus-visible{outline:2px solid var(--inter);outline-offset:1px}
+.credit{position:absolute;left:6px;bottom:4px;font-size:.62rem;color:#fff;text-shadow:0 0 3px #000,0 0 2px #000;pointer-events:none}
+/* over imagery: always light-mode run colors with white halos, in either theme */
+.sat{--easy:#1f8a4c;--inter:#1d63b8;--adv:#121820;--lift:#b0223a}
+.sat .labels text{stroke:#ffffff;fill:#17212b}
+.sat .labels text.lift{fill:#b0223a}
+.map .casing{display:none}
+.sat .map .casing{display:inline}
+.sat .map .closed{stroke:#ffffff;opacity:.5}
+.sat .labels text[data-closed]{fill:#4a5561}
 .mapwrap svg{position:absolute;inset:0;width:100%;height:100%;display:block}
 .map{touch-action:none;cursor:grab}
 .map.drag{cursor:grabbing}
@@ -70,6 +83,10 @@ h1{font-family:var(--display);font-weight:700;font-size:1.9rem;line-height:1;mar
   <header>
     <h1>Tahoe Lift Status</h1>
     <span class="sub" id="sub"></span>
+    <div class="seg" role="group" aria-label="Map background">
+      <button id="bgPlain" aria-pressed="true">Map</button>
+      <button id="bgSat" aria-pressed="false">Satellite</button>
+    </div>
     <div class="legend">
       <span><i style="border-color:var(--easy)"></i>Easier</span>
       <span><i style="border-color:var(--inter)"></i>More difficult</span>
@@ -80,7 +97,7 @@ h1{font-family:var(--display);font-weight:700;font-size:1.9rem;line-height:1;mar
     </div>
   </header>
   <div class="grid" id="grid"></div>
-  <p class="foot">Run and lift lines: <a href="https://openskimap.org/">OpenSkiMap</a> / © OpenStreetMap contributors. Open/closed: each resort's lift and terrain status page. Weather: <a href="https://open-meteo.com/">Open-Meteo</a> model data for the highest and lowest points on each resort's runs, adjusted to those elevations. The past 4 days are model estimates, not station readings.</p>
+  <p class="foot">Run and lift lines: <a href="https://openskimap.org/">OpenSkiMap</a> / © OpenStreetMap contributors. Open/closed: each resort's lift and terrain status page. Satellite imagery: Esri, Maxar, Earthstar Geographics. Weather: <a href="https://open-meteo.com/">Open-Meteo</a> model data for the highest and lowest points on each resort's runs, adjusted to those elevations. The past 4 days are model estimates, not station readings.</p>
 </div>
 <script>
 const DATA = __DATA__;
@@ -104,7 +121,11 @@ class MapView {
   constructor(wrap, R, single) {
     this.wrap = wrap; this.R = R; this.fs = single ? 11.5 : 10.5;
     this.svg = el('svg', { class: 'map', role: 'img', 'aria-label': `${R.name} runs and lifts. Open runs are colored by difficulty; closed runs and lifts are gray.` }, wrap);
+    this.tileRoot = el('g', { transform: `rotate(${R.rotate || 0})` }, this.svg);  // unrotated coords, rotated like the runs
+    this.layers = new Map();
     this.world = el('g', {}, this.svg);
+    this.credit = document.createElement('div'); this.credit.className = 'credit'; this.credit.textContent = 'Imagery © Esri, Maxar, Earthstar Geographics'; this.credit.hidden = true;
+    wrap.appendChild(this.credit);
     this.lsvg = el('svg', { class: 'labels', 'aria-hidden': 'true' }, wrap);
     const ctrl = document.createElement('div'); ctrl.className = 'ctrl';
     ctrl.innerHTML = `<button aria-label="Zoom in">+</button><button aria-label="Zoom out">−</button><button aria-label="Reset view" style="font-size:13px">⟲</button>`;
@@ -125,6 +146,7 @@ class MapView {
     const all = R.feats.flatMap(f => f.p.flat());
     const lat0 = all.reduce((s, c) => s + c[1], 0) / all.length, lon0 = all.reduce((s, c) => s + c[0], 0) / all.length;
     const k = Math.cos(lat0 * Math.PI / 180), a = R.rotate * Math.PI / 180, ca = Math.cos(a), sa = Math.sin(a);
+    Object.assign(this, { lat0, lon0, k, ca, sa });
     const proj = c => { const x = (c[0] - lon0) * k * 111320, y = -(c[1] - lat0) * 111320; return [x * ca - y * sa, x * sa + y * ca]; };
     let x0 = 1e9, x1 = -1e9, y0 = 1e9, y1 = -1e9;
     R.feats.forEach(f => { f.pp = f.p.map(p => p.map(proj)); f.pp.flat().forEach(([x, y]) => { x0 = Math.min(x0, x); x1 = Math.max(x1, x); y0 = Math.min(y0, y); y1 = Math.max(y1, y); }); });
@@ -133,8 +155,11 @@ class MapView {
     this.labels = [];
     R.feats.slice().sort((a, b) => rank(a) - rank(b)).forEach(f => {
       const open = isOpen(f);
+      const d = f.pp.map(pts => 'M' + pts.map(c => c[0].toFixed(1) + ',' + c[1].toFixed(1)).join('L')).join('');
+      // white outline under open terrain, shown only over satellite imagery
+      if (open) el('path', { d, class: 'casing', fill: 'none', stroke: '#ffffff', 'stroke-opacity': 0.85, 'vector-effect': 'non-scaling-stroke', 'stroke-linejoin': 'round', 'stroke-linecap': 'round', 'stroke-width': f.t === 'lift' ? 4.4 : 5 }, this.world);
       el('path', {
-        d: f.pp.map(pts => 'M' + pts.map(c => c[0].toFixed(1) + ',' + c[1].toFixed(1)).join('L')).join(''),
+        d, class: open ? 'open' : 'closed',
         fill: 'none', stroke: stroke(f), 'vector-effect': 'non-scaling-stroke', 'stroke-linejoin': 'round',
         'stroke-linecap': f.t === 'lift' ? 'butt' : 'round',
         'stroke-width': f.t === 'lift' ? (open ? 2.4 : 1.8) : open ? 2.8 : f.status === 'closed' ? 1.8 : 1.1,
@@ -167,7 +192,44 @@ class MapView {
     const w = r.width * this.scale, h = r.height * this.scale;
     this.vb = [this.cx - w / 2, this.cy - h / 2, w, h];
     this.svg.setAttribute('viewBox', this.vb.join(' '));
-    if (!this.pending) { this.pending = true; requestAnimationFrame(() => { this.pending = false; this.drawLabels(); }); }
+    if (!this.pending) { this.pending = true; requestAnimationFrame(() => { this.pending = false; this.drawLabels(); this.updateTiles(); }); }
+  }
+  setSat(on) {
+    this.sat = on; this.wrap.classList.toggle('sat', on); this.credit.hidden = !on;
+    this.tileRoot.style.display = on ? '' : 'none';
+    if (on) this.updateTiles();
+  }
+  // Satellite tiles (Web Mercator) placed in the same local projection as the runs.
+  updateTiles() {
+    if (!this.sat || !this.vb) return;
+    const { lat0, lon0, k, ca, sa } = this, M = 111320, vb = this.vb;
+    // visible area in unrotated local coordinates
+    const corners = [[vb[0], vb[1]], [vb[0] + vb[2], vb[1]], [vb[0], vb[1] + vb[3]], [vb[0] + vb[2], vb[1] + vb[3]]]
+      .map(([x, y]) => [x * ca + y * sa, -x * sa + y * ca]);
+    const xs = corners.map(c => c[0]), ys = corners.map(c => c[1]);
+    const lonW = Math.min(...xs) / (k * M) + lon0, lonE = Math.max(...xs) / (k * M) + lon0;
+    const latN = lat0 - Math.min(...ys) / M, latS = lat0 - Math.max(...ys) / M;
+    const mpp = this.scale / (window.devicePixelRatio || 1);
+    let z = Math.max(10, Math.min(18, Math.ceil(Math.log2(156543.03 * Math.cos(lat0 * Math.PI / 180) / mpp))));
+    const tx = (lon, z) => Math.floor((lon + 180) / 360 * 2 ** z);
+    const ty = (lat, z) => { const r = lat * Math.PI / 180; return Math.floor((1 - Math.log(Math.tan(r) + 1 / Math.cos(r)) / Math.PI) / 2 * 2 ** z); };
+    let x0, x1, y0, y1;
+    for (; z > 10; z--) { x0 = tx(lonW, z); x1 = tx(lonE, z); y0 = ty(latN, z); y1 = ty(latS, z); if ((x1 - x0 + 1) * (y1 - y0 + 1) <= 64) break; }
+    const tlon = (x, z) => x / 2 ** z * 360 - 180;
+    const tlat = (y, z) => Math.atan(Math.sinh(Math.PI * (1 - 2 * y / 2 ** z))) * 180 / Math.PI;
+    let layer = this.layers.get(z);
+    if (!layer) { layer = { g: el('g', {}, this.tileRoot), have: new Set() }; this.layers.set(z, layer); }
+    this.tileRoot.appendChild(layer.g);                          // current zoom on top
+    for (const [zz, L] of this.layers) if (Math.abs(zz - z) > 1) { L.g.remove(); this.layers.delete(zz); }
+    for (let x = x0; x <= x1; x++) for (let y = y0; y <= y1; y++) {
+      const key = x + '/' + y; if (layer.have.has(key)) continue; layer.have.add(key);
+      const ux0 = (tlon(x, z) - lon0) * k * M, ux1 = (tlon(x + 1, z) - lon0) * k * M;
+      const uy0 = -(tlat(y, z) - lat0) * M, uy1 = -(tlat(y + 1, z) - lat0) * M;
+      el('image', { href: `https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/${z}/${y}/${x}`,
+        x: ux0, y: uy0, width: (ux1 - ux0) * 1.003, height: (uy1 - uy0) * 1.003, preserveAspectRatio: 'none' }, layer.g);
+    }
+    if (!this.tint) this.tint = el('rect', { x: -1e6, y: -1e6, width: 2e6, height: 2e6, fill: '#ffffff', opacity: 0.18 });
+    this.tileRoot.appendChild(this.tint);
   }
   drawLabels() {
     const r = this.rect(), vb = this.vb, s = r.width / vb[2], fs = this.fs;
@@ -185,7 +247,7 @@ class MapView {
       if (placed.some(b => core[0] < b[2] && core[2] > b[0] && core[1] < b[3] && core[3] > b[1])) continue;
       placed.push(core);
       const t = el('text', { transform: `translate(${sx.toFixed(1)},${sy.toFixed(1)}) rotate(${L.ang.toFixed(1)})`, 'text-anchor': 'middle', dy: '-4',
-        fill: isOpen(L.f) ? (L.f.t === 'lift' ? 'var(--lift)' : 'var(--fg)') : 'var(--closed-text)' }, this.lsvg);
+        fill: isOpen(L.f) ? (L.f.t === 'lift' ? 'var(--lift)' : 'var(--fg)') : 'var(--closed-text)', ...(isOpen(L.f) ? {} : { 'data-closed': '' }) }, this.lsvg);
       if (L.f.t === 'lift') t.setAttribute('class', 'lift');
       t.textContent = L.f.name;
     }
@@ -252,14 +314,14 @@ function renderWeather(box, W) {
   key.innerHTML = `<span><svg width="18" height="6"><line x1="0" y1="3" x2="18" y2="3" stroke="var(--cold)" stroke-width="2"/></svg>Summit ${S.elevationFt.toLocaleString()} ft</span>
     <span><svg width="18" height="6"><line x1="0" y1="3" x2="18" y2="3" stroke="var(--cold)" stroke-width="1.5" stroke-dasharray="3 2"/></svg>Base ${B.elevationFt.toLocaleString()} ft</span>
     <span><svg width="22" height="6"><line x1="0" y1="3" x2="11" y2="3" stroke="var(--cold)" stroke-width="2"/><line x1="11" y1="3" x2="22" y2="3" stroke="var(--warm)" stroke-width="2"/></svg>Below / above 32°F</span>
-    <span><svg width="8" height="8"><rect width="8" height="8" rx="1.5" fill="var(--snow)"/></svg>Daily snow at summit</span>`;
+    <span><svg width="8" height="8"><rect width="8" height="8" rx="1.5" fill="var(--snow)"/></svg>Daily snow at summit</span><span>Past 4 days shaded</span>`;
   box.appendChild(key);
   const tip = document.createElement('div'); tip.className = 'tip'; tip.hidden = true; box.appendChild(tip);
 
   const draw = () => {
     const W_ = box.clientWidth - 28; if (W_ <= 0) return;
     chart.replaceChildren();
-    const m = { l: 26, r: 36 }, tempH = 86, gap = 6, snowH = 38, axisH = 14, top = 6;
+    const m = { l: 24, r: 34 }, tempH = 54, gap = 4, snowH = 28, axisH = 12, top = 4;
     const Ht = top + tempH + gap + snowH + axisH;
     chart.setAttribute('viewBox', `0 0 ${W_} ${Ht}`); chart.setAttribute('height', Ht);
     const x = t => m.l + (t - t0) / (t1 - t0) * (W_ - m.l - m.r);
@@ -268,7 +330,7 @@ function renderWeather(box, W) {
     const y = v => top + (hi - v) / (hi - lo) * tempH;
     const snowMax = Math.max(1, ...days.map(d => d.snow));
     const yBase = top + tempH + gap + snowH;
-    const ys = v => yBase - v / snowMax * (snowH - 11);
+    const ys = v => yBase - v / snowMax * (snowH - 10);
 
     // past shading + day grid
     el('rect', { x: x(t0), y: top, width: Math.max(0, x(now) - x(t0)), height: yBase - top, fill: 'var(--past)' }, chart);
@@ -313,7 +375,7 @@ function renderWeather(box, W) {
         el('text', { x: (xl + xr) / 2, y: yt - 2, 'text-anchor': 'middle', class: 'strong' }, chart).textContent = inch(d.snow);
       }
       const isToday = now >= d.t && now < d.t + DAY;
-      el('text', { x: (xl + xr) / 2, y: yBase + 11, 'text-anchor': 'middle', ...(isToday ? { class: 'strong' } : {}) }, chart).textContent = isToday ? 'Today' : dayName(d.t);
+      el('text', { x: (xl + xr) / 2, y: yBase + 10, 'text-anchor': 'middle', ...(isToday ? { class: 'strong' } : {}) }, chart).textContent = isToday ? 'Today' : dayName(d.t);
     });
     el('line', { x1: m.l, x2: W_ - m.r, y1: yBase, y2: yBase, stroke: 'var(--line)', 'stroke-width': 1 }, chart);
     el('text', { x: W_ - m.r + 4, y: yBase - 2 }, chart).textContent = 'snow';
@@ -366,10 +428,22 @@ function card(key, single) {
   addLink(R.onTheSnowUrl, 'OnTheSnow ↗', true);
   addLink(single ? '#' : '#' + key, single ? '← All resorts' : 'Full map →', false);
   sec.appendChild(head);
-  const wx = document.createElement('div'); wx.className = 'wx'; sec.appendChild(wx);
   const mw = document.createElement('div'); mw.className = 'mapwrap'; sec.appendChild(mw);
+  const wx = document.createElement('div'); wx.className = 'wx'; sec.appendChild(wx);
   return { sec, wx, mw, R };
 }
+let views = [];
+let satOn = false;
+try { satOn = localStorage.getItem('bg') === 'sat'; } catch (e) {}
+function setBg(on) {
+  satOn = on;
+  document.getElementById('bgPlain').setAttribute('aria-pressed', String(!on));
+  document.getElementById('bgSat').setAttribute('aria-pressed', String(on));
+  views.forEach(v => v.setSat(on));
+  try { localStorage.setItem('bg', on ? 'sat' : 'plain'); } catch (e) {}
+}
+document.getElementById('bgPlain').onclick = () => setBg(false);
+document.getElementById('bgSat').onclick = () => setBg(true);
 function route() {
   const k = location.hash.slice(1), single = !!DATA.resorts[k];
   const grid = document.getElementById('grid');
@@ -379,12 +453,14 @@ function route() {
   const asOf = keys.map(key => DATA.resorts[key].asOf).filter(Boolean).sort().pop();
   document.getElementById('sub').textContent = `Updated ${fmtTime(asOf)} Pacific`;
   document.title = single ? `${DATA.resorts[k].name} Lift Status` : 'Tahoe Lift Status';
+  views = [];
   for (const key of single ? [k] : keys) {
     const C = card(key, single);
     grid.appendChild(C.sec);
+    views.push(new MapView(C.mw, C.R, single));
     renderWeather(C.wx, C.R.weather);
-    new MapView(C.mw, C.R, single);
   }
+  setBg(satOn);
   window.scrollTo(0, 0);
 }
 window.addEventListener('hashchange', route);

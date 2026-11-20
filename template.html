@@ -1,201 +1,382 @@
-<title>Tahoe Lift Status Maps</title>
+<title>Tahoe Lift Status</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&display=swap">
 <style>
-/* Layout: one slim bar (resort tabs, status time, legend) over a full-height map. */
+/* Layout: slim header, then one column per resort (weather strip over map); stacks on narrow screens.
+   #<resort> shows that resort alone with a full-height map. */
 :root{
-  --bg:#eef2f5; --panel:#ffffff; --fg:#17212b; --muted:#5d6b78; --line:#d5dde4;
+  --bg:#eef2f5; --panel:#ffffff; --fg:#17212b; --muted:#5d6b78; --line:#d5dde4; --grid:#e6ebef;
   --easy:#1f8a4c; --inter:#1d63b8; --adv:#121820; --lift:#b0223a;
-  --closed:#c3cad1; --closed-text:#8d99a5; --connector:#d3d9de; --halo:#ffffff; --tab:#e3e9ee;
+  --closed:#c3cad1; --closed-text:#8d99a5; --connector:#d3d9de; --halo:#ffffff;
+  --cold:#2a78d6; --warm:#e34948; --snow:#86b6ef; --past:#f4f6f8;
   --display:"Barlow Condensed","Arial Narrow",system-ui,sans-serif;
   --body:"Barlow",system-ui,-apple-system,"Segoe UI",sans-serif;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --bg:#0f151b; --panel:#161e26; --fg:#e7edf2; --muted:#93a2b0; --line:#2a3540;
+  --bg:#0f151b; --panel:#161e26; --fg:#e7edf2; --muted:#93a2b0; --line:#2a3540; --grid:#222c36;
   --easy:#3fbf73; --inter:#4a97f0; --adv:#f1f4f7; --lift:#ef5a70;
-  --closed:#3a4550; --closed-text:#6f7d8a; --connector:#2c3640; --halo:#161e26; --tab:#1f2932; color-scheme:dark}}
+  --closed:#3a4550; --closed-text:#6f7d8a; --connector:#2c3640; --halo:#161e26;
+  --cold:#3987e5; --warm:#e66767; --snow:#5598e7; --past:#1b242d; color-scheme:dark}}
 :root[data-theme="dark"]{
-  --bg:#0f151b; --panel:#161e26; --fg:#e7edf2; --muted:#93a2b0; --line:#2a3540;
+  --bg:#0f151b; --panel:#161e26; --fg:#e7edf2; --muted:#93a2b0; --line:#2a3540; --grid:#222c36;
   --easy:#3fbf73; --inter:#4a97f0; --adv:#f1f4f7; --lift:#ef5a70;
-  --closed:#3a4550; --closed-text:#6f7d8a; --connector:#2c3640; --halo:#161e26; --tab:#1f2932; color-scheme:dark}
-html,body{height:100%}
-body{background:var(--panel);color:var(--fg);font-family:var(--body);font-size:14px;display:flex;flex-direction:column;overflow:hidden}
-.bar{display:flex;flex-wrap:wrap;align-items:center;gap:8px 18px;padding-block:10px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));border-bottom:1px solid var(--line);background:var(--panel)}
-.tabs{display:flex;gap:4px;background:var(--tab);padding:3px;border-radius:7px}
-.tabs a{font-family:var(--display);font-weight:700;font-size:1.05rem;letter-spacing:.03em;text-transform:uppercase;color:var(--muted);text-decoration:none;padding:4px 12px;border-radius:5px}
-.tabs a[aria-current="page"]{background:var(--panel);color:var(--fg);box-shadow:0 1px 2px rgba(0,0,0,.12)}
-.tabs a:focus-visible,.ctrl button:focus-visible{outline:2px solid var(--inter);outline-offset:2px}
-.meta{color:var(--muted);font-size:.85rem;font-variant-numeric:tabular-nums}
-.meta b{color:var(--fg);font-weight:600}
-.legend{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:.8rem;color:var(--muted);margin-left:auto}
+  --closed:#3a4550; --closed-text:#6f7d8a; --connector:#2c3640; --halo:#161e26;
+  --cold:#3987e5; --warm:#e66767; --snow:#5598e7; --past:#1b242d; color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:14px;line-height:1.4}
+.page{padding-block:14px 20px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:14px}
+header{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 16px}
+h1{font-family:var(--display);font-weight:700;font-size:1.9rem;line-height:1;margin:0;letter-spacing:.01em}
+.sub{color:var(--muted);font-size:.85rem}
+.legend{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:.78rem;color:var(--muted);margin-left:auto;align-items:center}
 .legend i{display:inline-block;width:18px;border-top:3px solid;vertical-align:middle;margin-right:5px}
-.mapwrap{position:relative;flex:1;min-height:0;background:var(--bg)}
-svg{position:absolute;inset:0;width:100%;height:100%;display:block}
-#map{touch-action:none;cursor:grab}
-#map.drag{cursor:grabbing}
-#labels{pointer-events:none}
-#labels text{font-family:var(--body);font-weight:600;font-size:11.5px;paint-order:stroke;stroke:var(--halo);stroke-width:3px;stroke-linejoin:round}
-#labels text.lift{font-weight:600;font-style:italic}
-.ctrl{position:absolute;right:max(12px,env(safe-area-inset-right,0px));bottom:calc(12px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:6px}
-.ctrl button{width:36px;height:36px;border-radius:6px;border:1px solid var(--line);background:var(--panel);color:var(--fg);font-size:18px;cursor:pointer}
-.notice{position:absolute;left:max(12px,env(safe-area-inset-left,0px));top:12px;max-width:min(420px,calc(100% - 24px));background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:8px 12px;font-size:.85rem;color:var(--fg)}
-.credit{position:absolute;left:max(12px,env(safe-area-inset-left,0px));bottom:calc(10px + env(safe-area-inset-bottom,0px));font-size:.72rem;color:var(--muted);background:color-mix(in srgb,var(--panel) 80%,transparent);padding:2px 6px;border-radius:4px}
-.credit a{color:inherit}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:14px;align-items:start}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:8px;overflow:hidden;min-width:0;display:flex;flex-direction:column}
+.chead{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 10px;padding:12px 14px 4px}
+.chead h2{font-family:var(--display);font-weight:700;font-size:1.45rem;text-transform:uppercase;letter-spacing:.04em;margin:0}
+.counts{color:var(--muted);font-size:.85rem;font-variant-numeric:tabular-nums}
+.counts b{color:var(--fg);font-weight:600}
+.chead a{margin-left:auto;font-size:.82rem;color:var(--inter);text-decoration:none;font-weight:600}
+.chead a:hover{text-decoration:underline}
+.chead a:focus-visible,.ctrl button:focus-visible{outline:2px solid var(--inter);outline-offset:2px}
+.wx{padding:2px 14px 10px;border-bottom:1px solid var(--line);position:relative}
+.verdict{font-size:.86rem;margin:0 0 6px;color:var(--fg)}
+.verdict .w{color:var(--warm);font-weight:600}
+.verdict .c{color:var(--cold);font-weight:600}
+.wxkey{display:flex;flex-wrap:wrap;gap:2px 12px;font-size:.72rem;color:var(--muted);margin-top:2px}
+.wxkey svg{vertical-align:middle;margin-right:4px}
+.chart{display:block;width:100%;touch-action:pan-y}
+.chart text{font-family:var(--body);font-size:10px;fill:var(--muted);font-variant-numeric:tabular-nums}
+.chart text.strong{fill:var(--fg);font-weight:600}
+.tip{position:absolute;pointer-events:none;background:var(--panel);color:var(--fg);border:1px solid var(--line);border-radius:6px;padding:5px 8px;font-size:.78rem;box-shadow:0 4px 14px rgba(0,0,0,.15);white-space:nowrap;font-variant-numeric:tabular-nums;z-index:2}
+.tip b{display:block;font-weight:600}
+.nowx{color:var(--muted);font-size:.8rem;padding:6px 0}
+.mapwrap{position:relative;height:440px;background:var(--bg)}
+.single .mapwrap{height:max(420px,calc(100vh - 330px))}
+.mapwrap svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.map{touch-action:none;cursor:grab}
+.map.drag{cursor:grabbing}
+.labels{pointer-events:none}
+.labels text{font-family:var(--body);font-weight:600;font-size:10.5px;paint-order:stroke;stroke:var(--halo);stroke-width:3px;stroke-linejoin:round}
+.single .labels text{font-size:11.5px}
+.labels text.lift{font-style:italic}
+.ctrl{position:absolute;right:10px;bottom:10px;display:flex;flex-direction:column;gap:5px}
+.ctrl button{width:32px;height:32px;border-radius:6px;border:1px solid var(--line);background:var(--panel);color:var(--fg);font-size:17px;cursor:pointer}
+.notice{position:absolute;left:10px;top:10px;right:56px;max-width:380px;background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:6px 10px;font-size:.8rem}
+.foot{color:var(--muted);font-size:.75rem;margin:0}
+.foot a{color:inherit}
 </style>
-<div class="bar">
-  <nav class="tabs" id="tabs" aria-label="Resort"></nav>
-  <div class="meta" id="meta"></div>
-  <div class="legend">
-    <span><i style="border-color:var(--easy)"></i>Easier</span>
-    <span><i style="border-color:var(--inter)"></i>More difficult</span>
-    <span><i style="border-color:var(--adv)"></i>Most difficult</span>
-    <span><i style="border-color:var(--lift);border-top-style:dashed"></i>Lift</span>
-    <span><i style="border-color:var(--inter);border-top-style:dotted"></i>Partly open</span>
-    <span><i style="border-color:var(--closed)"></i>Closed</span>
-  </div>
-</div>
-<div class="mapwrap" id="wrap">
-  <svg id="map" role="img" aria-label="Ski area map. Open runs are colored by difficulty; closed runs and lifts are gray."><g id="world"></g></svg>
-  <svg id="labels" aria-hidden="true"></svg>
-  <div class="notice" id="notice" hidden></div>
-  <div class="ctrl">
-    <button id="zin" aria-label="Zoom in">+</button>
-    <button id="zout" aria-label="Zoom out">−</button>
-    <button id="zreset" aria-label="Reset view" style="font-size:14px">⟲</button>
-  </div>
-  <div class="credit">Runs: <a href="https://openskimap.org/">OpenSkiMap</a> / © OpenStreetMap contributors · Status: <a id="src" href="#">resort site</a></div>
+<div class="page">
+  <header>
+    <h1>Tahoe Lift Status</h1>
+    <span class="sub" id="sub"></span>
+    <div class="legend">
+      <span><i style="border-color:var(--easy)"></i>Easier</span>
+      <span><i style="border-color:var(--inter)"></i>More difficult</span>
+      <span><i style="border-color:var(--adv)"></i>Most difficult</span>
+      <span><i style="border-color:var(--lift);border-top-style:dashed"></i>Lift</span>
+      <span><i style="border-color:var(--inter);border-top-style:dotted"></i>Partly open</span>
+      <span><i style="border-color:var(--closed)"></i>Closed</span>
+    </div>
+  </header>
+  <div class="grid" id="grid"></div>
+  <p class="foot">Run and lift lines: <a href="https://openskimap.org/">OpenSkiMap</a> / © OpenStreetMap contributors. Open/closed: each resort's lift and terrain status page. Weather: <a href="https://open-meteo.com/">Open-Meteo</a> model data for the highest and lowest points on each resort's runs, adjusted to those elevations. The past 4 days are model estimates, not station readings.</p>
 </div>
 <script>
 const DATA = __DATA__;
 const NS = "http://www.w3.org/2000/svg";
-const svg = document.getElementById('map'), world = document.getElementById('world'), lsvg = document.getElementById('labels');
-const keys = Object.keys(DATA);
-let R, vb, VB0, labelsData = [];
+const keys = Object.keys(DATA.resorts);
+const TZ = 'America/Los_Angeles';
+const el = (tag, attrs = {}, parent) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.appendChild(e); return e; };
+const fmtTime = iso => iso ? new Date(iso).toLocaleString('en-US', { timeZone: TZ, weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' }) : 'unknown';
 
-const tabs = document.getElementById('tabs');
-keys.forEach(k => { const a = document.createElement('a'); a.href = '#' + k; a.textContent = DATA[k].name; a.dataset.k = k; tabs.appendChild(a); });
-
+/* ---------- map ---------- */
 const DIFF = { novice: 'var(--easy)', easy: 'var(--easy)', intermediate: 'var(--inter)', advanced: 'var(--adv)', expert: 'var(--adv)', freeride: 'var(--adv)', extreme: 'var(--adv)' };
+const isOpen = f => f.status === 'open' || f.status === 'partial';
 function stroke(f) {
-  if (f.t === 'lift') return f.status === 'open' || f.status === 'partial' ? 'var(--lift)' : f.status === 'closed' ? 'var(--closed)' : 'var(--connector)';
-  if (f.status === 'open' || f.status === 'partial') return DIFF[f.diff] || 'var(--inter)';
+  if (f.t === 'lift') return isOpen(f) ? 'var(--lift)' : f.status === 'closed' ? 'var(--closed)' : 'var(--connector)';
+  if (isOpen(f)) return DIFF[f.diff] || 'var(--inter)';
   return f.status === 'closed' ? 'var(--closed)' : 'var(--connector)';
 }
 const rank = f => ({ open: 3, partial: 2, closed: 1 }[f.status] || 0) + (f.t === 'lift' ? 0.5 : 0);
 
-function load(key) {
-  R = DATA[key];
-  document.querySelectorAll('#tabs a').forEach(a => { if (a.dataset.k === key) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
-  document.getElementById('src').href = R.statusUrl;
-  const c = R.counts, when = R.asOf ? new Date(R.asOf).toLocaleString('en-US', { timeZone: 'America/Los_Angeles', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' }) : 'unknown';
-  document.getElementById('meta').innerHTML = R.reporting
-    ? `<b>${c.runsOpen}/${c.runs}</b> runs · <b>${c.liftsOpen}/${c.lifts}</b> lifts open · as of ${when}`
-    : `No run status reported · checked ${when}`;
-  const n = document.getElementById('notice');
-  n.hidden = R.reporting;
-  n.textContent = `${R.name} isn't reporting individual runs or lifts right now, which usually means it's closed for the season or not open yet. Everything is shown as closed.`;
-  document.title = R.name + ' Lift Status';
-
-  // project lon/lat to a flat plane (meters-ish), then rotate as configured
-  const all = R.feats.flatMap(f => f.p.flat());
-  const lat0 = all.reduce((s, c) => s + c[1], 0) / all.length, lon0 = all.reduce((s, c) => s + c[0], 0) / all.length;
-  const k = Math.cos(lat0 * Math.PI / 180), a = R.rotate * Math.PI / 180, ca = Math.cos(a), sa = Math.sin(a);
-  const proj = c => { const x = (c[0] - lon0) * k * 111320, y = -(c[1] - lat0) * 111320; return [x * ca - y * sa, x * sa + y * ca]; };
-  let x0 = 1e9, x1 = -1e9, y0 = 1e9, y1 = -1e9;
-  R.feats.forEach(f => { f.pp = f.p.map(p => p.map(proj)); f.pp.flat().forEach(([x, y]) => { x0 = Math.min(x0, x); x1 = Math.max(x1, x); y0 = Math.min(y0, y); y1 = Math.max(y1, y); }); });
-  const pad = Math.max(x1 - x0, y1 - y0) * 0.04;
-  VB0 = [x0 - pad, y0 - pad, x1 - x0 + 2 * pad, y1 - y0 + 2 * pad];
-
-  world.replaceChildren();
-  labelsData = [];
-  R.feats.slice().sort((a, b) => rank(a) - rank(b)).forEach(f => {
-    const p = document.createElementNS(NS, 'path');
-    p.setAttribute('d', f.pp.map(pts => 'M' + pts.map(c => c[0].toFixed(1) + ',' + c[1].toFixed(1)).join('L')).join(''));
-    p.setAttribute('fill', 'none'); p.setAttribute('stroke', stroke(f)); p.setAttribute('vector-effect', 'non-scaling-stroke');
-    p.setAttribute('stroke-linejoin', 'round'); p.setAttribute('stroke-linecap', f.t === 'lift' ? 'butt' : 'round');
-    const open = f.status === 'open' || f.status === 'partial';
-    p.setAttribute('stroke-width', f.t === 'lift' ? (open ? 2.6 : 2) : open ? 3 : f.status === 'closed' ? 2 : 1.2);
-    if (f.t === 'lift') p.setAttribute('stroke-dasharray', '7 3');
-    else if (f.status === 'partial') p.setAttribute('stroke-dasharray', '2 4');
-    world.appendChild(p);
-    if (!f.name) return;
-    // label anchor: midpoint of the longest part
-    let best = null;
-    f.pp.forEach(pts => { let L = 0; const seg = []; for (let i = 1; i < pts.length; i++) { const l = Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]); seg.push(l); L += l; } if (!best || L > best.L) best = { L, pts, seg }; });
-    if (!best || best.L === 0) return;
-    let acc = 0, i = 0; while (i < best.seg.length - 1 && acc + best.seg[i] < best.L / 2) { acc += best.seg[i]; i++; }
-    const A = best.pts[i], B = best.pts[i + 1], t = (best.L / 2 - acc) / best.seg[i];
-    let ang = Math.atan2(B[1] - A[1], B[0] - A[0]) * 180 / Math.PI; if (ang > 90) ang -= 180; if (ang < -90) ang += 180;
-    labelsData.push({ f, x: A[0] + (B[0] - A[0]) * t, y: A[1] + (B[1] - A[1]) * t, ang, len: best.L, pri: rank(f) * 1e6 + best.L });
-  });
-  labelsData.sort((a, b) => b.pri - a.pri);
-  vb = null; fit();
-}
-
-// view: keep the drawing's aspect ratio and fit it to the window
-function fit() { vb = VB0.slice(); apply(); }
-function rect() { return svg.getBoundingClientRect(); }
-function apply() {
-  const r = rect(); if (!r.width) return;
-  // expand vb to the window aspect so world→screen is a uniform scale
-  const s = Math.max(vb[2] / r.width, vb[3] / r.height), cx = vb[0] + vb[2] / 2, cy = vb[1] + vb[3] / 2;
-  vb = [cx - r.width * s / 2, cy - r.height * s / 2, r.width * s, r.height * s];
-  svg.setAttribute('viewBox', vb.join(' '));
-  scheduleLabels();
-}
-let lblPending = false;
-function scheduleLabels() { if (!lblPending) { lblPending = true; requestAnimationFrame(() => { lblPending = false; drawLabels(); }); } }
-function drawLabels() {
-  const r = rect(), s = r.width / vb[2];
-  lsvg.setAttribute('viewBox', `0 0 ${r.width} ${r.height}`);
-  lsvg.replaceChildren();
-  const placed = [];
-  for (const L of labelsData) {
-    const sx = (L.x - vb[0]) * s, sy = (L.y - vb[1]) * s;
-    if (sx < 0 || sy < 0 || sx > r.width || sy > r.height) continue;
-    const w = L.f.name.length * 6.3 + 6, h = 14;
-    if (L.len * s < w * 0.6 && L.f.t !== 'lift') continue; // run too short on screen for its name
-    const rad = L.ang * Math.PI / 180, c = Math.abs(Math.cos(rad)), sn = Math.abs(Math.sin(rad));
-    const bw = w * c + h * sn, bh = w * sn + h * c;
-    const box = [sx - bw / 2, sy - bh / 2, sx + bw / 2, sy + bh / 2];
-    // rotated labels: test against a slimmer core box to allow diagonal neighbours
-    const core = [sx - bw / 2 * 0.8, sy - bh / 2 * 0.8, sx + bw / 2 * 0.8, sy + bh / 2 * 0.8];
-    if (placed.some(b => core[0] < b[2] && core[2] > b[0] && core[1] < b[3] && core[3] > b[1])) continue;
-    placed.push(core);
-    const t = document.createElementNS(NS, 'text');
-    t.setAttribute('transform', `translate(${sx.toFixed(1)},${sy.toFixed(1)}) rotate(${L.ang.toFixed(1)})`);
-    t.setAttribute('text-anchor', 'middle'); t.setAttribute('dy', '-4');
-    const open = L.f.status === 'open' || L.f.status === 'partial';
-    t.setAttribute('fill', open ? (L.f.t === 'lift' ? 'var(--lift)' : 'var(--fg)') : 'var(--closed-text)');
-    if (L.f.t === 'lift') t.setAttribute('class', 'lift');
-    t.textContent = L.f.name;
-    lsvg.appendChild(t);
+class MapView {
+  constructor(wrap, R, single) {
+    this.wrap = wrap; this.R = R; this.fs = single ? 11.5 : 10.5;
+    this.svg = el('svg', { class: 'map', role: 'img', 'aria-label': `${R.name} runs and lifts. Open runs are colored by difficulty; closed runs and lifts are gray.` }, wrap);
+    this.world = el('g', {}, this.svg);
+    this.lsvg = el('svg', { class: 'labels', 'aria-hidden': 'true' }, wrap);
+    const ctrl = document.createElement('div'); ctrl.className = 'ctrl';
+    ctrl.innerHTML = `<button aria-label="Zoom in">+</button><button aria-label="Zoom out">−</button><button aria-label="Reset view" style="font-size:13px">⟲</button>`;
+    wrap.appendChild(ctrl);
+    const [bi, bo, br] = ctrl.children;
+    bi.onclick = () => this.zoom(1 / 1.5); bo.onclick = () => this.zoom(1.5); br.onclick = () => this.fit();
+    if (!R.reporting) {
+      const n = document.createElement('div'); n.className = 'notice';
+      n.textContent = `${R.name} isn't reporting individual runs or lifts right now, which usually means it's closed for the season or not open yet. Everything is shown as closed.`;
+      wrap.appendChild(n);
+    }
+    this.draw(); this.bind();
+    new ResizeObserver(() => this.resized()).observe(wrap);
+    this.fit();
+  }
+  draw() {
+    const R = this.R;
+    const all = R.feats.flatMap(f => f.p.flat());
+    const lat0 = all.reduce((s, c) => s + c[1], 0) / all.length, lon0 = all.reduce((s, c) => s + c[0], 0) / all.length;
+    const k = Math.cos(lat0 * Math.PI / 180), a = R.rotate * Math.PI / 180, ca = Math.cos(a), sa = Math.sin(a);
+    const proj = c => { const x = (c[0] - lon0) * k * 111320, y = -(c[1] - lat0) * 111320; return [x * ca - y * sa, x * sa + y * ca]; };
+    let x0 = 1e9, x1 = -1e9, y0 = 1e9, y1 = -1e9;
+    R.feats.forEach(f => { f.pp = f.p.map(p => p.map(proj)); f.pp.flat().forEach(([x, y]) => { x0 = Math.min(x0, x); x1 = Math.max(x1, x); y0 = Math.min(y0, y); y1 = Math.max(y1, y); }); });
+    const pad = Math.max(x1 - x0, y1 - y0) * 0.04;
+    this.VB0 = [x0 - pad, y0 - pad, x1 - x0 + 2 * pad, y1 - y0 + 2 * pad];
+    this.labels = [];
+    R.feats.slice().sort((a, b) => rank(a) - rank(b)).forEach(f => {
+      const open = isOpen(f);
+      el('path', {
+        d: f.pp.map(pts => 'M' + pts.map(c => c[0].toFixed(1) + ',' + c[1].toFixed(1)).join('L')).join(''),
+        fill: 'none', stroke: stroke(f), 'vector-effect': 'non-scaling-stroke', 'stroke-linejoin': 'round',
+        'stroke-linecap': f.t === 'lift' ? 'butt' : 'round',
+        'stroke-width': f.t === 'lift' ? (open ? 2.4 : 1.8) : open ? 2.8 : f.status === 'closed' ? 1.8 : 1.1,
+        ...(f.t === 'lift' ? { 'stroke-dasharray': '7 3' } : f.status === 'partial' ? { 'stroke-dasharray': '2 4' } : {}),
+      }, this.world);
+      if (!f.name) return;
+      let best = null;
+      f.pp.forEach(pts => { let L = 0; const seg = []; for (let i = 1; i < pts.length; i++) { const l = Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]); seg.push(l); L += l; } if (!best || L > best.L) best = { L, pts, seg }; });
+      if (!best || best.L === 0) return;
+      let acc = 0, i = 0; while (i < best.seg.length - 1 && acc + best.seg[i] < best.L / 2) { acc += best.seg[i]; i++; }
+      const A = best.pts[i], B = best.pts[i + 1], t = (best.L / 2 - acc) / best.seg[i];
+      let ang = Math.atan2(B[1] - A[1], B[0] - A[0]) * 180 / Math.PI; if (ang > 90) ang -= 180; if (ang < -90) ang += 180;
+      this.labels.push({ f, x: A[0] + (B[0] - A[0]) * t, y: A[1] + (B[1] - A[1]) * t, ang, len: best.L, pri: rank(f) * 1e6 + best.L });
+    });
+    this.labels.sort((a, b) => b.pri - a.pri);
+  }
+  rect() { return this.svg.getBoundingClientRect(); }
+  // View = a center point plus a scale (world units per screen pixel), so resizing
+  // the box never drifts the view. Until the user pans or zooms, resizing re-fits.
+  fit() {
+    const r = this.rect(); this.touched = false;
+    if (!r.width || !r.height) return;
+    this.scale = Math.max(this.VB0[2] / r.width, this.VB0[3] / r.height);
+    this.cx = this.VB0[0] + this.VB0[2] / 2; this.cy = this.VB0[1] + this.VB0[3] / 2;
+    this.apply();
+  }
+  resized() { if (!this.touched || !this.scale) this.fit(); else this.apply(); }
+  apply() {
+    const r = this.rect(); if (!r.width || !r.height || !this.scale) return;
+    const w = r.width * this.scale, h = r.height * this.scale;
+    this.vb = [this.cx - w / 2, this.cy - h / 2, w, h];
+    this.svg.setAttribute('viewBox', this.vb.join(' '));
+    if (!this.pending) { this.pending = true; requestAnimationFrame(() => { this.pending = false; this.drawLabels(); }); }
+  }
+  drawLabels() {
+    const r = this.rect(), vb = this.vb, s = r.width / vb[2], fs = this.fs;
+    this.lsvg.setAttribute('viewBox', `0 0 ${r.width} ${r.height}`);
+    this.lsvg.replaceChildren();
+    const placed = [];
+    for (const L of this.labels) {
+      const sx = (L.x - vb[0]) * s, sy = (L.y - vb[1]) * s;
+      if (sx < 0 || sy < 0 || sx > r.width || sy > r.height) continue;
+      const w = L.f.name.length * fs * 0.55 + 6, h = fs + 3;
+      if (L.len * s < w * 0.6 && L.f.t !== 'lift') continue; // run too short on screen for its name
+      const rad = L.ang * Math.PI / 180, c = Math.abs(Math.cos(rad)), sn = Math.abs(Math.sin(rad));
+      const bw = (w * c + h * sn) * 0.4, bh = (w * sn + h * c) * 0.4;
+      const core = [sx - bw, sy - bh, sx + bw, sy + bh];
+      if (placed.some(b => core[0] < b[2] && core[2] > b[0] && core[1] < b[3] && core[3] > b[1])) continue;
+      placed.push(core);
+      const t = el('text', { transform: `translate(${sx.toFixed(1)},${sy.toFixed(1)}) rotate(${L.ang.toFixed(1)})`, 'text-anchor': 'middle', dy: '-4',
+        fill: isOpen(L.f) ? (L.f.t === 'lift' ? 'var(--lift)' : 'var(--fg)') : 'var(--closed-text)' }, this.lsvg);
+      if (L.f.t === 'lift') t.setAttribute('class', 'lift');
+      t.textContent = L.f.name;
+    }
+  }
+  zoom(f, px, py) {
+    if (!this.scale) return;
+    const fitScale = Math.max(this.VB0[2], this.VB0[3]) / Math.max(1, Math.min(this.rect().width, this.rect().height));
+    const ns = Math.min(fitScale * 2, Math.max(fitScale / 20, this.scale * f)), q = ns / this.scale;
+    px = px ?? this.cx; py = py ?? this.cy;
+    this.cx = px - (px - this.cx) * q; this.cy = py - (py - this.cy) * q; this.scale = ns;
+    this.touched = true; this.apply();
+  }
+  bind() {
+    const svg = this.svg;
+    const toWorld = (ex, ey) => { const r = this.rect(); return [this.vb[0] + (ex - r.left) / r.width * this.vb[2], this.vb[1] + (ey - r.top) / r.height * this.vb[3]]; };
+    svg.addEventListener('wheel', e => { e.preventDefault(); const [x, y] = toWorld(e.clientX, e.clientY); this.zoom(Math.exp(e.deltaY * 0.0015), x, y); }, { passive: false });
+    const ptrs = new Map(); let last = null, pinch = null;
+    svg.addEventListener('pointerdown', e => { svg.setPointerCapture(e.pointerId); ptrs.set(e.pointerId, [e.clientX, e.clientY]); svg.classList.add('drag'); last = [e.clientX, e.clientY]; if (ptrs.size === 2) { const [a, b] = [...ptrs.values()]; pinch = Math.hypot(a[0] - b[0], a[1] - b[1]); } });
+    svg.addEventListener('pointermove', e => {
+      if (!ptrs.has(e.pointerId)) return; ptrs.set(e.pointerId, [e.clientX, e.clientY]);
+      if (ptrs.size === 2 && pinch) { const [a, b] = [...ptrs.values()], d = Math.hypot(a[0] - b[0], a[1] - b[1]); const [x, y] = toWorld((a[0] + b[0]) / 2, (a[1] + b[1]) / 2); this.zoom(pinch / d, x, y); pinch = d; return; }
+      this.cx -= (e.clientX - last[0]) * this.scale; this.cy -= (e.clientY - last[1]) * this.scale; last = [e.clientX, e.clientY]; this.touched = true; this.apply();
+    });
+    const up = e => { ptrs.delete(e.pointerId); if (ptrs.size < 2) pinch = null; if (!ptrs.size) svg.classList.remove('drag'); const v = [...ptrs.values()][0]; if (v) last = v; };
+    svg.addEventListener('pointerup', up); svg.addEventListener('pointercancel', up);
   }
 }
 
-// pan & zoom
-function zoom(f, cx, cy) {
-  const nw = Math.min(VB0[2] * 2, Math.max(VB0[2] / 20, vb[2] * f)), q = nw / vb[2];
-  cx = cx ?? vb[0] + vb[2] / 2; cy = cy ?? vb[1] + vb[3] / 2;
-  vb = [cx - (cx - vb[0]) * q, cy - (cy - vb[1]) * q, nw, vb[3] * q]; apply();
+/* ---------- weather ---------- */
+// Open-Meteo times are Pacific wall-clock strings; treat them as UTC numbers so
+// arithmetic and labels stay in Pacific time without timezone math.
+const wall = s => Date.parse(s + ':00Z');
+function nowWall() {
+  const p = Object.fromEntries(new Intl.DateTimeFormat('en-US', { timeZone: TZ, hourCycle: 'h23', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }).formatToParts(new Date()).map(x => [x.type, x.value]));
+  return Date.parse(`${p.year}-${p.month}-${p.day}T${p.hour}:${p.minute}:00Z`);
 }
-const toWorld = (ex, ey) => { const r = rect(); return [vb[0] + (ex - r.left) / r.width * vb[2], vb[1] + (ey - r.top) / r.height * vb[3]]; };
-svg.addEventListener('wheel', e => { e.preventDefault(); const [x, y] = toWorld(e.clientX, e.clientY); zoom(Math.exp(e.deltaY * 0.0015), x, y); }, { passive: false });
-const ptrs = new Map(); let last = null, pinch = null;
-svg.addEventListener('pointerdown', e => { svg.setPointerCapture(e.pointerId); ptrs.set(e.pointerId, [e.clientX, e.clientY]); svg.classList.add('drag'); last = [e.clientX, e.clientY]; if (ptrs.size === 2) { const [a, b] = [...ptrs.values()]; pinch = Math.hypot(a[0] - b[0], a[1] - b[1]); } });
-svg.addEventListener('pointermove', e => {
-  if (!ptrs.has(e.pointerId)) return; ptrs.set(e.pointerId, [e.clientX, e.clientY]);
-  if (ptrs.size === 2 && pinch) { const [a, b] = [...ptrs.values()], d = Math.hypot(a[0] - b[0], a[1] - b[1]); const [x, y] = toWorld((a[0] + b[0]) / 2, (a[1] + b[1]) / 2); zoom(pinch / d, x, y); pinch = d; return; }
-  const r = rect(); vb[0] -= (e.clientX - last[0]) / r.width * vb[2]; vb[1] -= (e.clientY - last[1]) / r.height * vb[3]; last = [e.clientX, e.clientY]; apply();
-});
-const up = e => { ptrs.delete(e.pointerId); if (ptrs.size < 2) pinch = null; if (!ptrs.size) svg.classList.remove('drag'); const v = [...ptrs.values()][0]; if (v) last = v; };
-svg.addEventListener('pointerup', up); svg.addEventListener('pointercancel', up);
-document.getElementById('zin').onclick = () => zoom(1 / 1.5);
-document.getElementById('zout').onclick = () => zoom(1.5);
-document.getElementById('zreset').onclick = fit;
-window.addEventListener('resize', () => vb && apply());
+const H = 3600e3, DAY = 24 * H;
+const dayName = t => new Date(t).toLocaleDateString('en-US', { timeZone: 'UTC', weekday: 'short' });
+const hourName = t => new Date(t).toLocaleString('en-US', { timeZone: 'UTC', weekday: 'short', hour: 'numeric' });
+const inch = v => v >= 9.95 ? Math.round(v) + '″' : v.toFixed(1) + '″';
+function hoursAbove(series, t0, from, to) {
+  let n = 0; series.temp.forEach((v, i) => { const t = t0 + i * H; if (t >= from && t < to && v > 32) n++; }); return n;
+}
 
-function route() { const k = location.hash.slice(1); load(DATA[k] ? k : keys[0]); }
+function renderWeather(box, W) {
+  if (!W || !W.summit) { box.innerHTML = '<div class="nowx">Weather isn\'t available yet. It gets added on the next scheduled update.</div>'; return; }
+  const S = W.summit, B = W.base, t0 = wall(S.start), n = S.temp.length, t1 = t0 + (n - 1) * H;
+  const now = Math.min(Math.max(nowWall(), t0), t1);
+  const pastS = hoursAbove(S, t0, now - 4 * DAY, now), nextS = hoursAbove(S, t0, now, now + 4 * DAY);
+  const pastB = hoursAbove(B, t0, now - 4 * DAY, now), nextB = hoursAbove(B, t0, now, now + 4 * DAY);
+  const phrase = (h, stay, when) => h ? `<span class="w">above 32°F for ${h} h</span> ${when}` : `<span class="c">${stay ? 'stays ' : ''}below freezing</span> ${when}`;
+  const v = document.createElement('p'); v.className = 'verdict';
+  v.innerHTML = `Summit ${phrase(pastS, false, 'in the last 4 days')}, ${phrase(nextS, true, 'in the next 4')}. Base: ${pastB}&nbsp;h past, ${nextB}&nbsp;h ahead above freezing.`;
+  box.appendChild(v);
+
+  // daily snow totals at the summit point
+  const days = [];
+  for (let d = t0; d <= t1; d += DAY) {
+    let tot = 0; for (let i = 0; i < 24; i++) { const k = (d - t0) / H + i; if (k < n) tot += S.snow[k] || 0; }
+    days.push({ t: d, snow: tot });
+  }
+  const chart = el('svg', { class: 'chart', role: 'img', 'aria-label': 'Hourly temperature at summit and base, and daily snowfall, from 4 days ago to 4 days ahead' }, box);
+  const key = document.createElement('div'); key.className = 'wxkey';
+  key.innerHTML = `<span><svg width="18" height="6"><line x1="0" y1="3" x2="18" y2="3" stroke="var(--cold)" stroke-width="2"/></svg>Summit ${S.elevationFt.toLocaleString()} ft</span>
+    <span><svg width="18" height="6"><line x1="0" y1="3" x2="18" y2="3" stroke="var(--cold)" stroke-width="1.5" stroke-dasharray="3 2"/></svg>Base ${B.elevationFt.toLocaleString()} ft</span>
+    <span><svg width="22" height="6"><line x1="0" y1="3" x2="11" y2="3" stroke="var(--cold)" stroke-width="2"/><line x1="11" y1="3" x2="22" y2="3" stroke="var(--warm)" stroke-width="2"/></svg>Below / above 32°F</span>
+    <span><svg width="8" height="8"><rect width="8" height="8" rx="1.5" fill="var(--snow)"/></svg>Daily snow at summit</span>`;
+  box.appendChild(key);
+  const tip = document.createElement('div'); tip.className = 'tip'; tip.hidden = true; box.appendChild(tip);
+
+  const draw = () => {
+    const W_ = box.clientWidth - 28; if (W_ <= 0) return;
+    chart.replaceChildren();
+    const m = { l: 26, r: 36 }, tempH = 86, gap = 6, snowH = 38, axisH = 14, top = 6;
+    const Ht = top + tempH + gap + snowH + axisH;
+    chart.setAttribute('viewBox', `0 0 ${W_} ${Ht}`); chart.setAttribute('height', Ht);
+    const x = t => m.l + (t - t0) / (t1 - t0) * (W_ - m.l - m.r);
+    const all = [...S.temp, ...B.temp].filter(v => v != null);
+    let lo = Math.min(32, ...all), hi = Math.max(32, ...all); const padT = (hi - lo) * 0.08 + 1; lo -= padT; hi += padT;
+    const y = v => top + (hi - v) / (hi - lo) * tempH;
+    const snowMax = Math.max(1, ...days.map(d => d.snow));
+    const yBase = top + tempH + gap + snowH;
+    const ys = v => yBase - v / snowMax * (snowH - 11);
+
+    // past shading + day grid
+    el('rect', { x: x(t0), y: top, width: Math.max(0, x(now) - x(t0)), height: yBase - top, fill: 'var(--past)' }, chart);
+    days.forEach(d => { if (d.t > t0) el('line', { x1: x(d.t), x2: x(d.t), y1: top, y2: yBase, stroke: 'var(--grid)', 'stroke-width': 1 }, chart); });
+    // temperature ticks + emphasized 32°F
+    const step = hi - lo > 45 ? 20 : 10;
+    for (let v = Math.ceil(lo / step) * step; v <= hi; v += step) {
+      if (Math.abs(v - 32) < step / 2.5) continue;
+      el('line', { x1: m.l, x2: W_ - m.r, y1: y(v), y2: y(v), stroke: 'var(--grid)', 'stroke-width': 1 }, chart);
+      el('text', { x: m.l - 4, y: y(v) + 3, 'text-anchor': 'end' }, chart).textContent = v + '°';
+    }
+    el('line', { x1: m.l, x2: W_ - m.r, y1: y(32), y2: y(32), stroke: 'var(--muted)', 'stroke-width': 1, 'stroke-dasharray': '3 3' }, chart);
+    el('text', { x: m.l - 4, y: y(32) + 3, 'text-anchor': 'end', class: 'strong' }, chart).textContent = '32°';
+
+    // temperature lines, colored by side of 32°F via clip paths
+    const uid = Math.random().toString(36).slice(2);
+    const defs = el('defs', {}, chart);
+    const cw = el('clipPath', { id: 'w' + uid }, defs); el('rect', { x: 0, y: 0, width: W_, height: y(32) }, cw);
+    const cc = el('clipPath', { id: 'c' + uid }, defs); el('rect', { x: 0, y: y(32), width: W_, height: Ht }, cc);
+    const linePath = s => s.temp.map((v, i) => (i ? 'L' : 'M') + x(t0 + i * H).toFixed(1) + ',' + y(v).toFixed(1)).join('');
+    const area = linePath(S) + `L${x(t1).toFixed(1)},${y(32).toFixed(1)}L${x(t0).toFixed(1)},${y(32).toFixed(1)}Z`;
+    el('path', { d: area, fill: 'var(--warm)', opacity: 0.16, 'clip-path': `url(#w${uid})` }, chart);
+    el('path', { d: area, fill: 'var(--cold)', opacity: 0.10, 'clip-path': `url(#c${uid})` }, chart);
+    for (const [s, w, dash] of [[B, 1.5, '3 2'], [S, 2, null]]) {
+      const d = linePath(s);
+      for (const [clip, col] of [['w', 'var(--warm)'], ['c', 'var(--cold)']])
+        el('path', { d, fill: 'none', stroke: col, 'stroke-width': w, 'stroke-linejoin': 'round', 'clip-path': `url(#${clip}${uid})`, ...(dash ? { 'stroke-dasharray': dash } : {}) }, chart);
+    }
+    // direct labels at the right end
+    const endS = S.temp[n - 1], endB = B.temp[n - 1];
+    let lyS = y(endS) + 3, lyB = y(endB) + 3;
+    if (Math.abs(lyS - lyB) < 11) { const mid = (lyS + lyB) / 2, up = endS >= endB; lyS = mid + (up ? -5.5 : 5.5); lyB = mid + (up ? 5.5 : -5.5); }
+    el('text', { x: W_ - m.r + 4, y: lyS, class: 'strong' }, chart).textContent = Math.round(endS) + '° S';
+    el('text', { x: W_ - m.r + 4, y: lyB }, chart).textContent = Math.round(endB) + '° B';
+
+    // snow bars, one per day, rounded top corners anchored to the baseline
+    days.forEach(d => {
+      const xl = Math.max(m.l, x(d.t) + 3), xr = Math.min(W_ - m.r, x(d.t + DAY) - 3), w = Math.max(2, xr - xl);
+      if (d.snow >= 0.05) {
+        const yt = ys(d.snow), h = yBase - yt, r = Math.min(3, h, w / 2);
+        el('path', { d: `M${xl},${yBase}V${yt + r}q0,-${r} ${r},-${r}H${xr - r}q${r},0 ${r},${r}V${yBase}Z`, fill: 'var(--snow)' }, chart);
+        el('text', { x: (xl + xr) / 2, y: yt - 2, 'text-anchor': 'middle', class: 'strong' }, chart).textContent = inch(d.snow);
+      }
+      const isToday = now >= d.t && now < d.t + DAY;
+      el('text', { x: (xl + xr) / 2, y: yBase + 11, 'text-anchor': 'middle', ...(isToday ? { class: 'strong' } : {}) }, chart).textContent = isToday ? 'Today' : dayName(d.t);
+    });
+    el('line', { x1: m.l, x2: W_ - m.r, y1: yBase, y2: yBase, stroke: 'var(--line)', 'stroke-width': 1 }, chart);
+    el('text', { x: W_ - m.r + 4, y: yBase - 2 }, chart).textContent = 'snow';
+    // now marker
+    el('line', { x1: x(now), x2: x(now), y1: top, y2: yBase, stroke: 'var(--fg)', 'stroke-width': 1, opacity: 0.5 }, chart);
+    el('text', { x: x(now) + 3, y: top + 8, class: 'strong' }, chart).textContent = 'now';
+
+    // hover crosshair + tooltip
+    const cross = el('line', { y1: top, y2: yBase, stroke: 'var(--fg)', 'stroke-width': 1, opacity: 0, 'pointer-events': 'none' }, chart);
+    const dotS = el('circle', { r: 4, fill: 'var(--panel)', stroke: 'var(--fg)', 'stroke-width': 1.5, opacity: 0, 'pointer-events': 'none' }, chart);
+    const hit = el('rect', { x: m.l, y: 0, width: W_ - m.l - m.r, height: Ht, fill: 'transparent' }, chart);
+    const show = e => {
+      const r = chart.getBoundingClientRect(), px = (e.clientX - r.left) * (W_ / r.width);
+      const i = Math.max(0, Math.min(n - 1, Math.round((px - m.l) / (W_ - m.l - m.r) * (n - 1))));
+      const t = t0 + i * H, dx = x(t);
+      cross.setAttribute('x1', dx); cross.setAttribute('x2', dx); cross.setAttribute('opacity', 0.35);
+      dotS.setAttribute('cx', dx); dotS.setAttribute('cy', y(S.temp[i])); dotS.setAttribute('opacity', 1);
+      const day = days[Math.min(days.length - 1, Math.floor((t - t0) / DAY))];
+      tip.innerHTML = `<b>${hourName(t)}</b>Summit ${Math.round(S.temp[i])}°F · Base ${Math.round(B.temp[i])}°F<br>${dayName(day.t)} snow at summit: ${inch(day.snow)}`;
+      tip.hidden = false;
+      const bx = box.getBoundingClientRect();
+      let left = e.clientX - bx.left + 12; if (left + tip.offsetWidth > bx.width - 4) left = e.clientX - bx.left - tip.offsetWidth - 12;
+      tip.style.left = Math.max(4, left) + 'px'; tip.style.top = (r.top - bx.top + 4) + 'px';
+    };
+    const hide = () => { tip.hidden = true; cross.setAttribute('opacity', 0); dotS.setAttribute('opacity', 0); };
+    hit.addEventListener('pointermove', show); hit.addEventListener('pointerdown', show); hit.addEventListener('pointerleave', hide);
+  };
+  draw();
+  let lastW = 0;
+  new ResizeObserver(() => { if (box.clientWidth !== lastW) { lastW = box.clientWidth; draw(); } }).observe(box);
+}
+
+/* ---------- page ---------- */
+function card(key, single) {
+  const R = DATA.resorts[key], c = R.counts;
+  const sec = document.createElement('section'); sec.className = 'card';
+  const head = document.createElement('div'); head.className = 'chead';
+  head.innerHTML = `<h2></h2><span class="counts"></span><a></a>`;
+  head.children[0].textContent = R.name;
+  head.children[1].innerHTML = R.reporting ? `<b>${c.runsOpen}/${c.runs}</b> runs · <b>${c.liftsOpen}/${c.lifts}</b> lifts open` : 'Not reporting runs yet';
+  head.children[2].href = single ? '#' : '#' + key;
+  head.children[2].textContent = single ? '← All resorts' : 'Full map →';
+  sec.appendChild(head);
+  const wx = document.createElement('div'); wx.className = 'wx'; sec.appendChild(wx);
+  const mw = document.createElement('div'); mw.className = 'mapwrap'; sec.appendChild(mw);
+  return { sec, wx, mw, R };
+}
+function route() {
+  const k = location.hash.slice(1), single = !!DATA.resorts[k];
+  const grid = document.getElementById('grid');
+  grid.replaceChildren();
+  document.body.classList.toggle('single', single);
+  grid.style.gridTemplateColumns = single ? '1fr' : '';
+  const asOf = keys.map(key => DATA.resorts[key].asOf).filter(Boolean).sort().pop();
+  document.getElementById('sub').textContent = `Updated ${fmtTime(asOf)} Pacific`;
+  document.title = single ? `${DATA.resorts[k].name} Lift Status` : 'Tahoe Lift Status';
+  for (const key of single ? [k] : keys) {
+    const C = card(key, single);
+    grid.appendChild(C.sec);
+    renderWeather(C.wx, C.R.weather);
+    new MapView(C.mw, C.R, single);
+  }
+  window.scrollTo(0, 0);
+}
 window.addEventListener('hashchange', route);
 route();
 </script>

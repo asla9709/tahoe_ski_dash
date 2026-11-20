@@ -91,9 +91,12 @@ for (const [key, r] of Object.entries(resorts)) {
     feats,
   };
 }
+const weatherPath = path.join(HERE, 'data', 'weather.json');
+const weather = fs.existsSync(weatherPath) ? JSON.parse(fs.readFileSync(weatherPath, 'utf8')) : null;
+for (const key of Object.keys(out)) out[key].weather = weather && weather.resorts[key] ? weather.resorts[key] : null;
 const tpl = fs.readFileSync(path.join(HERE, 'template.html'), 'utf8');
 fs.mkdirSync(path.join(HERE, 'dist'), { recursive: true });
-const html = tpl.replace('__DATA__', () => JSON.stringify(out));
+const html = tpl.replace('__DATA__', () => JSON.stringify({ resorts: out, weatherFetchedAt: weather ? weather.fetchedAt : null }));
 fs.writeFileSync(path.join(HERE, 'dist', 'ski-maps.html'), html);
 console.log(`Wrote dist/ski-maps.html (${Math.round(html.length / 1024)} KB)`);
 }

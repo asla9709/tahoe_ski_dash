@@ -2,7 +2,15 @@
 
 **Live page: https://asla9709.github.io/tahoe_ski_dash/**
 
-Run and lift maps for Northstar, Heavenly and Kirkwood. Open terrain is colored by difficulty and closed terrain is gray. The output is a single self-contained page, `dist/ski-maps.html`, with one tab per resort.
+Run and lift maps for Northstar, Heavenly and Kirkwood, side by side. Open terrain is colored by difficulty and closed terrain is gray.
+
+Above each map is a small weather chart:
+
+- hourly temperature at the resort's summit and base elevations, 4 days back and 4 days ahead
+- the 32°F line, with the temperature line drawn blue below freezing and red above
+- daily snowfall at the summit
+
+The output is a single self-contained page, `dist/ski-maps.html`. Adding `#northstar`, `#heavenly` or `#kirkwood` to the address opens that resort's full-size map.
 
 ## Refresh the open/closed status
 
@@ -11,7 +19,7 @@ You need Node.js 18 or newer.
 ```sh
 git clone https://github.com/asla9709/tahoe_ski_dash && cd tahoe_ski_dash
 npm run setup      # once: installs Playwright and its Chromium
-npm run update     # fetch today's status for every resort and rebuild the page
+npm run update     # fetch today's status and weather, then rebuild the page
 ```
 
 Then open `dist/ski-maps.html` in a browser.
@@ -50,6 +58,7 @@ n.
 | `data/shapes/<resort>.json` | Run and lift lines from OpenSkiMap. Changes rarely. |
 | `data/status/<resort>.json` | Open/closed status from the resort site. Rewritten by `npm run update`. |
 | `fetch_status.js` | Downloads the status. Each site embeds a `TerrainStatusFeed` JSON blob in its page. |
+| `fetch_weather.js` | Downloads hourly temperature and snowfall from [Open-Meteo](https://open-meteo.com/) (free, no key) for each resort's highest and lowest mapped points, adjusted to those elevations. Writes `data/weather.json`. |
 | `build.js` | Matches run names between the two sources and writes `dist/ski-maps.html` from `template.html` |
 | `fetch_shapes.js` | Re-downloads the run shapes (`npm run shapes`). Only needed when adding a resort. |
 

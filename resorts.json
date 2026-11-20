@@ -2,6 +2,7 @@
   "northstar": {
     "name": "Northstar",
     "statusUrl": "https://www.northstarcalifornia.com/the-mountain/mountain-conditions/terrain-and-lift-status.aspx",
+    "onTheSnowUrl": "https://www.onthesnow.com/california/northstar-california/skireport",
     "skiAreaIds": [
       "717fe0e81e226ce0361fb10dc24e9f863eeda6ba"
     ],
@@ -16,6 +17,7 @@
   "heavenly": {
     "name": "Heavenly",
     "statusUrl": "https://www.skiheavenly.com/the-mountain/mountain-conditions/terrain-and-lift-status.aspx",
+    "onTheSnowUrl": "https://www.onthesnow.com/california/heavenly-mountain-resort/skireport",
     "skiAreaIds": [
       "3f61859b47be735a77df9b1b9e102edbeb529286"
     ],
@@ -40,6 +42,7 @@
   "kirkwood": {
     "name": "Kirkwood",
     "statusUrl": "https://www.kirkwood.com/the-mountain/mountain-conditions/terrain-and-lift-status.aspx",
+    "onTheSnowUrl": "https://www.onthesnow.com/california/kirkwood/skireport",
     "skiAreaIds": [
       "718db266e6e9ec76a5003a404aec69a657b3ab33",
       "d025120e-d16b-4009-95db-84febf9214c4"

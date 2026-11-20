@@ -35,9 +35,10 @@ h1{font-family:var(--display);font-weight:700;font-size:1.9rem;line-height:1;mar
 .chead h2{font-family:var(--display);font-weight:700;font-size:1.45rem;text-transform:uppercase;letter-spacing:.04em;margin:0}
 .counts{color:var(--muted);font-size:.85rem;font-variant-numeric:tabular-nums}
 .counts b{color:var(--fg);font-weight:600}
-.chead a{margin-left:auto;font-size:.82rem;color:var(--inter);text-decoration:none;font-weight:600}
-.chead a:hover{text-decoration:underline}
-.chead a:focus-visible,.ctrl button:focus-visible{outline:2px solid var(--inter);outline-offset:2px}
+.links{margin-left:auto;display:flex;flex-wrap:wrap;gap:2px 12px;font-size:.82rem}
+.links a{color:var(--inter);text-decoration:none;font-weight:600;white-space:nowrap}
+.links a:hover{text-decoration:underline}
+.links a:focus-visible,.ctrl button:focus-visible{outline:2px solid var(--inter);outline-offset:2px}
 .wx{padding:2px 14px 10px;border-bottom:1px solid var(--line);position:relative}
 .verdict{font-size:.86rem;margin:0 0 6px;color:var(--fg)}
 .verdict .w{color:var(--warm);font-weight:600}
@@ -350,11 +351,20 @@ function card(key, single) {
   const R = DATA.resorts[key], c = R.counts;
   const sec = document.createElement('section'); sec.className = 'card';
   const head = document.createElement('div'); head.className = 'chead';
-  head.innerHTML = `<h2></h2><span class="counts"></span><a></a>`;
+  head.innerHTML = `<h2></h2><span class="counts"></span><nav class="links"></nav>`;
   head.children[0].textContent = R.name;
   head.children[1].innerHTML = R.reporting ? `<b>${c.runsOpen}/${c.runs}</b> runs · <b>${c.liftsOpen}/${c.lifts}</b> lifts open` : 'Not reporting runs yet';
-  head.children[2].href = single ? '#' : '#' + key;
-  head.children[2].textContent = single ? '← All resorts' : 'Full map →';
+  const links = head.children[2];
+  links.setAttribute('aria-label', `${R.name} links`);
+  const addLink = (href, text, external) => {
+    if (!href) return;
+    const a = document.createElement('a'); a.href = href; a.textContent = text;
+    if (external) { a.target = '_blank'; a.rel = 'noopener'; }
+    links.appendChild(a);
+  };
+  addLink(R.statusUrl, 'Lift status ↗', true);
+  addLink(R.onTheSnowUrl, 'OnTheSnow ↗', true);
+  addLink(single ? '#' : '#' + key, single ? '← All resorts' : 'Full map →', false);
   sec.appendChild(head);
   const wx = document.createElement('div'); wx.className = 'wx'; sec.appendChild(wx);
   const mw = document.createElement('div'); mw.className = 'mapwrap'; sec.appendChild(mw);

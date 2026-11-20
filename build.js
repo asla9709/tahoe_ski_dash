@@ -83,7 +83,7 @@ for (const [key, r] of Object.entries(resorts)) {
   else if (unmatched.size) console.log(`${r.name}: on map but not in status report -> ${[...unmatched].sort().join(', ')}`);
   if (missing.length) console.log(`${r.name}: in status report but not on map -> ${missing.sort().join(', ')}`);
   out[key] = {
-    name: r.name, rotate: r.rotate || 0, statusUrl: r.statusUrl, asOf: status.asOf || null, reporting,
+    name: r.name, rotate: r.rotate || 0, statusUrl: r.statusUrl, onTheSnowUrl: r.onTheSnowUrl || null, asOf: status.asOf || null, reporting,
     counts: {
       runsOpen: status.trails.filter(t => t.open).length, runs: status.trails.length,
       liftsOpen: status.lifts.filter(l => l.open).length, lifts: status.lifts.length,

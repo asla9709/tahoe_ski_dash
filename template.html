@@ -1,0 +1,201 @@
+<title>Tahoe Lift Status Maps</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@500;600&display=swap">
+<style>
+/* Layout: one slim bar (resort tabs, status time, legend) over a full-height map. */
+:root{
+  --bg:#eef2f5; --panel:#ffffff; --fg:#17212b; --muted:#5d6b78; --line:#d5dde4;
+  --easy:#1f8a4c; --inter:#1d63b8; --adv:#121820; --lift:#b0223a;
+  --closed:#c3cad1; --closed-text:#8d99a5; --connector:#d3d9de; --halo:#ffffff; --tab:#e3e9ee;
+  --display:"Barlow Condensed","Arial Narrow",system-ui,sans-serif;
+  --body:"Barlow",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0f151b; --panel:#161e26; --fg:#e7edf2; --muted:#93a2b0; --line:#2a3540;
+  --easy:#3fbf73; --inter:#4a97f0; --adv:#f1f4f7; --lift:#ef5a70;
+  --closed:#3a4550; --closed-text:#6f7d8a; --connector:#2c3640; --halo:#161e26; --tab:#1f2932; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f151b; --panel:#161e26; --fg:#e7edf2; --muted:#93a2b0; --line:#2a3540;
+  --easy:#3fbf73; --inter:#4a97f0; --adv:#f1f4f7; --lift:#ef5a70;
+  --closed:#3a4550; --closed-text:#6f7d8a; --connector:#2c3640; --halo:#161e26; --tab:#1f2932; color-scheme:dark}
+html,body{height:100%}
+body{background:var(--panel);color:var(--fg);font-family:var(--body);font-size:14px;display:flex;flex-direction:column;overflow:hidden}
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:8px 18px;padding-block:10px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));border-bottom:1px solid var(--line);background:var(--panel)}
+.tabs{display:flex;gap:4px;background:var(--tab);padding:3px;border-radius:7px}
+.tabs a{font-family:var(--display);font-weight:700;font-size:1.05rem;letter-spacing:.03em;text-transform:uppercase;color:var(--muted);text-decoration:none;padding:4px 12px;border-radius:5px}
+.tabs a[aria-current="page"]{background:var(--panel);color:var(--fg);box-shadow:0 1px 2px rgba(0,0,0,.12)}
+.tabs a:focus-visible,.ctrl button:focus-visible{outline:2px solid var(--inter);outline-offset:2px}
+.meta{color:var(--muted);font-size:.85rem;font-variant-numeric:tabular-nums}
+.meta b{color:var(--fg);font-weight:600}
+.legend{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:.8rem;color:var(--muted);margin-left:auto}
+.legend i{display:inline-block;width:18px;border-top:3px solid;vertical-align:middle;margin-right:5px}
+.mapwrap{position:relative;flex:1;min-height:0;background:var(--bg)}
+svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+#map{touch-action:none;cursor:grab}
+#map.drag{cursor:grabbing}
+#labels{pointer-events:none}
+#labels text{font-family:var(--body);font-weight:600;font-size:11.5px;paint-order:stroke;stroke:var(--halo);stroke-width:3px;stroke-linejoin:round}
+#labels text.lift{font-weight:600;font-style:italic}
+.ctrl{position:absolute;right:max(12px,env(safe-area-inset-right,0px));bottom:calc(12px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:6px}
+.ctrl button{width:36px;height:36px;border-radius:6px;border:1px solid var(--line);background:var(--panel);color:var(--fg);font-size:18px;cursor:pointer}
+.notice{position:absolute;left:max(12px,env(safe-area-inset-left,0px));top:12px;max-width:min(420px,calc(100% - 24px));background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:8px 12px;font-size:.85rem;color:var(--fg)}
+.credit{position:absolute;left:max(12px,env(safe-area-inset-left,0px));bottom:calc(10px + env(safe-area-inset-bottom,0px));font-size:.72rem;color:var(--muted);background:color-mix(in srgb,var(--panel) 80%,transparent);padding:2px 6px;border-radius:4px}
+.credit a{color:inherit}
+</style>
+<div class="bar">
+  <nav class="tabs" id="tabs" aria-label="Resort"></nav>
+  <div class="meta" id="meta"></div>
+  <div class="legend">
+    <span><i style="border-color:var(--easy)"></i>Easier</span>
+    <span><i style="border-color:var(--inter)"></i>More difficult</span>
+    <span><i style="border-color:var(--adv)"></i>Most difficult</span>
+    <span><i style="border-color:var(--lift);border-top-style:dashed"></i>Lift</span>
+    <span><i style="border-color:var(--inter);border-top-style:dotted"></i>Partly open</span>
+    <span><i style="border-color:var(--closed)"></i>Closed</span>
+  </div>
+</div>
+<div class="mapwrap" id="wrap">
+  <svg id="map" role="img" aria-label="Ski area map. Open runs are colored by difficulty; closed runs and lifts are gray."><g id="world"></g></svg>
+  <svg id="labels" aria-hidden="true"></svg>
+  <div class="notice" id="notice" hidden></div>
+  <div class="ctrl">
+    <button id="zin" aria-label="Zoom in">+</button>
+    <button id="zout" aria-label="Zoom out">−</button>
+    <button id="zreset" aria-label="Reset view" style="font-size:14px">⟲</button>
+  </div>
+  <div class="credit">Runs: <a href="https://openskimap.org/">OpenSkiMap</a> / © OpenStreetMap contributors · Status: <a id="src" href="#">resort site</a></div>
+</div>
+<script>
+const DATA = __DATA__;
+const NS = "http://www.w3.org/2000/svg";
+const svg = document.getElementById('map'), world = document.getElementById('world'), lsvg = document.getElementById('labels');
+const keys = Object.keys(DATA);
+let R, vb, VB0, labelsData = [];
+
+const tabs = document.getElementById('tabs');
+keys.forEach(k => { const a = document.createElement('a'); a.href = '#' + k; a.textContent = DATA[k].name; a.dataset.k = k; tabs.appendChild(a); });
+
+const DIFF = { novice: 'var(--easy)', easy: 'var(--easy)', intermediate: 'var(--inter)', advanced: 'var(--adv)', expert: 'var(--adv)', freeride: 'var(--adv)', extreme: 'var(--adv)' };
+function stroke(f) {
+  if (f.t === 'lift') return f.status === 'open' || f.status === 'partial' ? 'var(--lift)' : f.status === 'closed' ? 'var(--closed)' : 'var(--connector)';
+  if (f.status === 'open' || f.status === 'partial') return DIFF[f.diff] || 'var(--inter)';
+  return f.status === 'closed' ? 'var(--closed)' : 'var(--connector)';
+}
+const rank = f => ({ open: 3, partial: 2, closed: 1 }[f.status] || 0) + (f.t === 'lift' ? 0.5 : 0);
+
+function load(key) {
+  R = DATA[key];
+  document.querySelectorAll('#tabs a').forEach(a => { if (a.dataset.k === key) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
+  document.getElementById('src').href = R.statusUrl;
+  const c = R.counts, when = R.asOf ? new Date(R.asOf).toLocaleString('en-US', { timeZone: 'America/Los_Angeles', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' }) : 'unknown';
+  document.getElementById('meta').innerHTML = R.reporting
+    ? `<b>${c.runsOpen}/${c.runs}</b> runs · <b>${c.liftsOpen}/${c.lifts}</b> lifts open · as of ${when}`
+    : `No run status reported · checked ${when}`;
+  const n = document.getElementById('notice');
+  n.hidden = R.reporting;
+  n.textContent = `${R.name} isn't reporting individual runs or lifts right now, which usually means it's closed for the season or not open yet. Everything is shown as closed.`;
+  document.title = R.name + ' Lift Status';
+
+  // project lon/lat to a flat plane (meters-ish), then rotate as configured
+  const all = R.feats.flatMap(f => f.p.flat());
+  const lat0 = all.reduce((s, c) => s + c[1], 0) / all.length, lon0 = all.reduce((s, c) => s + c[0], 0) / all.length;
+  const k = Math.cos(lat0 * Math.PI / 180), a = R.rotate * Math.PI / 180, ca = Math.cos(a), sa = Math.sin(a);
+  const proj = c => { const x = (c[0] - lon0) * k * 111320, y = -(c[1] - lat0) * 111320; return [x * ca - y * sa, x * sa + y * ca]; };
+  let x0 = 1e9, x1 = -1e9, y0 = 1e9, y1 = -1e9;
+  R.feats.forEach(f => { f.pp = f.p.map(p => p.map(proj)); f.pp.flat().forEach(([x, y]) => { x0 = Math.min(x0, x); x1 = Math.max(x1, x); y0 = Math.min(y0, y); y1 = Math.max(y1, y); }); });
+  const pad = Math.max(x1 - x0, y1 - y0) * 0.04;
+  VB0 = [x0 - pad, y0 - pad, x1 - x0 + 2 * pad, y1 - y0 + 2 * pad];
+
+  world.replaceChildren();
+  labelsData = [];
+  R.feats.slice().sort((a, b) => rank(a) - rank(b)).forEach(f => {
+    const p = document.createElementNS(NS, 'path');
+    p.setAttribute('d', f.pp.map(pts => 'M' + pts.map(c => c[0].toFixed(1) + ',' + c[1].toFixed(1)).join('L')).join(''));
+    p.setAttribute('fill', 'none'); p.setAttribute('stroke', stroke(f)); p.setAttribute('vector-effect', 'non-scaling-stroke');
+    p.setAttribute('stroke-linejoin', 'round'); p.setAttribute('stroke-linecap', f.t === 'lift' ? 'butt' : 'round');
+    const open = f.status === 'open' || f.status === 'partial';
+    p.setAttribute('stroke-width', f.t === 'lift' ? (open ? 2.6 : 2) : open ? 3 : f.status === 'closed' ? 2 : 1.2);
+    if (f.t === 'lift') p.setAttribute('stroke-dasharray', '7 3');
+    else if (f.status === 'partial') p.setAttribute('stroke-dasharray', '2 4');
+    world.appendChild(p);
+    if (!f.name) return;
+    // label anchor: midpoint of the longest part
+    let best = null;
+    f.pp.forEach(pts => { let L = 0; const seg = []; for (let i = 1; i < pts.length; i++) { const l = Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]); seg.push(l); L += l; } if (!best || L > best.L) best = { L, pts, seg }; });
+    if (!best || best.L === 0) return;
+    let acc = 0, i = 0; while (i < best.seg.length - 1 && acc + best.seg[i] < best.L / 2) { acc += best.seg[i]; i++; }
+    const A = best.pts[i], B = best.pts[i + 1], t = (best.L / 2 - acc) / best.seg[i];
+    let ang = Math.atan2(B[1] - A[1], B[0] - A[0]) * 180 / Math.PI; if (ang > 90) ang -= 180; if (ang < -90) ang += 180;
+    labelsData.push({ f, x: A[0] + (B[0] - A[0]) * t, y: A[1] + (B[1] - A[1]) * t, ang, len: best.L, pri: rank(f) * 1e6 + best.L });
+  });
+  labelsData.sort((a, b) => b.pri - a.pri);
+  vb = null; fit();
+}
+
+// view: keep the drawing's aspect ratio and fit it to the window
+function fit() { vb = VB0.slice(); apply(); }
+function rect() { return svg.getBoundingClientRect(); }
+function apply() {
+  const r = rect(); if (!r.width) return;
+  // expand vb to the window aspect so world→screen is a uniform scale
+  const s = Math.max(vb[2] / r.width, vb[3] / r.height), cx = vb[0] + vb[2] / 2, cy = vb[1] + vb[3] / 2;
+  vb = [cx - r.width * s / 2, cy - r.height * s / 2, r.width * s, r.height * s];
+  svg.setAttribute('viewBox', vb.join(' '));
+  scheduleLabels();
+}
+let lblPending = false;
+function scheduleLabels() { if (!lblPending) { lblPending = true; requestAnimationFrame(() => { lblPending = false; drawLabels(); }); } }
+function drawLabels() {
+  const r = rect(), s = r.width / vb[2];
+  lsvg.setAttribute('viewBox', `0 0 ${r.width} ${r.height}`);
+  lsvg.replaceChildren();
+  const placed = [];
+  for (const L of labelsData) {
+    const sx = (L.x - vb[0]) * s, sy = (L.y - vb[1]) * s;
+    if (sx < 0 || sy < 0 || sx > r.width || sy > r.height) continue;
+    const w = L.f.name.length * 6.3 + 6, h = 14;
+    if (L.len * s < w * 0.6 && L.f.t !== 'lift') continue; // run too short on screen for its name
+    const rad = L.ang * Math.PI / 180, c = Math.abs(Math.cos(rad)), sn = Math.abs(Math.sin(rad));
+    const bw = w * c + h * sn, bh = w * sn + h * c;
+    const box = [sx - bw / 2, sy - bh / 2, sx + bw / 2, sy + bh / 2];
+    // rotated labels: test against a slimmer core box to allow diagonal neighbours
+    const core = [sx - bw / 2 * 0.8, sy - bh / 2 * 0.8, sx + bw / 2 * 0.8, sy + bh / 2 * 0.8];
+    if (placed.some(b => core[0] < b[2] && core[2] > b[0] && core[1] < b[3] && core[3] > b[1])) continue;
+    placed.push(core);
+    const t = document.createElementNS(NS, 'text');
+    t.setAttribute('transform', `translate(${sx.toFixed(1)},${sy.toFixed(1)}) rotate(${L.ang.toFixed(1)})`);
+    t.setAttribute('text-anchor', 'middle'); t.setAttribute('dy', '-4');
+    const open = L.f.status === 'open' || L.f.status === 'partial';
+    t.setAttribute('fill', open ? (L.f.t === 'lift' ? 'var(--lift)' : 'var(--fg)') : 'var(--closed-text)');
+    if (L.f.t === 'lift') t.setAttribute('class', 'lift');
+    t.textContent = L.f.name;
+    lsvg.appendChild(t);
+  }
+}
+
+// pan & zoom
+function zoom(f, cx, cy) {
+  const nw = Math.min(VB0[2] * 2, Math.max(VB0[2] / 20, vb[2] * f)), q = nw / vb[2];
+  cx = cx ?? vb[0] + vb[2] / 2; cy = cy ?? vb[1] + vb[3] / 2;
+  vb = [cx - (cx - vb[0]) * q, cy - (cy - vb[1]) * q, nw, vb[3] * q]; apply();
+}
+const toWorld = (ex, ey) => { const r = rect(); return [vb[0] + (ex - r.left) / r.width * vb[2], vb[1] + (ey - r.top) / r.height * vb[3]]; };
+svg.addEventListener('wheel', e => { e.preventDefault(); const [x, y] = toWorld(e.clientX, e.clientY); zoom(Math.exp(e.deltaY * 0.0015), x, y); }, { passive: false });
+const ptrs = new Map(); let last = null, pinch = null;
+svg.addEventListener('pointerdown', e => { svg.setPointerCapture(e.pointerId); ptrs.set(e.pointerId, [e.clientX, e.clientY]); svg.classList.add('drag'); last = [e.clientX, e.clientY]; if (ptrs.size === 2) { const [a, b] = [...ptrs.values()]; pinch = Math.hypot(a[0] - b[0], a[1] - b[1]); } });
+svg.addEventListener('pointermove', e => {
+  if (!ptrs.has(e.pointerId)) return; ptrs.set(e.pointerId, [e.clientX, e.clientY]);
+  if (ptrs.size === 2 && pinch) { const [a, b] = [...ptrs.values()], d = Math.hypot(a[0] - b[0], a[1] - b[1]); const [x, y] = toWorld((a[0] + b[0]) / 2, (a[1] + b[1]) / 2); zoom(pinch / d, x, y); pinch = d; return; }
+  const r = rect(); vb[0] -= (e.clientX - last[0]) / r.width * vb[2]; vb[1] -= (e.clientY - last[1]) / r.height * vb[3]; last = [e.clientX, e.clientY]; apply();
+});
+const up = e => { ptrs.delete(e.pointerId); if (ptrs.size < 2) pinch = null; if (!ptrs.size) svg.classList.remove('drag'); const v = [...ptrs.values()][0]; if (v) last = v; };
+svg.addEventListener('pointerup', up); svg.addEventListener('pointercancel', up);
+document.getElementById('zin').onclick = () => zoom(1 / 1.5);
+document.getElementById('zout').onclick = () => zoom(1.5);
+document.getElementById('zreset').onclick = fit;
+window.addEventListener('resize', () => vb && apply());
+
+function route() { const k = location.hash.slice(1); load(DATA[k] ? k : keys[0]); }
+window.addEventListener('hashchange', route);
+route();
+</script>

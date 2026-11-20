@@ -1,0 +1,962 @@
+{
+ "resort": "heavenly",
+ "asOf": "2026-11-20T14:08:55.2522787-07:00",
+ "fetchedAt": "2026-11-20T21:14:03.686Z",
+ "trails": [
+  {
+   "name": "Enchanted Forest",
+   "area": "California",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Green"
+  },
+  {
+   "name": "Groove Trail",
+   "area": "California",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Green"
+  },
+  {
+   "name": "Maggie's",
+   "area": "California",
+   "open": true,
+   "groomed": false,
+   "difficulty": "Green"
+  },
+  {
+   "name": "Patsy's",
+   "area": "California",
+   "open": true,
+   "groomed": false,
+   "difficulty": "Green"
+  },
+  {
+   "name": "Pioneer Trail",
+   "area": "California",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Green"
+  },
+  {
+   "name": "Poma Trail",
+   "area": "California",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Green"
+  },
+  {
+   "name": "Sky Chute 2",
+   "area": "California",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Green"
+  },
+  {
+   "name": "The Meadow",
+   "area": "California",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Green"
+  },
+  {
+   "name": "California Trail Lower",
+   "area": "California",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Canyonland Left",
+   "area": "California",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Canyonland Right",
+   "area": "California",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "High Five",
+   "area": "California",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Liz's Lower",
+   "area": "California",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Liz's Upper",
+   "area": "California",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Mombo",
+   "area": "California",
+   "open": true,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Mombo Lower",
+   "area": "California",
+   "open": true,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Powderbowl Run",
+   "area": "California",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Ridge Run Lower",
+   "area": "California",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Ridge Run Upper",
+   "area": "California",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Ridge Way",
+   "area": "California",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Round-a-Bout",
+   "area": "California",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Sky Chute",
+   "area": "California",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Skyline trail",
+   "area": "California",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Stein's Way",
+   "area": "California",
+   "open": true,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Swing Trail",
+   "area": "California",
+   "open": true,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "World Cup",
+   "area": "California",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Double Down",
+   "area": "California",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "East Bowl Woods",
+   "area": "California",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Ellie's",
+   "area": "California",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Ellie's Swing",
+   "area": "California",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Fall Line",
+   "area": "California",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Gunbarrel Lower",
+   "area": "California",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Maggie's Canyon",
+   "area": "California",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Pinnacle Glades",
+   "area": "California",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Pinnacles",
+   "area": "California",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Pistol",
+   "area": "California",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Powder Line",
+   "area": "California",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Powderbowl Woods",
+   "area": "California",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Ridge Bowl",
+   "area": "California",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Ski Way Glades",
+   "area": "California",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Sky Canyon",
+   "area": "California",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Sky Express Line",
+   "area": "California",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Waterfall",
+   "area": "California",
+   "open": true,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "West Bowl",
+   "area": "California",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "East Bowl",
+   "area": "California",
+   "open": false,
+   "groomed": false,
+   "difficulty": "DoubleBlack"
+  },
+  {
+   "name": "Gunbarrel Upper",
+   "area": "California",
+   "open": false,
+   "groomed": false,
+   "difficulty": "DoubleBlack"
+  },
+  {
+   "name": "Hogsback",
+   "area": "California",
+   "open": false,
+   "groomed": false,
+   "difficulty": "DoubleBlack"
+  },
+  {
+   "name": "The Face",
+   "area": "California",
+   "open": false,
+   "groomed": false,
+   "difficulty": "DoubleBlack"
+  },
+  {
+   "name": "Groove Terrain Park",
+   "area": "California",
+   "open": false,
+   "groomed": false,
+   "difficulty": "TerrainPark"
+  },
+  {
+   "name": "Lakeview Terrain Park",
+   "area": "California",
+   "open": false,
+   "groomed": false,
+   "difficulty": "TerrainPark"
+  },
+  {
+   "name": "Boulder Bowl",
+   "area": "Nevada",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Green"
+  },
+  {
+   "name": "Boulder Carpet Run",
+   "area": "Nevada",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Green"
+  },
+  {
+   "name": "$100 Saddle",
+   "area": "Nevada",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Aries",
+   "area": "Nevada",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Big Dipper",
+   "area": "Nevada",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Bonanza",
+   "area": "Nevada",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Boulder Chute",
+   "area": "Nevada",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Cloud Nine",
+   "area": "Nevada",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Comet",
+   "area": "Nevada",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Comstock Lower",
+   "area": "Nevada",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Comstock Upper",
+   "area": "Nevada",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Cosmic Wave",
+   "area": "Nevada",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Crossover",
+   "area": "Nevada",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Dipper Return Lower",
+   "area": "Nevada",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Dipper Return Upper",
+   "area": "Nevada",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Emily's Run",
+   "area": "Nevada",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Galaxy",
+   "area": "Nevada",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Galaxy Woods",
+   "area": "Nevada",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Jack's",
+   "area": "Nevada",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Meteor",
+   "area": "Nevada",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Mineshaft Lower",
+   "area": "Nevada",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Mineshaft Upper",
+   "area": "Nevada",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Nevada Trail",
+   "area": "Nevada",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "North Bowl Upper",
+   "area": "Nevada",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Nova",
+   "area": "Nevada",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Olympic Down Hill Lower",
+   "area": "Nevada",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Olympic Down Hill Upper",
+   "area": "Nevada",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Orion",
+   "area": "Nevada",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Outlaw",
+   "area": "Nevada",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Pepi's",
+   "area": "Nevada",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Perimeter",
+   "area": "Nevada",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Ponderosa",
+   "area": "Nevada",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Stagecoach Lower",
+   "area": "Nevada",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Stagecoach Return",
+   "area": "Nevada",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Stagecoach Upper",
+   "area": "Nevada",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "The Pines",
+   "area": "Nevada",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Aries Woods",
+   "area": "Nevada",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Bohemian Grove",
+   "area": "Nevada",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Dipper Bowl",
+   "area": "Nevada",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Dipper Line",
+   "area": "Nevada",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Dipper Woods",
+   "area": "Nevada",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Little Dipper",
+   "area": "Nevada",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Milky Way",
+   "area": "Nevada",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Milky Way Bowl",
+   "area": "Nevada",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Nevada Woods",
+   "area": "Nevada",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "North Bowl",
+   "area": "Nevada",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Stagecoach Woods",
+   "area": "Nevada",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "The Burn",
+   "area": "Nevada",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Killebrew Canyon",
+   "area": "Nevada",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Extreme"
+  },
+  {
+   "name": "Mott Canyon",
+   "area": "Nevada",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Extreme"
+  },
+  {
+   "name": "Big Easy",
+   "area": "Top of Gondola",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Green"
+  },
+  {
+   "name": "Black Bear Hollow",
+   "area": "Top of Gondola",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Green"
+  },
+  {
+   "name": "Easy Street",
+   "area": "Top of Gondola",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Green"
+  },
+  {
+   "name": "Red Fir",
+   "area": "Top of Gondola",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Green"
+  },
+  {
+   "name": "Tubing Run",
+   "area": "Top of Gondola",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Green"
+  },
+  {
+   "name": "Von Schmidt Lower",
+   "area": "Top of Gondola",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Green"
+  },
+  {
+   "name": "49er",
+   "area": "Top of Gondola",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "California Trail Upper",
+   "area": "Top of Gondola",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Cascade",
+   "area": "Top of Gondola",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Sam's Dream",
+   "area": "Top of Gondola",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Silver Spur",
+   "area": "Top of Gondola",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Tamarack Return",
+   "area": "Top of Gondola",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Von Schmidt Upper",
+   "area": "Top of Gondola",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  }
+ ],
+ "lifts": [
+  {
+   "name": "The Tram",
+   "area": "California",
+   "status": "Open",
+   "open": true
+  },
+  {
+   "name": "Canyon",
+   "area": "California",
+   "status": "Closed",
+   "open": false
+  },
+  {
+   "name": "Gunbarrel",
+   "area": "California",
+   "status": "Open",
+   "open": true
+  },
+  {
+   "name": "Powderbowl",
+   "area": "California",
+   "status": "Open",
+   "open": true
+  },
+  {
+   "name": "Sky",
+   "area": "California",
+   "status": "Closed",
+   "open": false
+  },
+  {
+   "name": "First Ride",
+   "area": "California",
+   "status": "Closed",
+   "open": false
+  },
+  {
+   "name": "Groove",
+   "area": "California",
+   "status": "Closed",
+   "open": false
+  },
+  {
+   "name": "Patsy's",
+   "area": "California",
+   "status": "Open",
+   "open": true
+  },
+  {
+   "name": "World Cup",
+   "area": "California",
+   "status": "Closed",
+   "open": false
+  },
+  {
+   "name": "Enchanted Forest",
+   "area": "California",
+   "status": "Closed",
+   "open": false
+  },
+  {
+   "name": "The Meadow Carpet",
+   "area": "California",
+   "status": "Closed",
+   "open": false
+  },
+  {
+   "name": "Pioneer",
+   "area": "California",
+   "status": "Closed",
+   "open": false
+  },
+  {
+   "name": "Comet",
+   "area": "Nevada",
+   "status": "Closed",
+   "open": false
+  },
+  {
+   "name": "Dipper",
+   "area": "Nevada",
+   "status": "Closed",
+   "open": false
+  },
+  {
+   "name": "North Bowl",
+   "area": "Nevada",
+   "status": "Closed",
+   "open": false
+  },
+  {
+   "name": "Olympic",
+   "area": "Nevada",
+   "status": "Closed",
+   "open": false
+  },
+  {
+   "name": "Stagecoach",
+   "area": "Nevada",
+   "status": "Closed",
+   "open": false
+  },
+  {
+   "name": "Boulder",
+   "area": "Nevada",
+   "status": "Closed",
+   "open": false
+  },
+  {
+   "name": "Galaxy",
+   "area": "Nevada",
+   "status": "Closed",
+   "open": false
+  },
+  {
+   "name": "Mott",
+   "area": "Nevada",
+   "status": "Closed",
+   "open": false
+  },
+  {
+   "name": "Boulder Carpet",
+   "area": "Nevada",
+   "status": "Closed",
+   "open": false
+  },
+  {
+   "name": "Gondola",
+   "area": "Top of Gondola",
+   "status": "Open",
+   "open": true
+  },
+  {
+   "name": "Tamarack",
+   "area": "Top of Gondola",
+   "status": "Closed",
+   "open": false
+  },
+  {
+   "name": "Big Easy",
+   "area": "Top of Gondola",
+   "status": "Closed",
+   "open": false
+  },
+  {
+   "name": "Bear Cave",
+   "area": "Top of Gondola",
+   "status": "Closed",
+   "open": false
+  },
+  {
+   "name": "Tube Lift",
+   "area": "Top of Gondola",
+   "status": "Closed",
+   "open": false
+  },
+  {
+   "name": "Red Fir",
+   "area": "Top of Gondola",
+   "status": "Closed",
+   "open": false
+  }
+ ]
+}

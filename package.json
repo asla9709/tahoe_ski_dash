@@ -1,0 +1,15 @@
+{
+  "name": "ski-maps",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Lift and run status maps for Northstar, Heavenly and Kirkwood",
+  "scripts": {
+    "setup": "npm install && npx playwright install chromium",
+    "update": "node update.js",
+    "build": "node build.js",
+    "shapes": "node fetch_shapes.js"
+  },
+  "dependencies": {
+    "playwright": "^1.48.0"
+  }
+}

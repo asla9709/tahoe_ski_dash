@@ -1,0 +1,879 @@
+{
+ "resort": "northstar",
+ "asOf": "2026-11-20T14:08:49.7586415-07:00",
+ "fetchedAt": "2026-11-20T21:09:52.294Z",
+ "trails": [
+  {
+   "name": "Lookout Bypass",
+   "area": "Lookout Mountain",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Schwarzstrasse",
+   "area": "Lookout Mountain",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Washoe",
+   "area": "Lookout Mountain",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Boca",
+   "area": "Lookout Mountain",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Gooseneck",
+   "area": "Lookout Mountain",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Lookout Glade",
+   "area": "Lookout Mountain",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Martis",
+   "area": "Lookout Mountain",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Prosser",
+   "area": "Lookout Mountain",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Stampede",
+   "area": "Lookout Mountain",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Sugar Pine Glade",
+   "area": "Lookout Mountain",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "The Camp Glade",
+   "area": "Lookout Mountain",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Webber",
+   "area": "Lookout Mountain",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Lower Main Street",
+   "area": "Mt. Pluto",
+   "open": true,
+   "groomed": false,
+   "difficulty": "Green"
+  },
+  {
+   "name": "Lumberjack",
+   "area": "Mt. Pluto",
+   "open": true,
+   "groomed": false,
+   "difficulty": "Green"
+  },
+  {
+   "name": "Skid Trail",
+   "area": "Mt. Pluto",
+   "open": true,
+   "groomed": false,
+   "difficulty": "Green"
+  },
+  {
+   "name": "Upper Main Street",
+   "area": "Mt. Pluto",
+   "open": true,
+   "groomed": false,
+   "difficulty": "Green"
+  },
+  {
+   "name": "Axe Handle",
+   "area": "Mt. Pluto",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Bear Crawl",
+   "area": "Mt. Pluto",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Cascades",
+   "area": "Mt. Pluto",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Cat's Face",
+   "area": "Mt. Pluto",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Coyote Crossing",
+   "area": "Mt. Pluto",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Delight",
+   "area": "Mt. Pluto",
+   "open": true,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Drop Off",
+   "area": "Mt. Pluto",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Dutchman",
+   "area": "Mt. Pluto",
+   "open": true,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Eagle Chute",
+   "area": "Mt. Pluto",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "East Ridge",
+   "area": "Mt. Pluto",
+   "open": true,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Flying Squirrel",
+   "area": "Mt. Pluto",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Logger's Loop",
+   "area": "Mt. Pluto",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Lookout Road",
+   "area": "Mt. Pluto",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Lower Grouse Alley",
+   "area": "Mt. Pluto",
+   "open": true,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Luggi's",
+   "area": "Mt. Pluto",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Powder Bowl",
+   "area": "Mt. Pluto",
+   "open": true,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Stump Alley",
+   "area": "Mt. Pluto",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "The Chute",
+   "area": "Mt. Pluto",
+   "open": true,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "The Flume",
+   "area": "Mt. Pluto",
+   "open": true,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Upper Jibboom",
+   "area": "Mt. Pluto",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "West Ridge",
+   "area": "Mt. Pluto",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Crosscut",
+   "area": "Mt. Pluto",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Hornet's Nest",
+   "area": "Mt. Pluto",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Jibboom",
+   "area": "Mt. Pluto",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Sawmill Glade",
+   "area": "Mt. Pluto",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Spring Board",
+   "area": "Mt. Pluto",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Surprise",
+   "area": "Mt. Pluto",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "The Plunge",
+   "area": "Mt. Pluto",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Tonini's",
+   "area": "Mt. Pluto",
+   "open": true,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Upper Grouse Alley",
+   "area": "Mt. Pluto",
+   "open": true,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Carpet Bowl",
+   "area": "Northwest Territory",
+   "open": true,
+   "groomed": false,
+   "difficulty": "Green"
+  },
+  {
+   "name": "Easy Street",
+   "area": "Northwest Territory",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Green"
+  },
+  {
+   "name": "Lower Lion's Way",
+   "area": "Northwest Territory",
+   "open": true,
+   "groomed": false,
+   "difficulty": "Green"
+  },
+  {
+   "name": "The Gulch",
+   "area": "Northwest Territory",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Green"
+  },
+  {
+   "name": "Wood Cutter",
+   "area": "Northwest Territory",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Green"
+  },
+  {
+   "name": "Bobcat Bowl",
+   "area": "Northwest Territory",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Boondocks",
+   "area": "Northwest Territory",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Christmas Tree",
+   "area": "Northwest Territory",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Cowboy Pass",
+   "area": "Northwest Territory",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Deerskin",
+   "area": "Northwest Territory",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Gateway",
+   "area": "Northwest Territory",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Goldmine",
+   "area": "Northwest Territory",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Home Run",
+   "area": "Northwest Territory",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Hoot Owl",
+   "area": "Northwest Territory",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Lower Pioneer",
+   "area": "Northwest Territory",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Northern Lights",
+   "area": "Northwest Territory",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Overland Trail",
+   "area": "Northwest Territory",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Shortcut",
+   "area": "Northwest Territory",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Sodergren's",
+   "area": "Northwest Territory",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "The Face",
+   "area": "Northwest Territory",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "The Glades",
+   "area": "Northwest Territory",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "The Gully",
+   "area": "Northwest Territory",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Timberline",
+   "area": "Northwest Territory",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Upper Lion's Way",
+   "area": "Northwest Territory",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Upper Lookout Bypass",
+   "area": "Northwest Territory",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Upper Pioneer",
+   "area": "Northwest Territory",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Wagon Wheel KAZ",
+   "area": "Northwest Territory",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Lower Chute",
+   "area": "Terrain Parks",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Forerunner",
+   "area": "Terrain Parks",
+   "open": false,
+   "groomed": false,
+   "difficulty": "TerrainPark"
+  },
+  {
+   "name": "Lil Stash",
+   "area": "Terrain Parks",
+   "open": false,
+   "groomed": false,
+   "difficulty": "TerrainPark"
+  },
+  {
+   "name": "Moonshine",
+   "area": "Terrain Parks",
+   "open": false,
+   "groomed": false,
+   "difficulty": "TerrainPark"
+  },
+  {
+   "name": "Pinball",
+   "area": "Terrain Parks",
+   "open": false,
+   "groomed": false,
+   "difficulty": "TerrainPark"
+  },
+  {
+   "name": "Pipeline",
+   "area": "Terrain Parks",
+   "open": false,
+   "groomed": false,
+   "difficulty": "TerrainPark"
+  },
+  {
+   "name": "Playground",
+   "area": "Terrain Parks",
+   "open": true,
+   "groomed": false,
+   "difficulty": "TerrainPark"
+  },
+  {
+   "name": "Sidewinder",
+   "area": "Terrain Parks",
+   "open": true,
+   "groomed": false,
+   "difficulty": "TerrainPark"
+  },
+  {
+   "name": "The Straits",
+   "area": "Terrain Parks",
+   "open": false,
+   "groomed": false,
+   "difficulty": "TerrainPark"
+  },
+  {
+   "name": "Upper Main St.",
+   "area": "Terrain Parks",
+   "open": false,
+   "groomed": false,
+   "difficulty": "TerrainPark"
+  },
+  {
+   "name": "Backdoor",
+   "area": "The Backside",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Castle Peak",
+   "area": "The Backside",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Drifter",
+   "area": "The Backside",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Drifter Connector",
+   "area": "The Backside",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Lower Burnout",
+   "area": "The Backside",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "The Islands",
+   "area": "The Backside",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Burnout",
+   "area": "The Backside",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Challenger",
+   "area": "The Backside",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Down Under",
+   "area": "The Backside",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Follow Me",
+   "area": "The Backside",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Iron Horse",
+   "area": "The Backside",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Monument Glade",
+   "area": "The Backside",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Polaris",
+   "area": "The Backside",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Promised Land",
+   "area": "The Backside",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Rail Splitter",
+   "area": "The Backside",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Sierra Grande",
+   "area": "The Backside",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "The Rapids",
+   "area": "The Backside",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Why Not",
+   "area": "The Backside",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Bearly",
+   "area": "Village at Northstar",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Green"
+  },
+  {
+   "name": "Condo Run",
+   "area": "Village at Northstar",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Green"
+  },
+  {
+   "name": "Lynx Luge",
+   "area": "Village at Northstar",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Green"
+  },
+  {
+   "name": "Village Run",
+   "area": "Village at Northstar",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Green"
+  },
+  {
+   "name": "Coyote Fork",
+   "area": "Village at Northstar",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Lynx Luge",
+   "area": "Village at Northstar",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "The Woods",
+   "area": "Village at Northstar",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  }
+ ],
+ "lifts": [
+  {
+   "name": "Martis Camp Express",
+   "area": "Lookout Mountain",
+   "status": "Closed",
+   "open": false
+  },
+  {
+   "name": "Lookout Link Platter",
+   "area": "Lookout Mountain",
+   "status": "Closed",
+   "open": false
+  },
+  {
+   "name": "Comstock Express",
+   "area": "Mt. Pluto",
+   "status": "Open",
+   "open": true
+  },
+  {
+   "name": "Rendezvous Triple",
+   "area": "Mt. Pluto",
+   "status": "Closed",
+   "open": false
+  },
+  {
+   "name": "Highlands Gondola",
+   "area": "Northwest Territory",
+   "status": "Open",
+   "open": true
+  },
+  {
+   "name": "Arrow Express",
+   "area": "Northwest Territory",
+   "status": "Open",
+   "open": true
+  },
+  {
+   "name": "Tahoe Zephyr Express",
+   "area": "Northwest Territory",
+   "status": "Closed",
+   "open": false
+  },
+  {
+   "name": "The Big Easy Quad",
+   "area": "Northwest Territory",
+   "status": "Open",
+   "open": true
+  },
+  {
+   "name": "Timberline Triple",
+   "area": "Northwest Territory",
+   "status": "Closed",
+   "open": false
+  },
+  {
+   "name": "Hemlock Carpet",
+   "area": "Northwest Territory",
+   "status": "Closed",
+   "open": false
+  },
+  {
+   "name": "Jeffrey Pines Carpet",
+   "area": "Northwest Territory",
+   "status": "Open",
+   "open": true
+  },
+  {
+   "name": "Juniper Carpet",
+   "area": "Northwest Territory",
+   "status": "Closed",
+   "open": false
+  },
+  {
+   "name": "Sugar Pine Carpet",
+   "area": "Northwest Territory",
+   "status": "Closed",
+   "open": false
+  },
+  {
+   "name": "Vista Express",
+   "area": "Terrain Parks",
+   "status": "Open",
+   "open": true
+  },
+  {
+   "name": "Backside Express",
+   "area": "The Backside",
+   "status": "Closed",
+   "open": false
+  },
+  {
+   "name": "Promised Land Express",
+   "area": "The Backside",
+   "status": "Closed",
+   "open": false
+  },
+  {
+   "name": "Big Springs Express Gondola",
+   "area": "Village at Northstar",
+   "status": "Open",
+   "open": true
+  },
+  {
+   "name": "Village Express",
+   "area": "Village at Northstar",
+   "status": "Closed",
+   "open": false
+  },
+  {
+   "name": "The Spruces Carpet",
+   "area": "Village at Northstar",
+   "status": "Closed",
+   "open": false
+  }
+ ]
+}

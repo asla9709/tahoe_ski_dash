@@ -1,0 +1,50 @@
+{
+  "northstar": {
+    "name": "Northstar",
+    "statusUrl": "https://www.northstarcalifornia.com/the-mountain/mountain-conditions/terrain-and-lift-status.aspx",
+    "skiAreaIds": [
+      "717fe0e81e226ce0361fb10dc24e9f863eeda6ba"
+    ],
+    "rotate": 180,
+    "aliases": {
+      "Ax Handle": "Axe Handle",
+      "Lookout Link": "Lookout Link Platter",
+      "Rendezvous": "Rendezvous Triple",
+      "The Big Easy": "The Big Easy Quad"
+    }
+  },
+  "heavenly": {
+    "name": "Heavenly",
+    "statusUrl": "https://www.skiheavenly.com/the-mountain/mountain-conditions/terrain-and-lift-status.aspx",
+    "skiAreaIds": [
+      "3f61859b47be735a77df9b1b9e102edbeb529286"
+    ],
+    "rotate": 0,
+    "aliases": {
+      "Heavenly Gondola": "Gondola",
+      "Aerial Tramway": "The Tram",
+      "Cloud 9": "Cloud Nine",
+      "Ski Ways Glades": "Ski Way Glades",
+      "Groove Park": "Groove Terrain Park",
+      "Tubing Hill": [
+        "Tubing Run",
+        "Tube Lift"
+      ],
+      "Olympic Downhill": "Olympic Down Hill",
+      "Mott Canyon": [
+        "Mott Canyon",
+        "Mott"
+      ]
+    }
+  },
+  "kirkwood": {
+    "name": "Kirkwood",
+    "statusUrl": "https://www.kirkwood.com/the-mountain/mountain-conditions/terrain-and-lift-status.aspx",
+    "skiAreaIds": [
+      "718db266e6e9ec76a5003a404aec69a657b3ab33",
+      "d025120e-d16b-4009-95db-84febf9214c4"
+    ],
+    "rotate": 180,
+    "aliases": {}
+  }
+}

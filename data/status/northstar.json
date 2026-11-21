@@ -1,7 +1,7 @@
 {
  "resort": "northstar",
- "asOf": "2026-11-20T15:05:30.5849027-07:00",
- "fetchedAt": "2026-11-20T22:07:08.411Z",
+ "asOf": "2026-11-21T07:54:33.2536622-07:00",
+ "fetchedAt": "2026-11-21T15:00:10.874Z",
  "trails": [
   {
    "name": "Lookout Bypass",
@@ -174,7 +174,7 @@
   {
    "name": "Eagle Chute",
    "area": "Mt. Pluto",
-   "open": false,
+   "open": true,
    "groomed": false,
    "difficulty": "Blue"
   },
@@ -349,7 +349,7 @@
   {
    "name": "The Gulch",
    "area": "Northwest Territory",
-   "open": false,
+   "open": true,
    "groomed": false,
    "difficulty": "Green"
   },
@@ -776,8 +776,8 @@
   {
    "name": "Comstock Express",
    "area": "Mt. Pluto",
-   "status": "Open",
-   "open": true
+   "status": "Scheduled",
+   "open": false
   },
   {
    "name": "Rendezvous Triple",
@@ -788,14 +788,14 @@
   {
    "name": "Highlands Gondola",
    "area": "Northwest Territory",
-   "status": "Open",
-   "open": true
+   "status": "Scheduled",
+   "open": false
   },
   {
    "name": "Arrow Express",
    "area": "Northwest Territory",
-   "status": "Open",
-   "open": true
+   "status": "Scheduled",
+   "open": false
   },
   {
    "name": "Tahoe Zephyr Express",
@@ -806,8 +806,8 @@
   {
    "name": "The Big Easy Quad",
    "area": "Northwest Territory",
-   "status": "Open",
-   "open": true
+   "status": "Scheduled",
+   "open": false
   },
   {
    "name": "Timberline Triple",
@@ -824,8 +824,8 @@
   {
    "name": "Jeffrey Pines Carpet",
    "area": "Northwest Territory",
-   "status": "Open",
-   "open": true
+   "status": "Scheduled",
+   "open": false
   },
   {
    "name": "Juniper Carpet",
@@ -842,8 +842,8 @@
   {
    "name": "Vista Express",
    "area": "Terrain Parks",
-   "status": "Open",
-   "open": true
+   "status": "Scheduled",
+   "open": false
   },
   {
    "name": "Backside Express",
@@ -860,8 +860,8 @@
   {
    "name": "Big Springs Express Gondola",
    "area": "Village at Northstar",
-   "status": "Open",
-   "open": true
+   "status": "Scheduled",
+   "open": false
   },
   {
    "name": "Village Express",

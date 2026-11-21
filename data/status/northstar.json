@@ -1,7 +1,7 @@
 {
  "resort": "northstar",
- "asOf": "2026-11-21T07:54:33.2536622-07:00",
- "fetchedAt": "2026-11-21T15:00:10.874Z",
+ "asOf": "2026-11-21T12:08:08.4013108-07:00",
+ "fetchedAt": "2026-11-21T19:10:46.072Z",
  "trails": [
   {
    "name": "Lookout Bypass",
@@ -118,7 +118,7 @@
   {
    "name": "Axe Handle",
    "area": "Mt. Pluto",
-   "open": false,
+   "open": true,
    "groomed": false,
    "difficulty": "Blue"
   },
@@ -132,7 +132,7 @@
   {
    "name": "Cascades",
    "area": "Mt. Pluto",
-   "open": false,
+   "open": true,
    "groomed": false,
    "difficulty": "Blue"
   },
@@ -216,7 +216,7 @@
   {
    "name": "Luggi's",
    "area": "Mt. Pluto",
-   "open": false,
+   "open": true,
    "groomed": false,
    "difficulty": "Blue"
   },
@@ -230,7 +230,7 @@
   {
    "name": "Stump Alley",
    "area": "Mt. Pluto",
-   "open": false,
+   "open": true,
    "groomed": false,
    "difficulty": "Blue"
   },
@@ -251,14 +251,14 @@
   {
    "name": "Upper Jibboom",
    "area": "Mt. Pluto",
-   "open": false,
+   "open": true,
    "groomed": false,
    "difficulty": "Blue"
   },
   {
    "name": "West Ridge",
    "area": "Mt. Pluto",
-   "open": false,
+   "open": true,
    "groomed": false,
    "difficulty": "Blue"
   },
@@ -279,7 +279,7 @@
   {
    "name": "Jibboom",
    "area": "Mt. Pluto",
-   "open": false,
+   "open": true,
    "groomed": false,
    "difficulty": "Black"
   },
@@ -293,7 +293,7 @@
   {
    "name": "Spring Board",
    "area": "Mt. Pluto",
-   "open": false,
+   "open": true,
    "groomed": false,
    "difficulty": "Black"
   },
@@ -307,7 +307,7 @@
   {
    "name": "The Plunge",
    "area": "Mt. Pluto",
-   "open": false,
+   "open": true,
    "groomed": false,
    "difficulty": "Black"
   },
@@ -405,7 +405,7 @@
   {
    "name": "Goldmine",
    "area": "Northwest Territory",
-   "open": false,
+   "open": true,
    "groomed": false,
    "difficulty": "Blue"
   },
@@ -776,8 +776,8 @@
   {
    "name": "Comstock Express",
    "area": "Mt. Pluto",
-   "status": "Scheduled",
-   "open": false
+   "status": "Open",
+   "open": true
   },
   {
    "name": "Rendezvous Triple",
@@ -788,14 +788,14 @@
   {
    "name": "Highlands Gondola",
    "area": "Northwest Territory",
-   "status": "Scheduled",
-   "open": false
+   "status": "Open",
+   "open": true
   },
   {
    "name": "Arrow Express",
    "area": "Northwest Territory",
-   "status": "Scheduled",
-   "open": false
+   "status": "Open",
+   "open": true
   },
   {
    "name": "Tahoe Zephyr Express",
@@ -806,8 +806,8 @@
   {
    "name": "The Big Easy Quad",
    "area": "Northwest Territory",
-   "status": "Scheduled",
-   "open": false
+   "status": "Open",
+   "open": true
   },
   {
    "name": "Timberline Triple",
@@ -824,8 +824,8 @@
   {
    "name": "Jeffrey Pines Carpet",
    "area": "Northwest Territory",
-   "status": "Scheduled",
-   "open": false
+   "status": "Open",
+   "open": true
   },
   {
    "name": "Juniper Carpet",
@@ -842,8 +842,8 @@
   {
    "name": "Vista Express",
    "area": "Terrain Parks",
-   "status": "Scheduled",
-   "open": false
+   "status": "Open",
+   "open": true
   },
   {
    "name": "Backside Express",
@@ -860,8 +860,8 @@
   {
    "name": "Big Springs Express Gondola",
    "area": "Village at Northstar",
-   "status": "Scheduled",
-   "open": false
+   "status": "Open",
+   "open": true
   },
   {
    "name": "Village Express",

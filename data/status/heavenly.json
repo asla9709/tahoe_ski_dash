@@ -1,7 +1,7 @@
 {
  "resort": "heavenly",
- "asOf": "2026-11-21T07:54:02.7158628-07:00",
- "fetchedAt": "2026-11-21T15:00:12.458Z",
+ "asOf": "2026-11-21T12:09:43.7281442-07:00",
+ "fetchedAt": "2026-11-21T19:10:48.182Z",
  "trails": [
   {
    "name": "Enchanted Forest",
@@ -799,8 +799,8 @@
   {
    "name": "The Tram",
    "area": "California",
-   "status": "Scheduled",
-   "open": false
+   "status": "Open",
+   "open": true
   },
   {
    "name": "Canyon",
@@ -811,14 +811,14 @@
   {
    "name": "Gunbarrel",
    "area": "California",
-   "status": "Scheduled",
-   "open": false
+   "status": "Open",
+   "open": true
   },
   {
    "name": "Powderbowl",
    "area": "California",
-   "status": "Scheduled",
-   "open": false
+   "status": "Open",
+   "open": true
   },
   {
    "name": "Sky",
@@ -841,8 +841,8 @@
   {
    "name": "Patsy's",
    "area": "California",
-   "status": "Scheduled",
-   "open": false
+   "status": "Open",
+   "open": true
   },
   {
    "name": "World Cup",

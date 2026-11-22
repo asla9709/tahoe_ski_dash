@@ -1,7 +1,7 @@
 {
  "resort": "northstar",
- "asOf": "2026-11-21T14:14:38.4467166-07:00",
- "fetchedAt": "2026-11-21T21:18:21.848Z",
+ "asOf": "2026-11-22T07:56:02.9695841-07:00",
+ "fetchedAt": "2026-11-22T14:58:01.576Z",
  "trails": [
   {
    "name": "Lookout Bypass",
@@ -139,7 +139,7 @@
   {
    "name": "Cat's Face",
    "area": "Mt. Pluto",
-   "open": false,
+   "open": true,
    "groomed": false,
    "difficulty": "Blue"
   },
@@ -195,7 +195,7 @@
   {
    "name": "Logger's Loop",
    "area": "Mt. Pluto",
-   "open": false,
+   "open": true,
    "groomed": false,
    "difficulty": "Blue"
   },
@@ -265,7 +265,7 @@
   {
    "name": "Crosscut",
    "area": "Mt. Pluto",
-   "open": false,
+   "open": true,
    "groomed": false,
    "difficulty": "Black"
   },
@@ -776,8 +776,8 @@
   {
    "name": "Comstock Express",
    "area": "Mt. Pluto",
-   "status": "Open",
-   "open": true
+   "status": "Closed",
+   "open": false
   },
   {
    "name": "Rendezvous Triple",
@@ -788,14 +788,14 @@
   {
    "name": "Highlands Gondola",
    "area": "Northwest Territory",
-   "status": "Open",
-   "open": true
+   "status": "Closed",
+   "open": false
   },
   {
    "name": "Arrow Express",
    "area": "Northwest Territory",
-   "status": "Open",
-   "open": true
+   "status": "Closed",
+   "open": false
   },
   {
    "name": "Tahoe Zephyr Express",
@@ -806,8 +806,8 @@
   {
    "name": "The Big Easy Quad",
    "area": "Northwest Territory",
-   "status": "Open",
-   "open": true
+   "status": "Closed",
+   "open": false
   },
   {
    "name": "Timberline Triple",
@@ -824,8 +824,8 @@
   {
    "name": "Jeffrey Pines Carpet",
    "area": "Northwest Territory",
-   "status": "Open",
-   "open": true
+   "status": "Closed",
+   "open": false
   },
   {
    "name": "Juniper Carpet",
@@ -842,8 +842,8 @@
   {
    "name": "Vista Express",
    "area": "Terrain Parks",
-   "status": "Open",
-   "open": true
+   "status": "Closed",
+   "open": false
   },
   {
    "name": "Backside Express",
@@ -860,8 +860,8 @@
   {
    "name": "Big Springs Express Gondola",
    "area": "Village at Northstar",
-   "status": "Open",
-   "open": true
+   "status": "Closed",
+   "open": false
   },
   {
    "name": "Village Express",

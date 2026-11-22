@@ -1,7 +1,7 @@
 {
  "resort": "heavenly",
- "asOf": "2026-11-21T14:16:24.5488276-07:00",
- "fetchedAt": "2026-11-21T21:18:23.488Z",
+ "asOf": "2026-11-22T07:51:53.7263167-07:00",
+ "fetchedAt": "2026-11-22T14:58:03.022Z",
  "trails": [
   {
    "name": "Enchanted Forest",
@@ -799,8 +799,8 @@
   {
    "name": "The Tram",
    "area": "California",
-   "status": "Open",
-   "open": true
+   "status": "Scheduled",
+   "open": false
   },
   {
    "name": "Canyon",
@@ -811,14 +811,14 @@
   {
    "name": "Gunbarrel",
    "area": "California",
-   "status": "Open",
-   "open": true
+   "status": "Scheduled",
+   "open": false
   },
   {
    "name": "Powderbowl",
    "area": "California",
-   "status": "Open",
-   "open": true
+   "status": "Scheduled",
+   "open": false
   },
   {
    "name": "Sky",
@@ -841,8 +841,8 @@
   {
    "name": "Patsy's",
    "area": "California",
-   "status": "Open",
-   "open": true
+   "status": "Scheduled",
+   "open": false
   },
   {
    "name": "World Cup",
@@ -925,8 +925,8 @@
   {
    "name": "Gondola",
    "area": "Top of Gondola",
-   "status": "Open",
-   "open": true
+   "status": "Scheduled",
+   "open": false
   },
   {
    "name": "Tamarack",
@@ -949,7 +949,7 @@
   {
    "name": "Tube Lift",
    "area": "Top of Gondola",
-   "status": "Closed",
+   "status": "Scheduled",
    "open": false
   },
   {

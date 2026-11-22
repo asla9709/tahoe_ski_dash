@@ -1,7 +1,7 @@
 {
  "resort": "northstar",
- "asOf": "2026-11-22T10:56:53.0400083-07:00",
- "fetchedAt": "2026-11-22T17:58:53.246Z",
+ "asOf": "2026-11-22T14:15:10.5484065-07:00",
+ "fetchedAt": "2026-11-22T21:24:09.202Z",
  "trails": [
   {
    "name": "Lookout Bypass",
@@ -713,7 +713,7 @@
   {
    "name": "Bearly",
    "area": "Village at Northstar",
-   "open": false,
+   "open": true,
    "groomed": false,
    "difficulty": "Green"
   },
@@ -734,7 +734,7 @@
   {
    "name": "Village Run",
    "area": "Village at Northstar",
-   "open": false,
+   "open": true,
    "groomed": false,
    "difficulty": "Green"
   },

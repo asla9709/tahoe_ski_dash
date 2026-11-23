@@ -1,7 +1,7 @@
 {
  "resort": "heavenly",
- "asOf": "2026-11-22T14:20:13.0011172-07:00",
- "fetchedAt": "2026-11-22T21:24:11.072Z",
+ "asOf": "2026-11-23T11:44:48.040755-07:00",
+ "fetchedAt": "2026-11-23T18:51:48.050Z",
  "trails": [
   {
    "name": "Enchanted Forest",
@@ -55,7 +55,7 @@
   {
    "name": "The Meadow",
    "area": "California",
-   "open": false,
+   "open": true,
    "groomed": false,
    "difficulty": "Green"
   },
@@ -734,7 +734,7 @@
   {
    "name": "Tubing Run",
    "area": "Top of Gondola",
-   "open": false,
+   "open": true,
    "groomed": false,
    "difficulty": "Green"
   },
@@ -835,7 +835,7 @@
   {
    "name": "Groove",
    "area": "California",
-   "status": "Closed",
+   "status": "Scheduled",
    "open": false
   },
   {
@@ -859,8 +859,8 @@
   {
    "name": "The Meadow Carpet",
    "area": "California",
-   "status": "Closed",
-   "open": false
+   "status": "Open",
+   "open": true
   },
   {
    "name": "Pioneer",

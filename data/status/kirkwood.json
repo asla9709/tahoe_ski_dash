@@ -1,7 +1,864 @@
 {
  "resort": "kirkwood",
- "asOf": "2026-11-22T14:22:38.1899191-07:00",
- "fetchedAt": "2026-11-22T21:24:13.468Z",
- "trails": [],
- "lifts": []
+ "asOf": "2026-11-23T11:44:52.50001-07:00",
+ "fetchedAt": "2026-11-23T18:51:50.257Z",
+ "trails": [
+  {
+   "name": "Bud's Alley",
+   "area": "Backside",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Devil's Draw",
+   "area": "Backside",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Easy Rider",
+   "area": "Backside",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Happiness is",
+   "area": "Backside",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Herringbone Straight",
+   "area": "Backside",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Lower Elevator Shaft",
+   "area": "Backside",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Upper Elevator Shaft",
+   "area": "Backside",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Button Bowl",
+   "area": "Backside",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Cold Shoulder",
+   "area": "Backside",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Covered Wagon",
+   "area": "Backside",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Coyote",
+   "area": "Backside",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Deadwood Spur",
+   "area": "Backside",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Hully Gully",
+   "area": "Backside",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Larry's Lip",
+   "area": "Backside",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Sunnyside",
+   "area": "Backside",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "The Wave",
+   "area": "Backside",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Upper Devil's Draw",
+   "area": "Backside",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Thimble Peak",
+   "area": "Backside",
+   "open": false,
+   "groomed": false,
+   "difficulty": "DoubleBlack"
+  },
+  {
+   "name": "Eagle Bowl",
+   "area": "Bowls",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Palisades Bowl",
+   "area": "Bowls",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Reuter Bowl",
+   "area": "Bowls",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Sentinel Bowl",
+   "area": "Bowls",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Wagon Wheel Bowl",
+   "area": "Bowls",
+   "open": true,
+   "groomed": false,
+   "difficulty": "DoubleBlack"
+  },
+  {
+   "name": "Schneider-Barn Loop-.5km",
+   "area": "Cross Country Center",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Schneider-Juniper-2.7km",
+   "area": "Cross Country Center",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Schneider-Last Round Up-1.9km",
+   "area": "Cross Country Center",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Schneider-Outpost-1.7km",
+   "area": "Cross Country Center",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Schneider-Rambler-2.3km",
+   "area": "Cross Country Center",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Schneider-Coyote Pass-.8KM",
+   "area": "Cross Country Center",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "*Meadow Trail System",
+   "area": "Cross Country Center",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Green"
+  },
+  {
+   "name": "Caples - Kiddie Kilometer",
+   "area": "Cross Country Center",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Green"
+  },
+  {
+   "name": "Caples - Waldear Academy - 1km",
+   "area": "Cross Country Center",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Green"
+  },
+  {
+   "name": "*Caples Trail System",
+   "area": "Cross Country Center",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "*Schneider Trail System - 15+km",
+   "area": "Cross Country Center",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Caples - Beaver Pond - .6km",
+   "area": "Cross Country Center",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Caples - Caples Creek - 2.5km",
+   "area": "Cross Country Center",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Caples - Granite Rock - 1km",
+   "area": "Cross Country Center",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Caples - High Trail - 2km",
+   "area": "Cross Country Center",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Caples - High Trail Ext. - .5km",
+   "area": "Cross Country Center",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Caples - Jobes Jaunt - 1km",
+   "area": "Cross Country Center",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Caples - Lynx - 3km",
+   "area": "Cross Country Center",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Schneider- Sierra Vista-1.9km",
+   "area": "Cross Country Center",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Uphill Access",
+   "area": "Cross Country Center",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Unknown"
+  },
+  {
+   "name": "Hay Flat",
+   "area": "Frontside",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Green"
+  },
+  {
+   "name": "Snowkirk",
+   "area": "Frontside",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Green"
+  },
+  {
+   "name": "Bark Shanty",
+   "area": "Frontside",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Buckboard",
+   "area": "Frontside",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Devil's Corral",
+   "area": "Frontside",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Flying Carpet",
+   "area": "Frontside",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Home Run to Timber Creek",
+   "area": "Frontside",
+   "open": true,
+   "groomed": true,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Juniper",
+   "area": "Frontside",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Low Whiskey",
+   "area": "Frontside",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Lower Monte Wolfe",
+   "area": "Frontside",
+   "open": true,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Lower Zachary",
+   "area": "Frontside",
+   "open": true,
+   "groomed": true,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Mokelumne",
+   "area": "Frontside",
+   "open": true,
+   "groomed": true,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Race Course",
+   "area": "Frontside",
+   "open": true,
+   "groomed": true,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Scott's Run",
+   "area": "Frontside",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Whiskey Slide",
+   "area": "Frontside",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Conestoga",
+   "area": "Frontside",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Fireball",
+   "area": "Frontside",
+   "open": true,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Headwaters",
+   "area": "Frontside",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "High Whiskey",
+   "area": "Frontside",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Jeff's Line",
+   "area": "Frontside",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Jim's",
+   "area": "Frontside",
+   "open": true,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "KGF",
+   "area": "Frontside",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Lightning",
+   "area": "Frontside",
+   "open": true,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Look Out Janek",
+   "area": "Frontside",
+   "open": true,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Lost Cabin",
+   "area": "Frontside",
+   "open": true,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Lower Olympic",
+   "area": "Frontside",
+   "open": true,
+   "groomed": true,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Monte Wolfe",
+   "area": "Frontside",
+   "open": true,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Olympic",
+   "area": "Frontside",
+   "open": true,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Rabbit Runs",
+   "area": "Frontside",
+   "open": true,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Sentinel",
+   "area": "Frontside",
+   "open": true,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Short Spoke",
+   "area": "Frontside",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Shotgun",
+   "area": "Frontside",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Snowsnake Gully",
+   "area": "Frontside",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Stump Run",
+   "area": "Frontside",
+   "open": true,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "The Drain",
+   "area": "Frontside",
+   "open": true,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Thunder Saddle",
+   "area": "Frontside",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Wagon Trail",
+   "area": "Frontside",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "Zachary",
+   "area": "Frontside",
+   "open": true,
+   "groomed": false,
+   "difficulty": "Black"
+  },
+  {
+   "name": "All The Way",
+   "area": "Frontside",
+   "open": false,
+   "groomed": false,
+   "difficulty": "DoubleBlack"
+  },
+  {
+   "name": "Bogies Slide",
+   "area": "Frontside",
+   "open": false,
+   "groomed": false,
+   "difficulty": "DoubleBlack"
+  },
+  {
+   "name": "Boylemaker",
+   "area": "Frontside",
+   "open": false,
+   "groomed": false,
+   "difficulty": "DoubleBlack"
+  },
+  {
+   "name": "Chamoix",
+   "area": "Frontside",
+   "open": true,
+   "groomed": false,
+   "difficulty": "DoubleBlack"
+  },
+  {
+   "name": "Cliff Chute",
+   "area": "Frontside",
+   "open": false,
+   "groomed": false,
+   "difficulty": "DoubleBlack"
+  },
+  {
+   "name": "Dick's Drop",
+   "area": "Frontside",
+   "open": false,
+   "groomed": false,
+   "difficulty": "DoubleBlack"
+  },
+  {
+   "name": "False Peak",
+   "area": "Frontside",
+   "open": false,
+   "groomed": false,
+   "difficulty": "DoubleBlack"
+  },
+  {
+   "name": "Glove Rock",
+   "area": "Frontside",
+   "open": false,
+   "groomed": false,
+   "difficulty": "DoubleBlack"
+  },
+  {
+   "name": "Hell's Delight",
+   "area": "Frontside",
+   "open": false,
+   "groomed": false,
+   "difficulty": "DoubleBlack"
+  },
+  {
+   "name": "Norm's Nose",
+   "area": "Frontside",
+   "open": false,
+   "groomed": false,
+   "difficulty": "DoubleBlack"
+  },
+  {
+   "name": "Notch Chute",
+   "area": "Frontside",
+   "open": false,
+   "groomed": false,
+   "difficulty": "DoubleBlack"
+  },
+  {
+   "name": "One Man Chute",
+   "area": "Frontside",
+   "open": false,
+   "groomed": false,
+   "difficulty": "DoubleBlack"
+  },
+  {
+   "name": "Saddle Chute",
+   "area": "Frontside",
+   "open": false,
+   "groomed": false,
+   "difficulty": "DoubleBlack"
+  },
+  {
+   "name": "Shot 5",
+   "area": "Frontside",
+   "open": false,
+   "groomed": false,
+   "difficulty": "DoubleBlack"
+  },
+  {
+   "name": "Sisters Chute",
+   "area": "Frontside",
+   "open": false,
+   "groomed": false,
+   "difficulty": "DoubleBlack"
+  },
+  {
+   "name": "The Wall",
+   "area": "Frontside",
+   "open": false,
+   "groomed": false,
+   "difficulty": "DoubleBlack"
+  },
+  {
+   "name": "Two Man Chute",
+   "area": "Frontside",
+   "open": false,
+   "groomed": false,
+   "difficulty": "DoubleBlack"
+  },
+  {
+   "name": "Funny Bunny",
+   "area": "Timber Creek",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Green"
+  },
+  {
+   "name": "Gold Rush",
+   "area": "Timber Creek",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Green"
+  },
+  {
+   "name": "Graduation",
+   "area": "Timber Creek",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Green"
+  },
+  {
+   "name": "Hide N' Seek",
+   "area": "Timber Creek",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Green"
+  },
+  {
+   "name": "School Run",
+   "area": "Timber Creek",
+   "open": false,
+   "groomed": false,
+   "difficulty": "Green"
+  },
+  {
+   "name": "Squirrel Ridge",
+   "area": "Timber Creek",
+   "open": true,
+   "groomed": true,
+   "difficulty": "Green"
+  },
+  {
+   "name": "Ditch of Doom",
+   "area": "Timber Creek",
+   "open": true,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Free 'N' Easy",
+   "area": "Timber Creek",
+   "open": true,
+   "groomed": true,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Hole N' Wall",
+   "area": "Timber Creek",
+   "open": true,
+   "groomed": true,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Jambi's Jaunt",
+   "area": "Timber Creek",
+   "open": true,
+   "groomed": true,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Jane's Juant",
+   "area": "Timber Creek",
+   "open": true,
+   "groomed": true,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Trench of Terror",
+   "area": "Timber Creek",
+   "open": true,
+   "groomed": false,
+   "difficulty": "Blue"
+  },
+  {
+   "name": "Up N' Over",
+   "area": "Timber Creek",
+   "open": true,
+   "groomed": true,
+   "difficulty": "Blue"
+  }
+ ],
+ "lifts": [
+  {
+   "name": "#2 Caples Crest",
+   "area": "Backside",
+   "status": "Closed",
+   "open": false
+  },
+  {
+   "name": "#3 Iron Horse",
+   "area": "Backside",
+   "status": "Closed",
+   "open": false
+  },
+  {
+   "name": "#4 Sunrise",
+   "area": "Backside",
+   "status": "Closed",
+   "open": false
+  },
+  {
+   "name": "#14 Vista T-Bar",
+   "area": "Backside",
+   "status": "Closed",
+   "open": false
+  },
+  {
+   "name": "#6 Cornice Express",
+   "area": "Frontside",
+   "status": "Open",
+   "open": true
+  },
+  {
+   "name": "#1 Snowkirk",
+   "area": "Frontside",
+   "status": "Closed",
+   "open": false
+  },
+  {
+   "name": "#5 Solitude",
+   "area": "Frontside",
+   "status": "Open",
+   "open": true
+  },
+  {
+   "name": "#10 The Wall",
+   "area": "Frontside",
+   "status": "Closed",
+   "open": false
+  },
+  {
+   "name": "#11 The Reut",
+   "area": "Frontside",
+   "status": "Closed",
+   "open": false
+  },
+  {
+   "name": "#7 TC Express",
+   "area": "Timber Creek",
+   "status": "Open",
+   "open": true
+  },
+  {
+   "name": "#9 Bunny",
+   "area": "Timber Creek",
+   "status": "Closed",
+   "open": false
+  },
+  {
+   "name": "#12 Ski School Magic Carpet",
+   "area": "Timber Creek",
+   "status": "Closed",
+   "open": false
+  },
+  {
+   "name": "#13 Public Magic Carpet",
+   "area": "Timber Creek",
+   "status": "Closed",
+   "open": false
+  }
+ ]
 }

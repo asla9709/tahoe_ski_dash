@@ -1,7 +1,7 @@
 {
  "resort": "heavenly",
- "asOf": "2026-11-23T11:44:48.040755-07:00",
- "fetchedAt": "2026-11-23T18:51:48.050Z",
+ "asOf": "2026-11-24T11:22:05.0285132-07:00",
+ "fetchedAt": "2026-11-24T18:28:25.969Z",
  "trails": [
   {
    "name": "Enchanted Forest",
@@ -55,7 +55,7 @@
   {
    "name": "The Meadow",
    "area": "California",
-   "open": true,
+   "open": false,
    "groomed": false,
    "difficulty": "Green"
   },
@@ -118,7 +118,7 @@
   {
    "name": "Powderbowl Run",
    "area": "California",
-   "open": true,
+   "open": false,
    "groomed": false,
    "difficulty": "Blue"
   },

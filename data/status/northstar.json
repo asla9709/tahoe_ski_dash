@@ -1,7 +1,7 @@
 {
  "resort": "northstar",
- "asOf": "2026-11-23T11:50:00.746661-07:00",
- "fetchedAt": "2026-11-23T18:51:45.545Z",
+ "asOf": "2026-11-24T11:20:13.4461308-07:00",
+ "fetchedAt": "2026-11-24T18:28:24.029Z",
  "trails": [
   {
    "name": "Lookout Bypass",
@@ -140,7 +140,7 @@
    "name": "Cat's Face",
    "area": "Mt. Pluto",
    "open": true,
-   "groomed": true,
+   "groomed": false,
    "difficulty": "Blue"
   },
   {
@@ -154,7 +154,7 @@
    "name": "Delight",
    "area": "Mt. Pluto",
    "open": true,
-   "groomed": true,
+   "groomed": false,
    "difficulty": "Blue"
   },
   {
@@ -189,13 +189,13 @@
    "name": "Flying Squirrel",
    "area": "Mt. Pluto",
    "open": true,
-   "groomed": true,
+   "groomed": false,
    "difficulty": "Blue"
   },
   {
    "name": "Logger's Loop",
    "area": "Mt. Pluto",
-   "open": true,
+   "open": false,
    "groomed": true,
    "difficulty": "Blue"
   },
@@ -315,14 +315,14 @@
    "name": "Tonini's",
    "area": "Mt. Pluto",
    "open": true,
-   "groomed": false,
+   "groomed": true,
    "difficulty": "Black"
   },
   {
    "name": "Upper Grouse Alley",
    "area": "Mt. Pluto",
    "open": true,
-   "groomed": true,
+   "groomed": false,
    "difficulty": "Black"
   },
   {
@@ -406,7 +406,7 @@
    "name": "Goldmine",
    "area": "Northwest Territory",
    "open": true,
-   "groomed": true,
+   "groomed": false,
    "difficulty": "Blue"
   },
   {
@@ -560,14 +560,14 @@
    "name": "Playground",
    "area": "Terrain Parks",
    "open": true,
-   "groomed": false,
+   "groomed": true,
    "difficulty": "TerrainPark"
   },
   {
    "name": "Sidewinder",
    "area": "Terrain Parks",
    "open": true,
-   "groomed": false,
+   "groomed": true,
    "difficulty": "TerrainPark"
   },
   {
@@ -830,7 +830,7 @@
   {
    "name": "Juniper Carpet",
    "area": "Northwest Territory",
-   "status": "Closed",
+   "status": "Scheduled",
    "open": false
   },
   {

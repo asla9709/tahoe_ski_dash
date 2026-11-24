@@ -1,7 +1,7 @@
 {
  "resort": "kirkwood",
- "asOf": "2026-11-23T11:44:52.50001-07:00",
- "fetchedAt": "2026-11-23T18:51:50.257Z",
+ "asOf": "2026-11-24T11:22:17.2495008-07:00",
+ "fetchedAt": "2026-11-24T18:28:28.750Z",
  "trails": [
   {
    "name": "Bud's Alley",
@@ -139,21 +139,21 @@
   {
    "name": "Palisades Bowl",
    "area": "Bowls",
-   "open": false,
+   "open": true,
    "groomed": false,
    "difficulty": "Black"
   },
   {
    "name": "Reuter Bowl",
    "area": "Bowls",
-   "open": false,
+   "open": true,
    "groomed": false,
    "difficulty": "Black"
   },
   {
    "name": "Sentinel Bowl",
    "area": "Bowls",
-   "open": false,
+   "open": true,
    "groomed": false,
    "difficulty": "Black"
   },
@@ -300,7 +300,7 @@
   {
    "name": "Uphill Access",
    "area": "Cross Country Center",
-   "open": false,
+   "open": true,
    "groomed": false,
    "difficulty": "Unknown"
   },
@@ -328,7 +328,7 @@
   {
    "name": "Buckboard",
    "area": "Frontside",
-   "open": false,
+   "open": true,
    "groomed": false,
    "difficulty": "Blue"
   },
@@ -440,7 +440,7 @@
   {
    "name": "Jeff's Line",
    "area": "Frontside",
-   "open": false,
+   "open": true,
    "groomed": false,
    "difficulty": "Black"
   },
@@ -454,7 +454,7 @@
   {
    "name": "KGF",
    "area": "Frontside",
-   "open": false,
+   "open": true,
    "groomed": false,
    "difficulty": "Black"
   },
@@ -531,7 +531,7 @@
   {
    "name": "Snowsnake Gully",
    "area": "Frontside",
-   "open": false,
+   "open": true,
    "groomed": false,
    "difficulty": "Black"
   },
@@ -573,7 +573,7 @@
   {
    "name": "All The Way",
    "area": "Frontside",
-   "open": false,
+   "open": true,
    "groomed": false,
    "difficulty": "DoubleBlack"
   },
@@ -601,21 +601,21 @@
   {
    "name": "Cliff Chute",
    "area": "Frontside",
-   "open": false,
+   "open": true,
    "groomed": false,
    "difficulty": "DoubleBlack"
   },
   {
    "name": "Dick's Drop",
    "area": "Frontside",
-   "open": false,
+   "open": true,
    "groomed": false,
    "difficulty": "DoubleBlack"
   },
   {
    "name": "False Peak",
    "area": "Frontside",
-   "open": false,
+   "open": true,
    "groomed": false,
    "difficulty": "DoubleBlack"
   },
@@ -643,7 +643,7 @@
   {
    "name": "Notch Chute",
    "area": "Frontside",
-   "open": false,
+   "open": true,
    "groomed": false,
    "difficulty": "DoubleBlack"
   },
@@ -657,7 +657,7 @@
   {
    "name": "Saddle Chute",
    "area": "Frontside",
-   "open": false,
+   "open": true,
    "groomed": false,
    "difficulty": "DoubleBlack"
   },
@@ -671,7 +671,7 @@
   {
    "name": "Sisters Chute",
    "area": "Frontside",
-   "open": false,
+   "open": true,
    "groomed": false,
    "difficulty": "DoubleBlack"
   },
@@ -706,8 +706,8 @@
   {
    "name": "Graduation",
    "area": "Timber Creek",
-   "open": false,
-   "groomed": false,
+   "open": true,
+   "groomed": true,
    "difficulty": "Green"
   },
   {

@@ -1,7 +1,7 @@
 {
  "resort": "northstar",
- "asOf": "2026-11-24T11:20:13.4461308-07:00",
- "fetchedAt": "2026-11-24T18:28:24.029Z",
+ "asOf": "2026-11-25T10:37:44.2338261-07:00",
+ "fetchedAt": "2026-11-25T17:42:31.356Z",
  "trails": [
   {
    "name": "Lookout Bypass",
@@ -195,7 +195,7 @@
   {
    "name": "Logger's Loop",
    "area": "Mt. Pluto",
-   "open": false,
+   "open": true,
    "groomed": true,
    "difficulty": "Blue"
   },
@@ -286,7 +286,7 @@
   {
    "name": "Sawmill Glade",
    "area": "Mt. Pluto",
-   "open": false,
+   "open": true,
    "groomed": false,
    "difficulty": "Black"
   },
@@ -830,8 +830,8 @@
   {
    "name": "Juniper Carpet",
    "area": "Northwest Territory",
-   "status": "Scheduled",
-   "open": false
+   "status": "Open",
+   "open": true
   },
   {
    "name": "Sugar Pine Carpet",

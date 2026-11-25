@@ -1,7 +1,7 @@
 {
  "resort": "kirkwood",
- "asOf": "2026-11-24T11:22:17.2495008-07:00",
- "fetchedAt": "2026-11-24T18:28:28.750Z",
+ "asOf": "2026-11-25T10:35:44.9356758-07:00",
+ "fetchedAt": "2026-11-25T17:42:35.160Z",
  "trails": [
   {
    "name": "Bud's Alley",
@@ -209,8 +209,8 @@
   {
    "name": "*Meadow Trail System",
    "area": "Cross Country Center",
-   "open": false,
-   "groomed": false,
+   "open": true,
+   "groomed": true,
    "difficulty": "Green"
   },
   {
@@ -329,7 +329,7 @@
    "name": "Buckboard",
    "area": "Frontside",
    "open": true,
-   "groomed": false,
+   "groomed": true,
    "difficulty": "Blue"
   },
   {
@@ -371,7 +371,7 @@
    "name": "Lower Monte Wolfe",
    "area": "Frontside",
    "open": true,
-   "groomed": false,
+   "groomed": true,
    "difficulty": "Blue"
   },
   {
@@ -622,7 +622,7 @@
   {
    "name": "Glove Rock",
    "area": "Frontside",
-   "open": false,
+   "open": true,
    "groomed": false,
    "difficulty": "DoubleBlack"
   },

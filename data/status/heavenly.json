@@ -1,7 +1,7 @@
 {
  "resort": "heavenly",
- "asOf": "2026-11-24T11:22:05.0285132-07:00",
- "fetchedAt": "2026-11-24T18:28:25.969Z",
+ "asOf": "2026-11-25T10:38:13.141711-07:00",
+ "fetchedAt": "2026-11-25T17:42:33.305Z",
  "trails": [
   {
    "name": "Enchanted Forest",
@@ -83,7 +83,7 @@
   {
    "name": "High Five",
    "area": "California",
-   "open": false,
+   "open": true,
    "groomed": false,
    "difficulty": "Blue"
   },
@@ -118,21 +118,21 @@
   {
    "name": "Powderbowl Run",
    "area": "California",
-   "open": false,
+   "open": true,
    "groomed": false,
    "difficulty": "Blue"
   },
   {
    "name": "Ridge Run Lower",
    "area": "California",
-   "open": false,
+   "open": true,
    "groomed": false,
    "difficulty": "Blue"
   },
   {
    "name": "Ridge Run Upper",
    "area": "California",
-   "open": false,
+   "open": true,
    "groomed": false,
    "difficulty": "Blue"
   },
@@ -153,7 +153,7 @@
   {
    "name": "Sky Chute",
    "area": "California",
-   "open": false,
+   "open": true,
    "groomed": false,
    "difficulty": "Blue"
   },
@@ -167,7 +167,7 @@
   {
    "name": "Stein's Way",
    "area": "California",
-   "open": true,
+   "open": false,
    "groomed": false,
    "difficulty": "Blue"
   },
@@ -517,7 +517,7 @@
   {
    "name": "North Bowl Upper",
    "area": "Nevada",
-   "open": false,
+   "open": true,
    "groomed": false,
    "difficulty": "Blue"
   },
@@ -531,7 +531,7 @@
   {
    "name": "Olympic Down Hill Lower",
    "area": "Nevada",
-   "open": false,
+   "open": true,
    "groomed": false,
    "difficulty": "Blue"
   },
@@ -580,21 +580,21 @@
   {
    "name": "Stagecoach Lower",
    "area": "Nevada",
-   "open": false,
+   "open": true,
    "groomed": false,
    "difficulty": "Blue"
   },
   {
    "name": "Stagecoach Return",
    "area": "Nevada",
-   "open": false,
+   "open": true,
    "groomed": false,
    "difficulty": "Blue"
   },
   {
    "name": "Stagecoach Upper",
    "area": "Nevada",
-   "open": false,
+   "open": true,
    "groomed": false,
    "difficulty": "Blue"
   },
@@ -805,8 +805,8 @@
   {
    "name": "Canyon",
    "area": "California",
-   "status": "Closed",
-   "open": false
+   "status": "Open",
+   "open": true
   },
   {
    "name": "Gunbarrel",
@@ -835,7 +835,7 @@
   {
    "name": "Groove",
    "area": "California",
-   "status": "Scheduled",
+   "status": "Closed",
    "open": false
   },
   {
@@ -859,8 +859,8 @@
   {
    "name": "The Meadow Carpet",
    "area": "California",
-   "status": "Open",
-   "open": true
+   "status": "Closed",
+   "open": false
   },
   {
    "name": "Pioneer",
@@ -895,8 +895,8 @@
   {
    "name": "Stagecoach",
    "area": "Nevada",
-   "status": "Closed",
-   "open": false
+   "status": "Open",
+   "open": true
   },
   {
    "name": "Boulder",

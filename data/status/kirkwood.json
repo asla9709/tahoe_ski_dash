@@ -1,7 +1,7 @@
 {
  "resort": "kirkwood",
- "asOf": "2026-11-25T10:35:44.9356758-07:00",
- "fetchedAt": "2026-11-25T17:42:35.160Z",
+ "asOf": "2026-11-25T13:10:01.8930916-07:00",
+ "fetchedAt": "2026-11-25T20:11:05.990Z",
  "trails": [
   {
    "name": "Bud's Alley",
@@ -412,7 +412,7 @@
   {
    "name": "Conestoga",
    "area": "Frontside",
-   "open": false,
+   "open": true,
    "groomed": false,
    "difficulty": "Black"
   },
@@ -426,7 +426,7 @@
   {
    "name": "Headwaters",
    "area": "Frontside",
-   "open": false,
+   "open": true,
    "groomed": false,
    "difficulty": "Black"
   },
@@ -517,14 +517,14 @@
   {
    "name": "Short Spoke",
    "area": "Frontside",
-   "open": false,
+   "open": true,
    "groomed": false,
    "difficulty": "Black"
   },
   {
    "name": "Shotgun",
    "area": "Frontside",
-   "open": false,
+   "open": true,
    "groomed": false,
    "difficulty": "Black"
   },
@@ -678,7 +678,7 @@
   {
    "name": "The Wall",
    "area": "Frontside",
-   "open": false,
+   "open": true,
    "groomed": false,
    "difficulty": "DoubleBlack"
   },
@@ -783,40 +783,10 @@
  ],
  "lifts": [
   {
-   "name": "#2 Caples Crest",
-   "area": "Backside",
-   "status": "Closed",
-   "open": false
-  },
-  {
-   "name": "#3 Iron Horse",
-   "area": "Backside",
-   "status": "Closed",
-   "open": false
-  },
-  {
-   "name": "#4 Sunrise",
-   "area": "Backside",
-   "status": "Closed",
-   "open": false
-  },
-  {
-   "name": "#14 Vista T-Bar",
-   "area": "Backside",
-   "status": "Closed",
-   "open": false
-  },
-  {
    "name": "#6 Cornice Express",
    "area": "Frontside",
    "status": "Open",
    "open": true
-  },
-  {
-   "name": "#1 Snowkirk",
-   "area": "Frontside",
-   "status": "Closed",
-   "open": false
   },
   {
    "name": "#5 Solitude",
@@ -827,38 +797,14 @@
   {
    "name": "#10 The Wall",
    "area": "Frontside",
-   "status": "Closed",
-   "open": false
-  },
-  {
-   "name": "#11 The Reut",
-   "area": "Frontside",
-   "status": "Closed",
-   "open": false
+   "status": "Open",
+   "open": true
   },
   {
    "name": "#7 TC Express",
    "area": "Timber Creek",
    "status": "Open",
    "open": true
-  },
-  {
-   "name": "#9 Bunny",
-   "area": "Timber Creek",
-   "status": "Closed",
-   "open": false
-  },
-  {
-   "name": "#12 Ski School Magic Carpet",
-   "area": "Timber Creek",
-   "status": "Closed",
-   "open": false
-  },
-  {
-   "name": "#13 Public Magic Carpet",
-   "area": "Timber Creek",
-   "status": "Closed",
-   "open": false
   }
  ]
 }

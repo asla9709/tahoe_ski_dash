@@ -1,7 +1,7 @@
 {
  "resort": "northstar",
- "asOf": "2026-11-25T13:15:11.9794349-07:00",
- "fetchedAt": "2026-11-25T20:18:31.679Z",
+ "asOf": "2026-11-25T14:09:25.0764829-07:00",
+ "fetchedAt": "2026-11-25T21:18:24.774Z",
  "trails": [
   {
    "name": "Lookout Bypass",
@@ -538,14 +538,14 @@
   {
    "name": "Moonshine",
    "area": "Terrain Parks",
-   "open": false,
+   "open": true,
    "groomed": false,
    "difficulty": "TerrainPark"
   },
   {
    "name": "Pinball",
    "area": "Terrain Parks",
-   "open": false,
+   "open": true,
    "groomed": false,
    "difficulty": "TerrainPark"
   },
@@ -573,7 +573,7 @@
   {
    "name": "The Straits",
    "area": "Terrain Parks",
-   "open": false,
+   "open": true,
    "groomed": false,
    "difficulty": "TerrainPark"
   },

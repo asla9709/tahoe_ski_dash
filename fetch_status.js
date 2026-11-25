@@ -36,7 +36,7 @@ async function main() {
       const trails = [], lifts = [];
       for (const a of feed.GroomingAreas) {
         for (const t of a.Trails) trails.push({ name: t.Name, area: a.Name, open: !!t.IsOpen, groomed: !!t.IsGroomed, difficulty: t.Difficulty });
-        for (const l of a.Lifts) lifts.push({ name: l.Name, area: a.Name, status: l.Status, open: l.Status === 'Open' });
+        for (const l of a.Lifts) lifts.push({ name: l.Name, area: a.Name, status: l.Status, open: /^(open|scheduled)$/i.test((l.Status || '').trim()) });
       }
       const out = { resort: key, asOf: feed.Date, fetchedAt: new Date().toISOString(), trails, lifts };
       fs.writeFileSync(path.join(HERE, 'data', 'status', `${key}.json`), JSON.stringify(out, null, 1));

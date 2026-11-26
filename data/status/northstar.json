@@ -1,7 +1,7 @@
 {
  "resort": "northstar",
- "asOf": "2026-11-26T08:08:59.061356-07:00",
- "fetchedAt": "2026-11-26T15:10:21.395Z",
+ "asOf": "2026-11-26T09:55:44.3403305-07:00",
+ "fetchedAt": "2026-11-26T17:00:28.987Z",
  "trails": [
   {
    "name": "Lookout Bypass",
@@ -734,7 +734,7 @@
   {
    "name": "Village Run",
    "area": "Village at Northstar",
-   "open": true,
+   "open": false,
    "groomed": true,
    "difficulty": "Green"
   },
@@ -776,7 +776,7 @@
   {
    "name": "Comstock Express",
    "area": "Mt. Pluto",
-   "status": "Scheduled",
+   "status": "Open",
    "open": true
   },
   {
@@ -788,13 +788,13 @@
   {
    "name": "Highlands Gondola",
    "area": "Northwest Territory",
-   "status": "Scheduled",
+   "status": "Open",
    "open": true
   },
   {
    "name": "Arrow Express",
    "area": "Northwest Territory",
-   "status": "Scheduled",
+   "status": "Open",
    "open": true
   },
   {
@@ -806,7 +806,7 @@
   {
    "name": "The Big Easy Quad",
    "area": "Northwest Territory",
-   "status": "Scheduled",
+   "status": "Open",
    "open": true
   },
   {
@@ -842,7 +842,7 @@
   {
    "name": "Vista Express",
    "area": "Terrain Parks",
-   "status": "Scheduled",
+   "status": "Open",
    "open": true
   },
   {
@@ -860,7 +860,7 @@
   {
    "name": "Big Springs Express Gondola",
    "area": "Village at Northstar",
-   "status": "Scheduled",
+   "status": "Open",
    "open": true
   },
   {

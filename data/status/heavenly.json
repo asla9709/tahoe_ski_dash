@@ -1,7 +1,7 @@
 {
  "resort": "heavenly",
- "asOf": "2026-11-25T23:52:01.8790288-07:00",
- "fetchedAt": "2026-11-26T07:00:55.254Z",
+ "asOf": "2026-11-26T08:02:33.6138022-07:00",
+ "fetchedAt": "2026-11-26T15:10:43.741Z",
  "trails": [
   {
    "name": "Enchanted Forest",
@@ -925,8 +925,8 @@
   {
    "name": "Gondola",
    "area": "Top of Gondola",
-   "status": "Closed",
-   "open": false
+   "status": "Scheduled",
+   "open": true
   },
   {
    "name": "Tamarack",

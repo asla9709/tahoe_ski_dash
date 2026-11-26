@@ -1,7 +1,7 @@
 {
  "resort": "northstar",
- "asOf": "2026-11-25T23:58:01.9820168-07:00",
- "fetchedAt": "2026-11-26T07:00:31.599Z",
+ "asOf": "2026-11-26T08:08:59.061356-07:00",
+ "fetchedAt": "2026-11-26T15:10:21.395Z",
  "trails": [
   {
    "name": "Lookout Bypass",
@@ -154,7 +154,7 @@
    "name": "Delight",
    "area": "Mt. Pluto",
    "open": true,
-   "groomed": false,
+   "groomed": true,
    "difficulty": "Blue"
   },
   {
@@ -539,14 +539,14 @@
    "name": "Moonshine",
    "area": "Terrain Parks",
    "open": true,
-   "groomed": false,
+   "groomed": true,
    "difficulty": "TerrainPark"
   },
   {
    "name": "Pinball",
    "area": "Terrain Parks",
    "open": true,
-   "groomed": false,
+   "groomed": true,
    "difficulty": "TerrainPark"
   },
   {
@@ -735,7 +735,7 @@
    "name": "Village Run",
    "area": "Village at Northstar",
    "open": true,
-   "groomed": false,
+   "groomed": true,
    "difficulty": "Green"
   },
   {
@@ -776,8 +776,8 @@
   {
    "name": "Comstock Express",
    "area": "Mt. Pluto",
-   "status": "Closed",
-   "open": false
+   "status": "Scheduled",
+   "open": true
   },
   {
    "name": "Rendezvous Triple",
@@ -788,14 +788,14 @@
   {
    "name": "Highlands Gondola",
    "area": "Northwest Territory",
-   "status": "Closed",
-   "open": false
+   "status": "Scheduled",
+   "open": true
   },
   {
    "name": "Arrow Express",
    "area": "Northwest Territory",
-   "status": "Closed",
-   "open": false
+   "status": "Scheduled",
+   "open": true
   },
   {
    "name": "Tahoe Zephyr Express",
@@ -806,8 +806,8 @@
   {
    "name": "The Big Easy Quad",
    "area": "Northwest Territory",
-   "status": "Closed",
-   "open": false
+   "status": "Scheduled",
+   "open": true
   },
   {
    "name": "Timberline Triple",
@@ -824,14 +824,14 @@
   {
    "name": "Jeffrey Pines Carpet",
    "area": "Northwest Territory",
-   "status": "Closed",
-   "open": false
+   "status": "Scheduled",
+   "open": true
   },
   {
    "name": "Juniper Carpet",
    "area": "Northwest Territory",
-   "status": "Open",
-   "open": true
+   "status": "Closed",
+   "open": false
   },
   {
    "name": "Sugar Pine Carpet",
@@ -842,8 +842,8 @@
   {
    "name": "Vista Express",
    "area": "Terrain Parks",
-   "status": "Closed",
-   "open": false
+   "status": "Scheduled",
+   "open": true
   },
   {
    "name": "Backside Express",
@@ -860,8 +860,8 @@
   {
    "name": "Big Springs Express Gondola",
    "area": "Village at Northstar",
-   "status": "Closed",
-   "open": false
+   "status": "Scheduled",
+   "open": true
   },
   {
    "name": "Village Express",

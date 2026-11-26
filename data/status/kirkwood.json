@@ -1,7 +1,7 @@
 {
  "resort": "kirkwood",
- "asOf": "2026-11-26T09:52:57.8075948-07:00",
- "fetchedAt": "2026-11-26T17:01:01.119Z",
+ "asOf": "2026-11-26T11:15:19.6461961-07:00",
+ "fetchedAt": "2026-11-26T18:18:05.765Z",
  "trails": [
   {
    "name": "Bud's Alley",
@@ -785,25 +785,25 @@
   {
    "name": "#6 Cornice Express",
    "area": "Frontside",
-   "status": "Scheduled",
+   "status": "Open",
    "open": true
   },
   {
    "name": "#5 Solitude",
    "area": "Frontside",
-   "status": "Scheduled",
+   "status": "Open",
    "open": true
   },
   {
    "name": "#10 The Wall",
    "area": "Frontside",
-   "status": "Scheduled",
+   "status": "Open",
    "open": true
   },
   {
    "name": "#7 TC Express",
    "area": "Timber Creek",
-   "status": "Scheduled",
+   "status": "Open",
    "open": true
   }
  ]

@@ -1,7 +1,7 @@
 {
  "resort": "kirkwood",
- "asOf": "2026-11-25T14:16:58.9341862-07:00",
- "fetchedAt": "2026-11-25T21:22:19.942Z",
+ "asOf": "2026-11-25T23:54:38.9439864-07:00",
+ "fetchedAt": "2026-11-26T07:01:16.539Z",
  "trails": [
   {
    "name": "Bud's Alley",
@@ -132,7 +132,7 @@
   {
    "name": "Eagle Bowl",
    "area": "Bowls",
-   "open": false,
+   "open": true,
    "groomed": false,
    "difficulty": "Black"
   },
@@ -328,14 +328,14 @@
   {
    "name": "Buckboard",
    "area": "Frontside",
-   "open": true,
+   "open": false,
    "groomed": true,
    "difficulty": "Blue"
   },
   {
    "name": "Devil's Corral",
    "area": "Frontside",
-   "open": false,
+   "open": true,
    "groomed": false,
    "difficulty": "Blue"
   },
@@ -559,7 +559,7 @@
   {
    "name": "Wagon Trail",
    "area": "Frontside",
-   "open": false,
+   "open": true,
    "groomed": false,
    "difficulty": "Black"
   },
@@ -636,7 +636,7 @@
   {
    "name": "Norm's Nose",
    "area": "Frontside",
-   "open": false,
+   "open": true,
    "groomed": false,
    "difficulty": "DoubleBlack"
   },
@@ -785,25 +785,25 @@
   {
    "name": "#6 Cornice Express",
    "area": "Frontside",
-   "status": "Open",
+   "status": "Scheduled",
    "open": true
   },
   {
    "name": "#5 Solitude",
    "area": "Frontside",
-   "status": "Open",
+   "status": "Scheduled",
    "open": true
   },
   {
    "name": "#10 The Wall",
    "area": "Frontside",
-   "status": "Open",
+   "status": "Scheduled",
    "open": true
   },
   {
    "name": "#7 TC Express",
    "area": "Timber Creek",
-   "status": "Open",
+   "status": "Scheduled",
    "open": true
   }
  ]

@@ -1,7 +1,7 @@
 {
  "resort": "heavenly",
- "asOf": "2026-11-25T14:15:42.8990175-07:00",
- "fetchedAt": "2026-11-25T21:22:03.611Z",
+ "asOf": "2026-11-25T23:52:01.8790288-07:00",
+ "fetchedAt": "2026-11-26T07:00:55.254Z",
  "trails": [
   {
    "name": "Enchanted Forest",
@@ -20,14 +20,14 @@
   {
    "name": "Maggie's",
    "area": "California",
-   "open": true,
+   "open": false,
    "groomed": false,
    "difficulty": "Green"
   },
   {
    "name": "Patsy's",
    "area": "California",
-   "open": true,
+   "open": false,
    "groomed": false,
    "difficulty": "Green"
   },
@@ -69,21 +69,21 @@
   {
    "name": "Canyonland Left",
    "area": "California",
-   "open": true,
+   "open": false,
    "groomed": false,
    "difficulty": "Blue"
   },
   {
    "name": "Canyonland Right",
    "area": "California",
-   "open": true,
+   "open": false,
    "groomed": false,
    "difficulty": "Blue"
   },
   {
    "name": "High Five",
    "area": "California",
-   "open": true,
+   "open": false,
    "groomed": false,
    "difficulty": "Blue"
   },
@@ -104,35 +104,35 @@
   {
    "name": "Mombo",
    "area": "California",
-   "open": true,
+   "open": false,
    "groomed": false,
    "difficulty": "Blue"
   },
   {
    "name": "Mombo Lower",
    "area": "California",
-   "open": true,
+   "open": false,
    "groomed": false,
    "difficulty": "Blue"
   },
   {
    "name": "Powderbowl Run",
    "area": "California",
-   "open": true,
+   "open": false,
    "groomed": false,
    "difficulty": "Blue"
   },
   {
    "name": "Ridge Run Lower",
    "area": "California",
-   "open": true,
+   "open": false,
    "groomed": false,
    "difficulty": "Blue"
   },
   {
    "name": "Ridge Run Upper",
    "area": "California",
-   "open": true,
+   "open": false,
    "groomed": false,
    "difficulty": "Blue"
   },
@@ -153,7 +153,7 @@
   {
    "name": "Sky Chute",
    "area": "California",
-   "open": true,
+   "open": false,
    "groomed": false,
    "difficulty": "Blue"
   },
@@ -174,7 +174,7 @@
   {
    "name": "Swing Trail",
    "area": "California",
-   "open": true,
+   "open": false,
    "groomed": false,
    "difficulty": "Blue"
   },
@@ -216,7 +216,7 @@
   {
    "name": "Fall Line",
    "area": "California",
-   "open": true,
+   "open": false,
    "groomed": false,
    "difficulty": "Black"
   },
@@ -258,14 +258,14 @@
   {
    "name": "Powder Line",
    "area": "California",
-   "open": true,
+   "open": false,
    "groomed": false,
    "difficulty": "Black"
   },
   {
    "name": "Powderbowl Woods",
    "area": "California",
-   "open": true,
+   "open": false,
    "groomed": false,
    "difficulty": "Black"
   },
@@ -300,7 +300,7 @@
   {
    "name": "Waterfall",
    "area": "California",
-   "open": true,
+   "open": false,
    "groomed": false,
    "difficulty": "Black"
   },
@@ -517,7 +517,7 @@
   {
    "name": "North Bowl Upper",
    "area": "Nevada",
-   "open": true,
+   "open": false,
    "groomed": false,
    "difficulty": "Blue"
   },
@@ -531,7 +531,7 @@
   {
    "name": "Olympic Down Hill Lower",
    "area": "Nevada",
-   "open": true,
+   "open": false,
    "groomed": false,
    "difficulty": "Blue"
   },
@@ -580,21 +580,21 @@
   {
    "name": "Stagecoach Lower",
    "area": "Nevada",
-   "open": true,
+   "open": false,
    "groomed": false,
    "difficulty": "Blue"
   },
   {
    "name": "Stagecoach Return",
    "area": "Nevada",
-   "open": true,
+   "open": false,
    "groomed": false,
    "difficulty": "Blue"
   },
   {
    "name": "Stagecoach Upper",
    "area": "Nevada",
-   "open": true,
+   "open": false,
    "groomed": false,
    "difficulty": "Blue"
   },
@@ -734,7 +734,7 @@
   {
    "name": "Tubing Run",
    "area": "Top of Gondola",
-   "open": true,
+   "open": false,
    "groomed": false,
    "difficulty": "Green"
   },
@@ -799,25 +799,25 @@
   {
    "name": "The Tram",
    "area": "California",
-   "status": "Open",
+   "status": "Scheduled",
    "open": true
   },
   {
    "name": "Canyon",
    "area": "California",
-   "status": "Open",
+   "status": "Scheduled",
    "open": true
   },
   {
    "name": "Gunbarrel",
    "area": "California",
-   "status": "Open",
+   "status": "Scheduled",
    "open": true
   },
   {
    "name": "Powderbowl",
    "area": "California",
-   "status": "Open",
+   "status": "Scheduled",
    "open": true
   },
   {
@@ -835,13 +835,13 @@
   {
    "name": "Groove",
    "area": "California",
-   "status": "Closed",
-   "open": false
+   "status": "Scheduled",
+   "open": true
   },
   {
    "name": "Patsy's",
    "area": "California",
-   "status": "Open",
+   "status": "Scheduled",
    "open": true
   },
   {
@@ -859,7 +859,7 @@
   {
    "name": "The Meadow Carpet",
    "area": "California",
-   "status": "Open",
+   "status": "Scheduled",
    "open": true
   },
   {
@@ -895,7 +895,7 @@
   {
    "name": "Stagecoach",
    "area": "Nevada",
-   "status": "Open",
+   "status": "Scheduled",
    "open": true
   },
   {
@@ -925,8 +925,8 @@
   {
    "name": "Gondola",
    "area": "Top of Gondola",
-   "status": "Open",
-   "open": true
+   "status": "Closed",
+   "open": false
   },
   {
    "name": "Tamarack",
@@ -949,7 +949,7 @@
   {
    "name": "Tube Lift",
    "area": "Top of Gondola",
-   "status": "Open",
+   "status": "Scheduled",
    "open": true
   },
   {

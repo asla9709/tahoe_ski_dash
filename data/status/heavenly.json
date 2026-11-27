@@ -1,7 +1,7 @@
 {
  "resort": "heavenly",
- "asOf": "2026-11-26T11:11:48.6195811-07:00",
- "fetchedAt": "2026-11-26T18:17:39.298Z",
+ "asOf": "2026-11-26T23:57:01.2851583-07:00",
+ "fetchedAt": "2026-11-27T07:00:44.612Z",
  "trails": [
   {
    "name": "Enchanted Forest",
@@ -111,7 +111,7 @@
   {
    "name": "Mombo Lower",
    "area": "California",
-   "open": true,
+   "open": false,
    "groomed": false,
    "difficulty": "Blue"
   },
@@ -419,7 +419,7 @@
   {
    "name": "Comstock Lower",
    "area": "Nevada",
-   "open": true,
+   "open": false,
    "groomed": false,
    "difficulty": "Blue"
   },
@@ -799,25 +799,25 @@
   {
    "name": "The Tram",
    "area": "California",
-   "status": "Open",
+   "status": "Scheduled",
    "open": true
   },
   {
    "name": "Canyon",
    "area": "California",
-   "status": "Open",
+   "status": "Scheduled",
    "open": true
   },
   {
    "name": "Gunbarrel",
    "area": "California",
-   "status": "Open",
+   "status": "Scheduled",
    "open": true
   },
   {
    "name": "Powderbowl",
    "area": "California",
-   "status": "Open",
+   "status": "Scheduled",
    "open": true
   },
   {
@@ -835,13 +835,13 @@
   {
    "name": "Groove",
    "area": "California",
-   "status": "Open",
+   "status": "Scheduled",
    "open": true
   },
   {
    "name": "Patsy's",
    "area": "California",
-   "status": "Open",
+   "status": "Scheduled",
    "open": true
   },
   {
@@ -895,7 +895,7 @@
   {
    "name": "Stagecoach",
    "area": "Nevada",
-   "status": "Open",
+   "status": "Scheduled",
    "open": true
   },
   {
@@ -925,7 +925,7 @@
   {
    "name": "Gondola",
    "area": "Top of Gondola",
-   "status": "Open",
+   "status": "Scheduled",
    "open": true
   },
   {
@@ -949,7 +949,7 @@
   {
    "name": "Tube Lift",
    "area": "Top of Gondola",
-   "status": "Open",
+   "status": "Scheduled",
    "open": true
   },
   {

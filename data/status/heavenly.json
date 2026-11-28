@@ -1,7 +1,7 @@
 {
  "resort": "heavenly",
- "asOf": "2026-11-27T10:09:27.5444049-07:00",
- "fetchedAt": "2026-11-27T17:10:43.434Z",
+ "asOf": "2026-11-27T23:57:03.4425889-07:00",
+ "fetchedAt": "2026-11-28T07:00:38.830Z",
  "trails": [
   {
    "name": "Enchanted Forest",
@@ -799,25 +799,25 @@
   {
    "name": "The Tram",
    "area": "California",
-   "status": "Open",
+   "status": "Scheduled",
    "open": true
   },
   {
    "name": "Canyon",
    "area": "California",
-   "status": "Open",
+   "status": "Scheduled",
    "open": true
   },
   {
    "name": "Gunbarrel",
    "area": "California",
-   "status": "Open",
+   "status": "Scheduled",
    "open": true
   },
   {
    "name": "Powderbowl",
    "area": "California",
-   "status": "Open",
+   "status": "Scheduled",
    "open": true
   },
   {
@@ -841,7 +841,7 @@
   {
    "name": "Patsy's",
    "area": "California",
-   "status": "Open",
+   "status": "Scheduled",
    "open": true
   },
   {
@@ -859,7 +859,7 @@
   {
    "name": "The Meadow Carpet",
    "area": "California",
-   "status": "Open",
+   "status": "Scheduled",
    "open": true
   },
   {
@@ -895,7 +895,7 @@
   {
    "name": "Stagecoach",
    "area": "Nevada",
-   "status": "Open",
+   "status": "Scheduled",
    "open": true
   },
   {
@@ -925,7 +925,7 @@
   {
    "name": "Gondola",
    "area": "Top of Gondola",
-   "status": "Open",
+   "status": "Scheduled",
    "open": true
   },
   {

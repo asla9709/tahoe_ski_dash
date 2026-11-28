@@ -1,7 +1,7 @@
 {
  "resort": "northstar",
- "asOf": "2026-11-27T10:09:41.9550053-07:00",
- "fetchedAt": "2026-11-27T17:10:20.677Z",
+ "asOf": "2026-11-27T23:52:30.4071292-07:00",
+ "fetchedAt": "2026-11-28T07:00:22.111Z",
  "trails": [
   {
    "name": "Lookout Bypass",
@@ -776,8 +776,8 @@
   {
    "name": "Comstock Express",
    "area": "Mt. Pluto",
-   "status": "Open",
-   "open": true
+   "status": "Closed",
+   "open": false
   },
   {
    "name": "Rendezvous Triple",
@@ -788,14 +788,14 @@
   {
    "name": "Highlands Gondola",
    "area": "Northwest Territory",
-   "status": "Open",
-   "open": true
+   "status": "Closed",
+   "open": false
   },
   {
    "name": "Arrow Express",
    "area": "Northwest Territory",
-   "status": "Open",
-   "open": true
+   "status": "Closed",
+   "open": false
   },
   {
    "name": "Tahoe Zephyr Express",
@@ -806,8 +806,8 @@
   {
    "name": "The Big Easy Quad",
    "area": "Northwest Territory",
-   "status": "Open",
-   "open": true
+   "status": "Closed",
+   "open": false
   },
   {
    "name": "Timberline Triple",
@@ -824,8 +824,8 @@
   {
    "name": "Jeffrey Pines Carpet",
    "area": "Northwest Territory",
-   "status": "Open",
-   "open": true
+   "status": "Closed",
+   "open": false
   },
   {
    "name": "Juniper Carpet",
@@ -842,8 +842,8 @@
   {
    "name": "Vista Express",
    "area": "Terrain Parks",
-   "status": "Open",
-   "open": true
+   "status": "Closed",
+   "open": false
   },
   {
    "name": "Backside Express",
@@ -860,8 +860,8 @@
   {
    "name": "Big Springs Express Gondola",
    "area": "Village at Northstar",
-   "status": "Open",
-   "open": true
+   "status": "Closed",
+   "open": false
   },
   {
    "name": "Village Express",
